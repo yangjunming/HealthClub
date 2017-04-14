@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.club.mapper.OrderMapper">
+		<select id="getOrderByTechnician" resultType="com.club.model.Order">
+				SELECT room_id as roomId,
+				res_starttime as startTime,
+				res_endtime as endTime,
+				is_spa as isSpa,
+				is_mass as isMass,
+				is_cup as isCup
+				FROM t_order WHERE technician_id=#{technicianId} and order_status = 0
+				ORDER BY res_starttime ASC
+		</select>
+		
+		<select id="getSalaryByTechnician" resultType="com.club.model.TechnicianSalary">
+                SELECT sv.mons as month,sum(sv.sals) as salary
+				FROM
+				(SELECT
+				date_format(t_order.end_time,'%Y%m') as mons,
+				t_order.sales_volume as  sals
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2 AND
+				t_order.technician_id =#{technicianId} ) as sv
+				GROUP BY sv.mons
+        </select>
+        
+        <select id="getPerformByTechnician" resultType="com.club.model.TechnicianPerform">
+                SELECT
+				date_format(t_order.end_time,'%Y%m%d') as day,
+				t_order.spa_amount as spaAmount,
+				t_order.mass_amout as massAmount,
+				t_order.cup_amount as cupAmount,
+				t_order.sales_volume as salesVolume
+				FROM
+				t_order
+				WHERE
+				t_order.technician_id =#{technicianId} AND
+				t_order.order_status = 2
+				order by t_order.end_time ASC
+        </select>
+</mapper>

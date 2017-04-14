@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.club.mapper.HomeMapper">
+		<update id="updateByHomeId" parameterType="com.club.model.Home">
+				UPDATE t_home
+				<trim prefix="set" suffixOverrides=",">
+						<if test="startTime !=null and startTime !='' ">start_time=#{startTime},</if>
+						<if test="isEnd !=0 ">is_end=#{isEnd},</if>
+						<if test="isReservation !=0 ">is_reservation=#{isReservation},</if>
+						<if test="resTime !=null and resTime !='' ">res_time=#{resTime},</if>
+						<if test="userId !=0 ">user_id=#{userId},</if>
+						<if test="hasUser !=0 ">has_user=#{hasUser},</if>
+						<if test="technicianId !=0 ">technician_id=#{technicianId},</if>
+						<if test="homeNum !=0 ">home_num=#{homeNum},</if>
+						<if test="size !=0 ">size=#{size},</if>
+				</trim>
+				WHERE id=#{id}
+		</update>
+		<select id="gethomeList" resultType="com.club.model.Home">
+				SELECT id,start_time as startTime,
+				is_end as isEnd,
+				is_reservation as
+				isReservation,
+				res_time as resTime,
+				user_id as userId,
+				has_user as hasUser,
+				technician_id as technicianId,
+				home_num as
+				homeNum
+				FROM t_home
+		</select>
+		<select id="getHomeById" resultType="com.club.model.Home">
+				SELECT id,start_time as startTime,
+				is_end as isEnd,
+				is_reservation as
+				isReservation,
+				res_time as resTime,
+				user_id as userId,
+				has_user as hasUser,
+				technician_id as technicianId,
+				home_num as
+				homeNum
+				FROM t_home WHERE id=#{homeId}
+		</select>
+		<select id="getHomeNotTechnician" resultType="com.club.model.Home">
+				SELECT id,start_time as startTime,
+				is_end as isEnd,
+				is_reservation
+				as isReservation,
+				res_time as resTime,
+				user_id as userId,
+				has_user as hasUser,
+				technician_id as technicianId,
+				home_num as
+				homeNum
+				FROM t_home WHERE technician_id = 0 or technician_id=#{id}
+		</select>
+		<update id="updateHomeByUserId">
+				UPDATE t_home
+				set user_id=0
+				WHERE user_id=#{userId}
+		</update>
+		<update id="updateByHomeNum">
+				UPDATE t_home
+				set user_id=#{userId}
+				WHERE home_num=#{homeNum}
+		</update>
+		<select id="getHomeByUserId" resultType="com.club.model.Home">
+				SELECT id,start_time as startTime,
+				is_end as isEnd,
+				is_reservation as
+				isReservation,
+				res_time as resTime,
+				user_id as userId,
+				has_user as hasUser,
+				technician_id as technicianId,
+				home_num as
+				homeNum
+				FROM t_home WHERE user_id=#{userId}
+		</select>
+</mapper>

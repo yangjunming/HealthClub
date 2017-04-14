@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.club.mapper.HomeMapper">
+		<update id="updateByUserId" parameterType="com.club.model.Technician">
+				UPDATE technician
+				<trim prefix="set" suffixOverrides=",">
+						<if test="grade !=0 ">grade=#{grade},</if>
+						<if test="charge !=null and charge !='' ">charge=#{charge},</if>
+						<if test="status !=0 ">status=#{status},</if>
+				</trim>
+				WHERE user_id=#{userId}
+		</update>
+</mapper>
