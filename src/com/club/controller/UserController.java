@@ -76,6 +76,16 @@ public class UserController {
 		return mv;
 	}
 	
+	@RequestMapping("/loginout")
+	public ModelAndView loginOut(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		if(httpSession != null){
+			httpSession.removeAttribute("User"); 
+		}
+		mv.setViewName("login");
+		return mv;
+	}
+	
 	@RequestMapping("/getUserByMobile")
 	@ResponseBody
 	public String getUserByMobile(@RequestParam String mobile) {
