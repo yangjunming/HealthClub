@@ -14,6 +14,7 @@
 <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
  <!-- Bootstrap Core CSS -->
 <link href="<%=basePath%>resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
@@ -56,9 +57,94 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
         <div id="page-wrapper">
-        <div>你是游客</div>
+        <div class="row" style="padding-top: 40px">
+          <div class="col-md-5">
+          </div>
+          <div class="col-md-3">
+        <h3>欢迎预约养生会馆服务</h3>
+        </div></div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>预约开始时间：</label>
+                <input type="text" readonly="readonly" class="startTime"/>  
+			    <input type="text" readonly="readonly" class="endTime" />  
+			    <input type="text" readonly="readonly" class="testTime" />
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>预约结束时间：</label>
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>技师选择：</label>
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>服务项目：</label>
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>房间大小：</label>
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>预约人：</label>
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>预约人手机号码：</label>
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
        </div>
    </div>
     <script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
+    
 </body>
 </html>
