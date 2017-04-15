@@ -58,4 +58,19 @@
 	#{discount}
 	</if>)
 	</insert>
+	
+	<select id="getMemberCardByUserId" resultType="com.club.model.MemberCard">
+        SELECT
+		member_card.card_num as cardNum,
+		member_card.card_name as cardName,
+		member_card.grade,
+		member_card.balance,
+		member_card.point,
+		member_card.discount
+		FROM
+		member_card
+		WHERE
+		member_card.user_id = #{userId}
+    </select>
+	
 </mapper>

@@ -14,6 +14,7 @@ import com.club.dao.MemberCardDao;
 import com.club.dao.UserDao;
 import com.club.model.MemberCard;
 import com.club.model.User;
+import com.sun.org.apache.regexp.internal.recompile;
 
 @Controller
 @RequestMapping("/memberCard")
@@ -107,6 +108,15 @@ public class MemberCardController {
 			return mv1;
 		}
 		mv.setViewName("manager/memberCard");
+		return mv;
+	}
+	
+	@RequestMapping(value="/getMemCard")
+	public ModelAndView addMemberCard(@RequestParam(required = false) int id){
+		MemberCard mCard = memberCardDao.getMemberCardByUserId(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("mCard", mCard);
+		mv.setViewName("customer/member-card");
 		return mv;
 	}
 	

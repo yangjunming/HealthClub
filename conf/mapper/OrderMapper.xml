@@ -24,7 +24,7 @@
 				WHERE
 				t_order.order_status = 2 AND
 				t_order.technician_id =#{technicianId} ) as sv
-				GROUP BY sv.mons
+				GROUP BY sv.mons 
         </select>
         
         <select id="getPerformByTechnician" resultType="com.club.model.TechnicianPerform">

@@ -36,6 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!---//webfonts--->
 <!-- Nav CSS -->
 <link href="<%=basePath%>resources/css/custom.css" rel="stylesheet">
+<link href="<%=basePath%>resources/css/select.css" rel='stylesheet' type='text/css' />
 <!-- Metis Menu Plugin JavaScript -->
 <script src="<%=basePath%>resources/js/metisMenu.min.js"></script>
 <script src="<%=basePath%>resources/js/custom.js"></script>
@@ -44,20 +45,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<%=basePath%>resources/js/rickshaw.js"></script>
 </head>
 <body>
-
 		<div id="wrapper">
 				<!-- Navigation -->
-				  <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand">欢迎光临</a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
-            </div>
+				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+						<div class="navbar-header">
+								<a class="navbar-brand">欢迎光临</a>
+						</div>
+						<div class="nav navbar-nav navbar-right">
+								<a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
+						</div>
 						<div class="navbar-default sidebar" role="navigation">
 								<div class="sidebar-nav navbar-collapse">
 										<ul class="nav" id="side-menu">
-												<li><a href="<%=basePath%>/views/customer/tourist-index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a></li>
+												<li>
+                            <a href="<%=basePath%>/views/customer/member-reserve.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>homebase"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>
+                        </li>
 										</ul>
 								</div>
 						</div>
@@ -73,7 +81,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>预计开始时间：</label> <input type="text" class="form-control1" id="startTime" value="">
+												<label>预技开始时间：</label> <input type="text" class="form-control1" id="startTime" value="">
 												<!--             <input class="form-control" style="cursor: pointer; background-color: #FFF" -->
 												<!-- 																						id="startTime" name="signDate" placeholder="选择签约时间" type="text"> -->
 										</div>
@@ -84,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>预计结束时间：</label> <input type="text" class="form-control1" id="endTime" value="">
+                                                <label>预计结束时间：</label> <input type="text" class="form-control1" id="endTime" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -136,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-                                                <label>预约人：</label> <input type="text" class="form-control1" readonly="readonly" value="${User.name}">
+												<label>预约人：</label> <input type="text" class="form-control1" readonly="readonly" value="${User.name}">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -145,7 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-                                                <label>预约人手机号码：</label> <input type="text" class="form-control1" readonly="readonly"  value="${User.mobile}">
+												<label>预约人手机号码：</label> <input type="text" class="form-control1" readonly="readonly"  value="${User.mobile}">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -157,6 +165,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <div class="clearfix"></div>
                                 </div>
                         </div>
+						
+						
 				</div>
 		</div>
 		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
@@ -216,36 +226,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     });
                 }
 			})
-			
-			
-			function save() {
-			    var id = $("#id").val();
-			        var datas = {
-			                "id" : id,
-			                "mobile" : $("#mobile").val(),
-			                "name" : $("#name").val(),
-			                "spaCharge" : $("#spaCharge").val(),
-			                "massCharge" : $("#massCharge").val(),
-			                "cupCharge" : $("#cupCharge").val(),
-			                "grade" : $("#grade").val(),
-			                "technicianStatus" : $("#technicianStatus").val()
-			            }
-			        $.ajax({
-			        type: "post",
-			        url: "<%=basePath%>user/editTechnician",
-			        contentType : "application/json;charset=utf-8",
-			        data : JSON.stringify(datas),
-			            dataType : "json",
-			            async : false,
-			            success : function(data) {
-			                if(data){
-			                    window.location.href="<%=basePath%>views/manager/technician-manager.jsp";
-			                }
-			            }
-			        });
-			    }
-
 		</script>
-		
 </body>
 </html>
