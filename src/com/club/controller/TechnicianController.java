@@ -1,15 +1,19 @@
 package com.club.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.club.dao.OrderDao;
+import com.club.dao.TechnicianDao;
 import com.club.model.Order;
+import com.club.model.TechnicianDetailRes;
 import com.club.model.TechnicianPerform;
 import com.club.model.TechnicianSalary;
 
@@ -18,6 +22,8 @@ import com.club.model.TechnicianSalary;
 public class TechnicianController {
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private TechnicianDao technicianDao;
 
 	@RequestMapping("/schedule")
 	public ModelAndView techModelAndView(@RequestParam(required = false) int id) {
@@ -44,6 +50,14 @@ public class TechnicianController {
 		mv.addObject("perform", perform);
 		mv.setViewName("technician/performance");
 		return mv;
+	}
+	
+	@RequestMapping("/getTechnicianByGrade")
+	@ResponseBody
+	public List<TechnicianDetailRes> getTechnicianByGrade(@RequestParam(required = false) Integer grade) {
+		List<TechnicianDetailRes> technicianList = new ArrayList<>();
+		technicianList = technicianDao.getTechnicianByGrade(grade);
+		return technicianList;
 	}
 	
 }

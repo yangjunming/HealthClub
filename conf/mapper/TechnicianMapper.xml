@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.club.mapper.HomeMapper">
+<mapper namespace="com.club.mapper.TechnicianMapper">
 		<update id="updateByUserId" parameterType="com.club.model.Technician">
 				UPDATE technician
 				<trim prefix="set" suffixOverrides=",">
@@ -11,4 +11,17 @@
 				</trim>
 				WHERE user_id=#{userId}
 		</update>
+		<select id="getTechnicianByGrade" resultType="com.club.model.TechnicianDetailRes">
+				SELECT
+				technician.id,
+				NAME,
+				mobile,
+				charge
+				FROM
+				technician
+				LEFT JOIN `user` ON `user`.id = technician.user_id
+				WHERE
+				technician. STATUS = 4 AND `user`.`status` = '1'
+			  AND grade = #{grade}
+		</select>
 </mapper>

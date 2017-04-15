@@ -1,10 +1,13 @@
 package com.club.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.club.mapper.TechnicianMapper;
 import com.club.model.Technician;
+import com.club.model.TechnicianDetailRes;
 
 @Component
 public class TechnicianDaoImpl implements TechnicianDao {
@@ -18,6 +21,11 @@ public class TechnicianDaoImpl implements TechnicianDao {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<TechnicianDetailRes> getTechnicianByGrade(Integer grade) {
+		return technicianMapper.getTechnicianByGrade(grade);
 	}
 
 }
