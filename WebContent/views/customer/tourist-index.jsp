@@ -45,13 +45,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 		<div id="wrapper">
 				<!-- Navigation -->
-				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-						<div class="navbar-header">
-								<a class="navbar-brand">欢迎光临</a>
-						</div>
-						<div class="nav navbar-nav navbar-right">
-								<a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
-						</div>
+				  <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">欢迎光临</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
+            </div>
 						<div class="navbar-default sidebar" role="navigation">
 								<div class="sidebar-nav navbar-collapse">
 										<ul class="nav" id="side-menu">

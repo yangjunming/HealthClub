@@ -6,8 +6,10 @@
 				UPDATE technician
 				<trim prefix="set" suffixOverrides=",">
 						<if test="grade !=0 ">grade=#{grade},</if>
-						<if test="charge !=null and charge !='' ">charge=#{charge},</if>
-						<if test="status !=0 ">status=#{status},</if>
+						<if test="spaCharge !=null and spaCharge !='' ">spa_charge=#{spaCharge},</if>
+						<if test="massCharge !=null and massCharge !='' ">mass_charge=#{massCharge},</if>
+						<if test="cupCharge !=null and cupCharge !='' ">cup_charge=#{cupCharge},</if>
+						<if test="technicianStatus !=0 ">status=#{technicianStatus},</if>
 				</trim>
 				WHERE user_id=#{userId}
 		</update>

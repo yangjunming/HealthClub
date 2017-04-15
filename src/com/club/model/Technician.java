@@ -1,11 +1,40 @@
 package com.club.model;
 
+import java.math.BigDecimal;
+
 public class Technician {
 	private Integer id;
 	private int userId;
-	private String technicianStatus;
+	private int technicianStatus;
 	private int grade;
-	private int charge;
+	private BigDecimal charge;
+	private BigDecimal spaCharge;
+	private BigDecimal massCharge;
+	private BigDecimal cupCharge;
+
+	public BigDecimal getSpaCharge() {
+		return spaCharge;
+	}
+
+	public void setSpaCharge(BigDecimal spaCharge) {
+		this.spaCharge = spaCharge;
+	}
+
+	public BigDecimal getMassCharge() {
+		return massCharge;
+	}
+
+	public void setMassCharge(BigDecimal massCharge) {
+		this.massCharge = massCharge;
+	}
+
+	public BigDecimal getCupCharge() {
+		return cupCharge;
+	}
+
+	public void setCupCharge(BigDecimal cupCharge) {
+		this.cupCharge = cupCharge;
+	}
 
 	public Integer getId() {
 		return id;
@@ -23,11 +52,11 @@ public class Technician {
 		this.userId = userId;
 	}
 
-	public String getTechnicianStatus() {
+	public int getTechnicianStatus() {
 		return technicianStatus;
 	}
 
-	public void setTechnicianStatus(String technicianStatus) {
+	public void setTechnicianStatus(int technicianStatus) {
 		this.technicianStatus = technicianStatus;
 	}
 
@@ -39,11 +68,11 @@ public class Technician {
 		this.grade = grade;
 	}
 
-	public int getCharge() {
+	public BigDecimal getCharge() {
 		return charge;
 	}
 
-	public void setCharge(int charge) {
+	public void setCharge(BigDecimal charge) {
 		this.charge = charge;
 	}
 

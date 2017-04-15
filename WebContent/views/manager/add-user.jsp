@@ -80,14 +80,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row" style="padding-top: 30px">
 								<div class="col-md-5"></div>
 								<div class="col-md-3">
-										<h5>技师安排</h5>
+										<h5>人员编辑</h5>
 								</div>
 						</div>
 						<div class="form-group">
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<input id="id" hidden="" value="${param.id}"> <label>姓名:</label> <input type="text"
+												<label>姓名:</label> <input type="text"
 														class="form-control1" id="name" name="name" value="">
 										</div>
 										<div class="clearfix"></div>
@@ -106,24 +106,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>收费标准:</label> <br>
-													<label>SPA标准:</label><input type="text" style="margin-top: 5px" id="spaCharge" name="spaCharge" value=""><label>元/小时</label><br>
-													<label>按摩标准:</label><input type="text" style="margin-top: 5px"  id="massCharge" name="massCharge" value=""><label>元/小时</label><br>
-													<label>拔罐标准:</label><input type="text" style="margin-top: 5px" id="cupCharge" name="cupCharge" value=""><label>元/小时</label>
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label class="control-label ">技师等级：</label> <select id="grade" name="grade"
+												<label class="control-label ">人员类型：</label> <select id="userType"
 														style="width: 100px; padding-left: 2px">
-														<!-- 														(1:初级，2：中级，3：高级) -->
-														<option value="1">初级技师</option>
-														<option value="2">中级技师</option>
-														<option value="3">高级技师</option>
+<!-- 														(1:管理员，2：技师，3客人，4会员) -->
+														<option value="1">管理员</option>
+														<option value="2">员工</option>
+														<option value="3">游客</option>
+														<option value="4">会员</option>
 												</select>
 										</div>
 										<div class="clearfix"></div>
@@ -133,12 +122,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label class="control-label " style="margin-right: 25px">状态：</label> <select id="technicianStatus"
-														name="technicianStatus" style="width: 100px; padding-left: 20px">
-														<option value="4">正常</option>
-														<option value="2">下牌</option>
-														<option value="1">停牌</option>
-														<option value="3">休假</option>
+												<label class="control-label ">登录状态：</label>
+												 <select id="userStatus" style="width: 100px; padding-left: 20px">
+														<option value="1">正常</option>
+														<option value="2">停用</option>
+														<option value="3">已删除</option>
 												</select>
 										</div>
 										<div class="clearfix"></div>
@@ -149,62 +137,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="row">
 												<div class="col-md-8"></div>
 												<div class="col-md-4">
-														<a class="btn btn-primary" href="${pageContext.request.contextPath}/views/manager/technician-manager.jsp">返回</a>
+														<a class="btn btn-primary" href="${pageContext.request.contextPath}/views/manager/member-user.jsp">返回</a>
 														<a class="btn btn-primary" href="javascript:save();">保存</a>
 												</div>
 												</fdiv>
 										</div>
 						</footer>
+						</div>
 						<!-- /#wrapper -->
 						<!-- Bootstrap Core JavaScript -->
 						<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
 </body>
 <script type="text/javascript">
-$(function (){
-	var id = $("#id").val();
-	//加载人员信息
-	$.ajax({
-    type: "get",
-    url: "<%=basePath%>user/getTechnicianDetail?id="+id+"",
-			data : {},
-			dataType : "json",
-			async:false,
-			success : function(data) {
-				console.log(data);
-					$("#mobile").val(data.mobile);
-					$("#name").val(data.name);
-					$("#spaCharge").val(data.spaCharge);
-					$("#massCharge").val(data.massCharge);
-					$("#cupCharge").val(data.cupCharge);
-					$("#grade").val(data.grade);
-					$("technicianStatus").val(data.technicianStatus);
-				}
-		});
-	
-	})
-
 	function save() {
 	var id = $("#id").val();
 		var datas = {
 				"id" : id,
 				"mobile" : $("#mobile").val(),
 				"name" : $("#name").val(),
-				"spaCharge" : $("#spaCharge").val(),
-				"massCharge" : $("#massCharge").val(),
-				"cupCharge" : $("#cupCharge").val(),
-				"grade" : $("#grade").val(),
-				"technicianStatus" : $("#technicianStatus").val()
+				"type" : $("#userType").val(),
+				"status" : $("#userStatus").val()
 			}
 		$.ajax({
 	    type: "post",
-	    url: "<%=basePath%>user/editTechnician",
+	    url: "<%=basePath%>user/addUser",
 	    contentType : "application/json;charset=utf-8",
 	    data : JSON.stringify(datas),
 			dataType : "json",
 			async : false,
 			success : function(data) {
 				if(data){
-					window.location.href="<%=basePath%>views/manager/technician-manager.jsp";
+					window.location.href="<%=basePath%>views/manager/manager-user.jsp";
 				}
 			}
 		});

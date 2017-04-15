@@ -57,6 +57,7 @@
 						<if test="mobile !=null and mobile !='' ">mobile=#{mobile},</if>
 						<if test="type !=0 ">type=#{type},</if>
 						<if test="userName !=null and userName !='' ">user_name=#{userName},</if>
+							<if test="status !=null and status !='' ">status=#{status},</if>
 						<if test="password !=null and password !='' ">password=#{password},</if>
 				</trim>
 				WHERE id=#{id}
@@ -72,7 +73,8 @@
 				FROM
 				USER
 				LEFT JOIN t_home ON t_home.technician_id = USER .id
-				LEFT JOIN technician ON technician.user_id = USER .id
+				LEFT JOIN technician
+				ON technician.user_id = USER .id
 				WHERE
 				user.STATUS = '1'
 				AND type = '2'
@@ -84,14 +86,35 @@
 				NAME,
 				mobile,
 				grade,
-				charge,
-				technician.STATUS as technicianStatus
+				spa_charge AS
+				spaCharge,
+				mass_charge AS massCharge,
+				cup_charge AS cupCharge,
+				technician. STATUS AS technicianStatus
 				FROM
 				USER
-				LEFT JOIN technician ON technician.user_id = USER .id
-				LEFT JOIN t_home
-				ON t_home.technician_id = USER .id
+				LEFT JOIN
+				technician ON technician.user_id = USER .id
+				LEFT JOIN t_home ON t_home.technician_id = USER .id
 				WHERE
 				USER.id = #{id}
+		</select>
+		<select id="getUserList" resultType="com.club.model.User">
+				SELECT
+				id,name,mobile,type,user_name as userName,status FROM user
+				<where>
+						<if test="type !=0 ">
+								AND type = #{type}
+						</if>
+						<if test=" mobile !=null and mobile !='' ">
+								AND mobile LIKE CONCAT("%",#{mobile},"%")
+						</if>
+				</where>
+		</select>
+		<select id="getUserById" resultType="com.club.model.User">
+				SELECT
+				id,name,mobile,type,user_name as userName,status FROM user
+				where
+				id = #{userId}
 		</select>
 </mapper>

@@ -51,5 +51,30 @@ public class UserDaoImpl implements UserDao{
 	public TechnicianDetailRes getTechnicianDetail(int id) {
 		return userMapper.getTechnicianDetail(id);
 	}
+	@Override
+	public List<User> getUserList(int type, String mobile) {
+		return userMapper.getUserList(type,mobile);
+	}
+	@Override
+	public User getUserById(int userId) {
+		return userMapper.getUserById(userId);
+	}
+	@Override
+	public boolean editUser(User user) {
+		int result = userMapper.update(user);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean addUser(User user) {
+		user.setPassword("123456");
+		int result = userMapper.insert(user);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
 	
 }

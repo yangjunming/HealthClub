@@ -18,4 +18,12 @@ public interface UserDao {
 	public List<TechnicianDetailRes> getTechnician();
 
 	public TechnicianDetailRes getTechnicianDetail(int id);
+
+	public List<User> getUserList(int type, String mobile);
+
+	public User getUserById(int id);
+
+	public boolean editUser(User user);
+
+	public boolean addUser(User user);
 }

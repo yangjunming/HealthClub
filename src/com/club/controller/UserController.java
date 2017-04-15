@@ -1,5 +1,6 @@
 package com.club.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.club.dao.HomeDao;
 import com.club.dao.TechnicianDao;
 import com.club.dao.UserDao;
-import com.club.model.Home;
 import com.club.model.Technician;
 import com.club.model.TechnicianDetailRes;
 import com.club.model.User;
@@ -27,8 +26,6 @@ public class UserController {
 	private UserDao userDao;
 	@Autowired
 	private TechnicianDao technicianDao;
-	@Autowired
-	private HomeDao homeDao;
 
 	@RequestMapping(value = "/findUser", method = RequestMethod.POST)
 	public String getUser() {
@@ -123,19 +120,48 @@ public class UserController {
 		boolean updateUser = userDao.update(user);
 		Technician technician = new Technician();
 		technician.setUserId(request.getId());
-		technician.setGrade(request.getGrade());
+		technician.setSpaCharge(request.getSpaCharge());
+		technician.setMassCharge(request.getMassCharge());
+		technician.setCupCharge(request.getCupCharge());
 		technician.setTechnicianStatus(request.getTechnicianStatus());
 		technician.setCharge(request.getCharge());
 		boolean updateTe = technicianDao.updateByUserId(technician);
-		Home home = homeDao.getHomeByUserId(request.getId());
-		if(null !=home){
-			boolean updateHome = homeDao.updateByUserId(home.getUserId());
-		}
-		boolean updateHome = homeDao.updateByHomeNum(request.getId(),request.getHomeNum());
-		if(updateUser&&updateTe&&updateHome){
+		if(updateUser&&updateTe){
 			return true;
 		}
 		return false;
+	}
+	@RequestMapping("/user/getUserList")
+	@ResponseBody
+	public List<User> getUserList(@RequestParam(required=false) int type,@RequestParam String mobile){
+		List<User> userLiset = new ArrayList<>();
+		userLiset = userDao.getUserList(type,mobile);
+		return userLiset;
+	}
+	
+	@RequestMapping("/user/getUserById")
+	@ResponseBody
+	public User getUserById(@RequestParam(required=false) int id){
+		User user = new User();
+		if(id == 0){
+			return user;
+		}
+		user = userDao.getUserById(id);
+		return user;
+	}
+	
+	@RequestMapping("/user/editUser")
+	@ResponseBody
+	public Boolean editUser(@RequestBody User user){
+		boolean result = userDao.editUser(user);
+		return result;
+	}
+	
+	@RequestMapping("/user/addUser")
+	@ResponseBody
+	public Boolean addUser(@RequestBody User user){
+		boolean result = userDao.addUser(user);
+		return result;
 	}
 	
 }

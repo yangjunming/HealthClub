@@ -22,4 +22,8 @@ public interface UserMapper {
 
 	public TechnicianDetailRes getTechnicianDetail(@Param("id")int id);
 
+	public List<User> getUserList(@Param("type")int type,@Param("mobile") String mobile);
+
+	public User getUserById(@Param("userId")int userId);
+
 }

@@ -125,7 +125,6 @@ $(function (){
 			data : {},
 			dataType : "json",
 			success : function(data) {
-				console.log(data);
 				var tr = "";
 				for (var i = 0; i < data.length; i++) {
 					var technicianStatus = data[i].technicianStatus;
