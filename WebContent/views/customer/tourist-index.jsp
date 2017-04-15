@@ -69,9 +69,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-md-4">
              <label>预约开始时间：</label>
-                <input type="text" readonly="readonly" class="startTime"/>  
-			    <input type="text" readonly="readonly" class="endTime" />  
-			    <input type="text" readonly="readonly" class="testTime" />
+                <input type="text" class="form-control1" readonly="readonly" id="hasUser" value="" >
             </div>
             <div class="clearfix"> </div>
            </div>
