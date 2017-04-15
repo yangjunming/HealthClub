@@ -11,6 +11,14 @@ public class MemberCard {
 	private BigDecimal discount;
 	private String cardName;
 	private String cardNum;
+	private BigDecimal balance;
+	
+	public BigDecimal getBalance() {
+		return balance;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 	public String getCardNum() {
 		return cardNum;
 	}

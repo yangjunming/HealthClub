@@ -2,6 +2,7 @@ package com.club.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,5 +27,10 @@ public class MemberCardDaoImpl implements MemberCardDao{
 		}
 		return false;
 	}
+	@Override
+	public MemberCard getMemberCardByUserId(int userId){
+		MemberCard mCard = memberCardMapper.getMemberCardByUserId(userId);
+		return mCard;
+	};
 	
 }

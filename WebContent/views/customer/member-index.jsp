@@ -49,10 +49,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<%=basePath%>homebase"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a>
+                            <a href="<%=basePath%>/views/customer/member-reserve.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>homebase"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
+                            <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>homebase"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>

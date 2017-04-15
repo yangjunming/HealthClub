@@ -11,5 +11,7 @@ public interface MemberCardMapper {
 	public List<MemberCard> gethomeList(@Param("query")String query,@Param("grade")Integer grade);
 
 	public int addMemberCard(MemberCard memberCard);
+	
+	public MemberCard getMemberCardByUserId(@Param("userId")int userId);
 
 }
