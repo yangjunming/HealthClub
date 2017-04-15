@@ -58,8 +58,7 @@ public class UserController {
 				break;
 			}
 			mv.addObject("result", result);
-			httpSession.setAttribute("name", result.getName());
-			httpSession.setAttribute("id", result.getId());
+			httpSession.setAttribute("User", result);
 			return mv;
 		}
 		mv.addObject("message", "登录失败");
