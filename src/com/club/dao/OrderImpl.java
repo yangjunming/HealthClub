@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.club.mapper.OrderMapper;
+import com.club.model.IncomeAndExpense;
 import com.club.model.Order;
 import com.club.model.TechnicianPerform;
 import com.club.model.TechnicianSalary;
@@ -31,6 +32,18 @@ public class OrderImpl implements OrderDao{
 	public List<TechnicianPerform> getPerformByTechnician(int technicianId) {
 		List<TechnicianPerform> perform = orderMapper.getPerformByTechnician(technicianId);
 		return perform;
+	}
+
+	@Override
+	public List<TechnicianPerform> getAllPerform() {
+		List<TechnicianPerform> performs = orderMapper.getAllPerform();
+		return performs;
+	}
+
+	@Override
+	public List<IncomeAndExpense> getIncomeAndExpense() {
+		List<IncomeAndExpense> incomeAndExpenses = orderMapper.getIncomeAndExpense();
+		return incomeAndExpenses;
 	}
 	
 

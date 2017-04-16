@@ -14,7 +14,7 @@
 		</select>
 		
 		<select id="getSalaryByTechnician" resultType="com.club.model.TechnicianSalary">
-                SELECT sv.mons as month,sum(sv.sals) as salary
+                SELECT sv.mons as month,sum(sv.sals)*0.3 as salary
 				FROM
 				(SELECT
 				date_format(t_order.end_time,'%Y%m') as mons,
@@ -40,5 +40,46 @@
 				t_order.technician_id =#{technicianId} AND
 				t_order.order_status = 2
 				order by t_order.end_time ASC
+        </select>
+        
+        
+        <select id="getAllPerform" resultType="com.club.model.TechnicianPerform">
+                SELECT tb.dt as day,
+                `user`.`name` as name,
+                tb.spa as spaAmount,
+                tb.mas as massAmount,
+                tb.cup as cupAmount,
+                tb.vol as salesVolume
+				From 
+				(SELECT
+				DATE_FORMAT(t_order.end_time,"%Y%m%d") as dt,
+				t_order.technician_id as id,
+				sum(t_order.spa_amount) as spa,
+				sum(t_order.mass_amout) as mas,
+				sum(t_order.cup_amount) as cup,
+				sum(t_order.sales_volume) as vol
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2
+				GROUP BY
+				DATE_FORMAT(t_order.end_time,"%Y%m%d"),t_order.technician_id
+				ORDER BY
+				DATE_FORMAT(t_order.end_time,"%Y%m%d") ASC) tb,user
+				WHERE tb.id=`user`.id
+        </select>
+        
+        <select id="getIncomeAndExpense" resultType="com.club.model.IncomeAndExpense">
+                SELECT
+					DATE_FORMAT(t_order.end_time,"%Y%m") as month,
+					sum(t_order.sales_volume) as income,
+					sum(t_order.sales_volume)*0.3 as expense,
+					sum(t_order.sales_volume)-sum(t_order.sales_volume)*0.3 as profit
+					FROM
+					t_order
+					WHERE
+					t_order.order_status = 2
+					GROUP BY
+					DATE_FORMAT(t_order.end_time,"%Y%m")
         </select>
 </mapper>

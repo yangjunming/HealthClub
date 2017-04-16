@@ -60,4 +60,21 @@ public class TechnicianController {
 		return technicianList;
 	}
 	
+	@RequestMapping("/all_performance")
+	public ModelAndView performanceModelAndView() {
+		List<TechnicianPerform> performs = orderDao.getAllPerform();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("performs", performs);
+		mv.setViewName("manager/technician-performance");
+		return mv;
+	}
+	@RequestMapping("/incomeAndExpense")
+	public ModelAndView incomeModelAndView() {
+		List<TechnicianPerform> incomes = orderDao.getAllPerform();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("incomes", incomes);
+		mv.setViewName("manager/income-expense");
+		return mv;
+	}
+	
 }

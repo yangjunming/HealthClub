@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -64,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														</ul> <!-- /.nav-second-level --></li>
 												<li><a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
 														<ul class="nav nav-second-level">
-                                                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
+																<li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
 																<li><a href="typography.html">费用明细查询</a></li>
 																<li><a href="typography.html">收支登记</a></li>
 														</ul></li>
@@ -72,101 +75,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 						</div>
 				</nav>
-				<div id="page-wrapper">
-						<div class="panel-body1">
-         <div class="row">
-<!--          <div class="navbar-right"> -->
-<!--          <div class="col_md_2"> -->
-<!--                         类型： -->
-<!--          <select id="grade" > -->
-<!--          <option value="0">全部</option> -->
-<!--          <option value="1">普通会员</option> -->
-<!--          <option value="2">银卡会员</option> -->
-<!--          <option value="3">金卡会员</option> -->
-<!--          <option value="4">白金会员</option> -->
-<!--          <option value="5">至尊会员</option> -->
-<!--          </select> -->
-<!--              <input type="text" class="text" value="请输入卡号" name="query" id="cardNum" onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入卡号'}" /> -->
-<!--              <a class="btn-success btn" onclick="query()" type="submit">搜索</a> -->
-<!--           </div> -->
-<!--           <div> -->
-         
-<!--           </div> -->
-<!--          </div> -->
-         <div class="bs-example4" data-example-id="contextual-table">
-   <table class="table">
-     <thead>
-        <tr>
-	        <th>姓名</th>
-          <th>电话</th>
-          <th>状态</th>
-          <th>负责房间</th>
-          <th>房间状态</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="technicianTable">
-      </tbody>
-    </table>
-    </div>
-    </div>
-				</div></div>
-				<!-- /#page-wrapper -->
+		<div id="page-wrapper">
+			<div class="bs-example4" data-example-id="contextual-table">
+			   <table class="table">
+			     <thead>
+			        <tr>
+			            <th>日期</th>
+			            <th>技师姓名</th>
+			            <th>SPA总额</th>
+			            <th>按摩总额</th>
+			            <th>拔罐总额</th>
+			            <th>总金额</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			      <c:forEach items="${performs}" var = "performs" >
+			      <tr>
+			          <td> ${fn:substring(performs.day,0,4)}年${fn:substring(performs.day,4,6)}月${fn:substring(performs.day,6,8)}日 </td>
+			          <td>${performs.name}</td>
+			          <td>${performs.spaAmount}</td>
+			          <td>${performs.massAmount}</td>
+			          <td>${performs.cupAmount}</td>
+			          <td>${performs.salesVolume}</td>
+			      </tr>
+			      </c:forEach> 
+			      </tbody>
+			    </table>
+             </div>
+		</div>
 		</div>
 		<!-- /#wrapper -->
 		<!-- Bootstrap Core JavaScript -->
 		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
 </body>
-<script type="text/javascript">
-$(function (){
-	$.ajax({
-    type: "get",
-    url: "<%=basePath%>user/getTechnician",
-			data : {},
-			dataType : "json",
-			success : function(data) {
-				var tr = "";
-				for (var i = 0; i < data.length; i++) {
-					var technicianStatus = data[i].technicianStatus;
-					var status = "";
-// 					1(停牌),2(下牌),3(休假),4(正常)
-					if(technicianStatus=="1"){
-						status = "停牌";
-					}else if(technicianStatus=="2"){
-						status = "下牌";
-					}else if(technicianStatus=="3"){
-						status = "休假";
-					}else if(technicianStatus=="4"){
-						status = "正常";
-					}
-					var homeStatus = data[i].hasUser;
-					var hasuser = "";
-// 					0:沒有，1:有，2已经被预约
-					if(homeStatus=="0"){
-						hasuser = "空闲";
-					}else if(homeStatus=="1"){
-						hasuser = "使用中";
-					}else if(homeStatus=="2"){
-						hasuser = "已预约";
-					}else{
-						hasuser="-";
-					}
-					var homeNum = data[i].homeNum;
-					if(homeNum==null){
-						homeNum = "没有负责的房间"
-					}
-					tr += "<tr>";
-					tr += "<td>" + data[i].name + "</td>";
-					tr += "<td>" + data[i].mobile + "</td>";
-					tr += "<td>" + status + "</td>";
-					tr += "<td>" + homeNum + "</td>";
-					tr += "<td>" + hasuser + "</td>";
-					tr += "<td><a class='remove btn btn-primary input-xs' href=${pageContext.request.contextPath}/views/manager/eidt-technician.jsp?id=" + data[i].id + ">编辑</a></td>";
-					tr += "</tr>";
-				}
-				$("#technicianTable").append(tr);
-			}
-		});
-	})
-</script>
+
 </html>

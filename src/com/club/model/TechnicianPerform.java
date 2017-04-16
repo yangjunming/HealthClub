@@ -2,6 +2,7 @@ package com.club.model;
 
 public class TechnicianPerform {
 	private int day;
+	private String name;
 	private float spaAmount;
 	private float massAmount;
 	private float cupAmount;
@@ -35,6 +36,12 @@ public class TechnicianPerform {
 	}
 	public void setSalesVolume(float salesVolume) {
 		this.salesVolume = salesVolume;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
