@@ -165,6 +165,7 @@
 				LEFT JOIN `user` AS teuser ON teuser.id = t_order.technician_id
 				WHERE
 				room_id=#{roomId}
+				AND t_order.is_end = 0
 		</select>
 		<update id="updateOrder" parameterType="com.club.model.Order">
 		UPDATE t_order

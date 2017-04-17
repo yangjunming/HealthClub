@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.club.dao.HomeDao;
 import com.club.dao.OrderDao;
+import com.club.dao.UserDao;
 import com.club.model.Home;
 import com.club.model.Order;
 import com.club.model.OrderRes;
+import com.club.model.User;
 
 @Controller
 @RequestMapping("/order")
@@ -22,7 +24,14 @@ public class OrderController {
 	private OrderDao orderDao;
 	@Autowired
 	private HomeDao homeDao;
+	@Autowired
+	private UserDao userDao;
 	
+	/**
+	 * 预约提交订单
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping("/submitOrder")
 	@ResponseBody
 	public boolean submitOrder(@RequestBody Order order){
@@ -35,6 +44,35 @@ public class OrderController {
 		home.setResTime(order.getResStarttime());
 		home.setTechnicianId(order.getTechnicianId());
 		home.setHasUser(2);
+		boolean updateHome = homeDao.updateByHomeId(home);
+		if(insertOrder&&updateHome){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 管理员直接提交订单
+	 * @param order
+	 * @return
+	 */
+	@RequestMapping("/submitOrderByManager")
+	@ResponseBody
+	public boolean submitOrderByManager(@RequestBody Order order){
+		String mobile = order.getMobile();
+		User user = userDao.getUserByMobile(mobile);
+		Home home = new Home();
+		if(null!=user){
+			order.setUserId(user.getId());
+			home.setUserId(user.getId());
+		}
+		order.setOrderStatus(1);
+		order.setStartTime(new Date());
+		boolean insertOrder = orderDao.submitOrder(order);
+		home.setId(order.getRoomId());
+		home.setStartTime(new Date());
+		home.setTechnicianId(order.getTechnicianId());
+		home.setHasUser(1);
 		boolean updateHome = homeDao.updateByHomeId(home);
 		if(insertOrder&&updateHome){
 			return true;
@@ -69,6 +107,7 @@ public class OrderController {
 		home.setId(order.getRoomId());
 		home.setIsReservation(0);
 		home.setTechnicianId(0);
+		home.setStartTime(new Date());
 		updateHome = homeDao.updateHomeByOrder(home);
 		}
 		updateOrder = orderDao.updateOrder(order);

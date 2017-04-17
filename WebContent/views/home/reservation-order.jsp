@@ -174,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row">
 								<div class="col-md-6"></div>
 								<input id="orderId" hidden="">
-								<a class="btn btn-primary" href="<%=basePath%>views/home/home-base.jsp" style="margin-left: 70px">返回</a>
+								<a class="btn btn-primary" href="<%=basePath%>homebase" style="margin-left: 70px">返回</a>
 								<a class="btn btn-primary" href="javascript:save(3);" style="margin-left: 70px">取消</a>
 								<a class="btn btn-primary" href="javascript:save(1);" style="margin-left: 70px">开始</a>
 								<div class="clearfix"></div>
@@ -191,7 +191,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		})
 		function getOrder(){
 			var homeId = $("#homeId").val();
-			console.log(homeId);
 			$.ajax({
 		    type: "get",
 		    url: "<%=basePath%>order/getOrderByHomeId?roomId="+homeId+"",
