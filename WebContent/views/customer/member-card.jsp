@@ -22,7 +22,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 
 <!-- Bootstrap Core CSS -->
-<link href="<%=basePath%>resources/css/styles.css" rel='stylesheet' type='text/css' />
 <link href="<%=basePath%>resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
 <link href="<%=basePath%>resources/css/style.css" rel='stylesheet' type='text/css' />
@@ -63,7 +62,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>homebase"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>
+                            <a href="<%=basePath%>/views/customer/point-exchange.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>
                         </li>
                     </ul>
                 </div>
@@ -93,19 +92,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-md-4">
              <label>会员卡级别：</label>
-              <c:if test="${mCard.grade== 1} ">
+                <c:if test="${mCard.grade== 1}">
                 <input type="text" class="form-control1" readonly="readonly"  id="mGrade" value="普通会员" >
                 </c:if> 
                  <c:if test="${mCard.grade== 2}">
                 <input type="text" class="form-control1" readonly="readonly"  id="mGrade" value="银卡会员" >
                 </c:if> 
-                 <c:if test="${mCard.grade== 3} ">
+                 <c:if test="${mCard.grade== 3}">
                 <input type="text" class="form-control1" readonly="readonly"  id="mGrade" value="金卡会员" >
                 </c:if> 
-                 <c:if test="${mCard.grade== 4} ">
+                 <c:if test="${mCard.grade== 4}">
                 <input type="text" class="form-control1" readonly="readonly"  id="mGrade" value="白金会员" >
                 </c:if>
-                <c:if test="${mCard.grade== 5} ">
+                <c:if test="${mCard.grade== 5}">
                 <input type="text" class="form-control1" readonly="readonly"  id="mGrade" value="至尊会员" >
                 </c:if>
             </div>

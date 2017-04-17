@@ -17,6 +17,10 @@ public class HomeController {
 	@Autowired
 	private HomeDao homeDao;
 	
+	/**
+	 * 获取房间列表
+	 * @return
+	 */
 	@RequestMapping("/homebase")
 	public ModelAndView homebase() {
 		List<Home> homeList = homeDao.gethomeList();
@@ -26,8 +30,13 @@ public class HomeController {
 		return mv;
 	}
 
+	/**
+	 * 根据房间id获取房间信息
+	 * @param homeId
+	 * @return
+	 */
 	@RequestMapping("/home")
-	public ModelAndView login(@RequestParam int homeId) {
+	public ModelAndView homeInfo(@RequestParam int homeId) {
 		Home home = homeDao.getHomeById(homeId);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("id", home.getId());
@@ -41,10 +50,27 @@ public class HomeController {
 		return mv;
 	}
 	
+	/**
+	 * 获取本人可负责房间
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/home/getHomeNotTechnician")
 	@ResponseBody
 	public List<Home> getHomeNotTechnician(@RequestParam(required = false) int id) {
 		List<Home> home = homeDao.getHomeNotTechnician(id);
+		return home;
+	}
+	
+	/**
+	 * 根据房间大小获取房间列表
+	 * @param homeSize
+	 * @return
+	 */
+	@RequestMapping("/home/getHomeBySize")
+	@ResponseBody
+	public List<Home> getHomeBySize(@RequestParam(required = false) int homeSize) {
+		List<Home> home = homeDao.getHomeBySize(homeSize);
 		return home;
 	}
 

@@ -22,6 +22,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 </script>
+
 <!-- Bootstrap Core CSS -->
 <link href="<%=basePath%>resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
@@ -44,7 +45,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<%=basePath%>resources/js/rickshaw.js"></script>
 </head>
 <body>
-		<div id="wrapper">
+<div id="wrapper">
      <!-- Navigation -->
               <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -103,101 +104,164 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
         </nav>
-				<div id="page-wrapper">
-						<div class="row" style="padding-top: 30px">
-								<div class="col-md-5"></div>
-								<div class="col-md-3">
-										<h5>人员编辑</h5>
+		<div id="page-wrapper">
+				<div class="row" style="padding-top: 40px">
+						<div class="col-md-5"></div>
+						<div class="col-md-3">
+								<h3>预约订单查看</h3>
+						</div>
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>预技开始时间：</label> <input id="homeId" hidden="" value="${param.id}"> <input type="text"
+												class="form-control1" id="startTime" readonly="readonly" value="">
 								</div>
+								<div class="clearfix"></div>
 						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>姓名:</label> <input type="text"
-														class="form-control1" id="name" name="name" value="">
-										</div>
-										<div class="clearfix"></div>
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>预计结束时间：</label> <input readonly="readonly" type="text" class="form-control1" id="endTime" value="">
 								</div>
+								<div class="clearfix"></div>
 						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>电话:</label> <input type="text" class="form-control1" value="" id="mobile" name="mobile">
-										</div>
-										<div class="clearfix"></div>
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>技师：</label> <input id="technicianId" readonly="readonly"
+												style="width: 150px; height: 30px; padding-left: 30px; font-size: 0.85em">
 								</div>
+								<div class="clearfix"></div>
 						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label class="control-label ">人员类型：</label> <select id="userType"
-														style="width: 100px; padding-left: 2px">
-<!-- 														(1:管理员，2：技师，3客人，4会员) -->
-														<option value="1">管理员</option>
-														<option value="2">员工</option>
-														<option value="3">游客</option>
-														<option value="4">会员</option>
-												</select>
-										</div>
-										<div class="clearfix"></div>
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>服务项目：</label><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"
+												name="chkItem" id="spa" value="1">SPA&nbsp;&nbsp; <input type="checkbox" name="chkItem" id="mass"
+												value="2">按摩&nbsp;&nbsp; <input type="checkbox" name="chkItem" id="cup" value="3">拔罐
 								</div>
+								<div class="clearfix"></div>
 						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label class="control-label ">登录状态：</label>
-												 <select id="userStatus" style="width: 100px; padding-left: 20px">
-														<option value="1">正常</option>
-														<option value="2">停用</option>
-														<option value="3">已删除</option>
-												</select>
-										</div>
-										<div class="clearfix"></div>
+				</div>
+
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>预约人：</label> <input type="text" class="form-control1" id="userName" readonly="readonly" value="">
 								</div>
+								<div class="clearfix"></div>
 						</div>
-						<footer>
-								<div class="form-actions">
-										<div class="row">
-												<div class="col-md-8"></div>
-												<div class="col-md-4">
-														<a class="btn btn-primary" href="${pageContext.request.contextPath}/views/manager/member-user.jsp">返回</a>
-														<a class="btn btn-primary" href="javascript:save();">保存</a>
-												</div>
-												</fdiv>
-										</div>
-						</footer>
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>预约人手机号码：</label> <input type="text" class="form-control1" id="userMobile" readonly="readonly" value="">
+								</div>
+								<div class="clearfix"></div>
 						</div>
-						<!-- /#wrapper -->
-						<!-- Bootstrap Core JavaScript -->
-						<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
-</body>
-<script type="text/javascript">
-	function save() {
-	var id = $("#id").val();
-		var datas = {
-				"id" : id,
-				"mobile" : $("#mobile").val(),
-				"name" : $("#name").val(),
-				"type" : $("#userType").val(),
-				"status" : $("#userStatus").val()
-			}
-		$.ajax({
-	    type: "post",
-	    url: "<%=basePath%>user/addUser",
-	    contentType : "application/json;charset=utf-8",
-	    data : JSON.stringify(datas),
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				if(data){
-					window.location.href="<%=basePath%>views/manager/manager-user.jsp";
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-6"></div>
+								<input id="orderId" hidden="">
+								<a class="btn btn-primary" href="<%=basePath%>views/home/home-base.jsp" style="margin-left: 70px">返回</a>
+								<a class="btn btn-primary" href="javascript:save(3);" style="margin-left: 70px">取消</a>
+								<a class="btn btn-primary" href="javascript:save(1);" style="margin-left: 70px">开始</a>
+								<div class="clearfix"></div>
+						</div>
+				</div>
+
+
+		</div>
+		</div>
+		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		$(function (){
+			getOrder();
+		})
+		function getOrder(){
+			var homeId = $("#homeId").val();
+			console.log(homeId);
+			$.ajax({
+		    type: "get",
+		    url: "<%=basePath%>order/getOrderByHomeId?roomId="+homeId+"",
+					data : {},
+					dataType : "json",
+					async:false,
+					success : function(data) {
+						  $("#orderId").val(data.id);
+							$("#startTime").val(data.startTime);
+							$("#endTime").val(data.endTime);
+							$("#technicianId").val(data.technicianId);
+							$("#homeNum").val(data.roomId);
+                if(data.isSpa==1){
+                	$("#spa").attr("checked", true);
+                }
+                if(data.isMass==1){
+                	$("#mass").attr("checked", true);
+                }
+                if(data.isCup==1){
+                	$("#cup").attr("checked", true);
+                }
+                $("#userName").val(data.name);
+                $("#userMobile").val(data.mobile);
+                $("#technicianId").val(data.technicianName);
+					}
+				})
+		}
+		
+		function save(val){
+			var isSpa =0;
+			var isMass = 0;
+			var isCup = 0;
+			var roomId = $("#homeId").val();
+			$('input:checkbox[name=chkItem]').each(function() {
+				if($(this).context.checked){
+					if($(this).val()==1){
+						isSpa = 1;
+					}else if($(this).val()==2){
+						isMass =1;
+					}else if($(this).val()==3){
+						isCup =1;
+					}
 				}
+			});
+				var datas = {
+            "id" : $("#orderId").val(),
+            "isSpa" : isSpa,
+            "isMass" : isMass,
+            "isCup" : isCup,
+            "roomId":$("#homeId").val(),
+            "orderStatus":val
+        }
+    $.ajax({
+    type: "post",
+    url: "<%=basePath%>order/updateOrder",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(datas),
+					dataType : "json",
+					async : false,
+					success : function(data) {
+						if (data) {
+							if(val==1){
+								alert("开始服务");
+							}else{
+							alert("取消成功");
+							}
+						}
+					}
+				});
 			}
-		});
-	}
-</script>
+		</script>
+</body>
 </html>

@@ -44,6 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -66,10 +67,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <a href="<%=basePath%>memberCard/list">会员卡管理</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">技师安排</a>
+                                    <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">人员管理</a>
+                                    <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
                                 </li>
                                 <li>
                                     <a href="typography.html">收支登记</a>
@@ -96,26 +97,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
         <div id="page-wrapper">
-<!--          <h3>Basic</h3> -->
         <c:forEach items="${homeList}" var = "id">
-        <div class="col-md-3 widget widget1" style="padding-top: 12px">
+        <div class="col-md-3 widget widget1" style="padding-top: 12px;padding-bottom: 15px;">
         <form action="<%=basePath%>home.do">
         <input type="text" class="text" value="${id.id}" name="homeId" hidden="" />
-        		<div class="r3_counter_box">
+        		<div class="r3_counter_box" >
                     <div class="stats">
                       <h5><strong> 
             <button class="btn-success btn" type="submit">房间${id.id}</button>
+            <c:if test="${id.isReservation== 1}">
+            <a class="btn-success btn" href="<%=basePath%>views/home/reservation-order.jsp?id=${id.id}">已预约</a>
+            </c:if>
+            <c:if test="${id.isReservation== 0  and id.hasUser!= 0}" >
+            <a class="btn-success btn" href="<%=basePath%>views/home/end-order.jsp?id=${id.id}">结单</a>
+            </c:if>
+            <c:if test="${id.isReservation== 0  and id.hasUser== 0}" >
+            <a class="btn btn-primary" href="<%=basePath%>views/home/new-order.jsp?id=${id.id}">空闲</a>
+            </c:if>
             </strong></h5>
                     </div>
                 </div>
                 </form>
         	</div>
         </c:forEach>
-       </div>
-      <!-- /#page-wrapper -->
+<!-- 								<div class="form-actions"> -->
+<!-- 										<div class="row"> -->
+<!-- 												<div class="col-md-8"></div> -->
+<!-- 												<div class="col-md-4"> -->
+<%-- 														<a class="btn btn-primary" href="<%=basePath%>views/home/add-home.jsp">新增</a> --%>
+<!-- 												</div> -->
+<!-- 												</fdiv> -->
+<!-- 										</div> -->
+<!--        </div> -->
    </div>
-    <!-- /#wrapper -->
-    <!-- Bootstrap Core JavaScript -->
     <script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
 </body>
 </html>

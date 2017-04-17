@@ -39,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -58,13 +59,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<%=basePath%>memberCard/list.do">会员卡管理</a>
+                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">技师安排</a>
+                                    <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">人员管理</a>
+                                    <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
                                 </li>
                                 <li>
                                     <a href="typography.html">收支登记</a>
@@ -90,7 +91,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
         </nav>
-        </div>
         <div id="page-wrapper">
         <div class="row">
 		  <div class="col-md-5">
@@ -142,6 +142,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"> </div>
 		   </div>
 		</div>
+		<footer>
+								<div class="form-actions">
+										<div class="row">
+												<div class="col-md-8"></div>
+												<div class="col-md-4">
+														<a class="btn btn-primary" href="<%=basePath%>homebase">返回</a>
+												</div>
+												</fdiv>
+										</div>
+						</footer>
         </div>
         <div class="col-md-3 widget widget1">
         </div>

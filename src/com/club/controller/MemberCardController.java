@@ -14,7 +14,6 @@ import com.club.dao.MemberCardDao;
 import com.club.dao.UserDao;
 import com.club.model.MemberCard;
 import com.club.model.User;
-import com.sun.org.apache.regexp.internal.recompile;
 
 @Controller
 @RequestMapping("/memberCard")
@@ -24,6 +23,12 @@ public class MemberCardController {
 	@Autowired
 	private UserDao userDao;
 
+	/**
+	 * 查询会员卡信息
+	 * @param query
+	 * @param grade
+	 * @return
+	 */
 	@RequestMapping("/list")
 	public ModelAndView getList(@RequestParam(required = false) String query,
 			@RequestParam(required = false) Integer grade) {
@@ -62,6 +67,10 @@ public class MemberCardController {
 		return mv;
 	}
 	
+	/**
+	 * 调整到add-memberCard.jsp
+	 * @return
+	 */
 	@RequestMapping("/addView")
 	public ModelAndView addView(){
 		ModelAndView mv = new ModelAndView();
@@ -69,6 +78,17 @@ public class MemberCardController {
 		return mv;
 	}
 	
+	/**
+	 * 添加会员卡
+	 * @param grade
+	 * @param cardNum
+	 * @param price
+	 * @param point
+	 * @param discount
+	 * @param name
+	 * @param mobile
+	 * @return
+	 */
 	@RequestMapping(value="/addMemberCard")
 	public ModelAndView addMemberCard(@RequestParam Integer grade,
 			@RequestParam String cardNum,
@@ -90,11 +110,13 @@ public class MemberCardController {
 			user1.setType(4);
 			userId = userDao.insert(user1);
 		}else{
+			if(user.getType() == 3){
 			user1.setId(user.getId());
 			user1.setType(4);
 			boolean updateUser = userDao.update(user1);
 			if(updateUser){
 				userId = user1.getId();
+			}
 			}
 		}
 		boolean result = false;
@@ -111,6 +133,11 @@ public class MemberCardController {
 		return mv;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/getMemCard")
 	public ModelAndView addMemberCard(@RequestParam(required = false) int id){
 		MemberCard mCard = memberCardDao.getMemberCardByUserId(id);

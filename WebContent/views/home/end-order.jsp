@@ -45,32 +45,65 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<%=basePath%>resources/js/rickshaw.js"></script>
 </head>
 <body>
-		<div id="wrapper">
-				<!-- Navigation -->
-				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-						<div class="navbar-header">
-								<a class="navbar-brand">欢迎光临</a>
-						</div>
-						<div class="nav navbar-nav navbar-right">
-								<a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
-						</div>
-						<div class="navbar-default sidebar" role="navigation">
+<div id="wrapper">
+     <!-- Navigation -->
+              <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">欢迎光临</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<%=basePath%>/views/customer/member-reserve.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a>
+                            <a href="index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
+                            <a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=basePath%>homebase">房间监控</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="<%=basePath%>/views/customer/point-exchange.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>
+                            <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
+                                </li>
+                                <li>
+                                    <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
+                                </li>
+                                <li>
+                                    <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">收支登记</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="graphs.html">业绩查询</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">费用明细查询</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">收支登记</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
             </div>
-						</div>
-				</nav>
+        </nav>
 				<div id="page-wrapper">
 						<div class="row" style="padding-top: 40px">
 								<div class="col-md-5"></div>

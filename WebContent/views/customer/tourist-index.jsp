@@ -110,11 +110,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <div class="col-md-4"></div>
                                         <div class="col-md-4">
                                                 <label>房间大小：</label>
-                                                <select id="homeSize" style="width: 100px;height:30px;padding-left: 40px;font-size: 0.85em">
-                                                <option>大</option>
-                                                <option>中</option>
-                                                <option>小</option>
+                                                <select id="homeSize" style="width: 100px;height:30px;padding-left: 40px;font-size: 0.85em" onchange="javascript:showHome();">
+                                                <option value="1">大</option>
+                                                <option value="2">中</option>
+                                                <option value="3">小</option>
                                                 </select>
+                                                <select id="homeNum" style="width: 150px;height:30px;padding-left: 30px;font-size: 0.85em">
+												             </select>
                                         </div>
                                         <div class="clearfix"></div>
                                 </div>
@@ -145,7 +147,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-                                                <label>预约人手机号码：</label> <input type="text" class="form-control1" readonly="readonly"  value="${User.mobile}">
+                                                <label>预约人手机号码：</label> <input type="text" class="form-control1"
+														readonly="readonly" value="${User.mobile}">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -153,7 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="form-group">
                                 <div class="row" >
                                         <div class="col-md-5"></div>
-                                        <a class="btn btn-primary" href="<%=basePath%>views/login.jsp" style="margin-left: 70px">预约</a>
+                                        <a class="btn btn-primary" href="javascript:save();" style="margin-left: 70px">预约</a>
                                         <div class="clearfix"></div>
                                 </div>
                         </div>
@@ -166,6 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<script type="text/javascript">
 		$(function (){
 			showTechnician();
+			showHome();
 		})
 		function showTechnician(){
 			var grade = $("#grade").val();
@@ -189,14 +193,69 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					}
 				})
 		}
-		function ss(){
+		function showHome(){
+			var homeSize = $("#homeSize").val();
+			$("#homeNum option").remove();
+		//加载技师
+			$.ajax({
+		    type: "get",
+		    url: "<%=basePath%>home/getHomeBySize?homeSize="+homeSize+"",
+					data : {},
+					dataType : "json",
+					async:false,
+					success : function(data) {
+						if(data.length==0){
+							$("#homeNum").append("<option value='0'>无房间可选择</option>");
+						}else{
+						for (var i = 0; i < data.length; i++) {
+							$("#homeNum").append("<option value='"+data[i].id+"'>" + data[i].homeNum + "</option>");
+						}
+						}
+					}
+				})
+		}
+		
+		function save(){
+			var startTime = $("#startTime").val();
+			var entTime = $("#endTime").val();
+			var isSpa =0;
+			var isMass = 0;
+			var isCup = 0;
+			var userId= ${User.id};
 			$('input:checkbox[name=chkItem]').each(function() {
 				if($(this).context.checked){
-					console.log($(this).val());
+					if($(this).val()==1){
+						isSpa = 1;
+					}else if($(this).val()==2){
+						isMass =1;
+					}else if($(this).val()==3){
+						isCup =1;
+					}
 				}
-//         if ($(this).attr('checked') ==true) {
-//         }
-});
+			});
+				var datas = {
+            "resStarttime" : startTime,
+            "resEndtime" : entTime,
+            "technicianId" : $("#technicianId").val(),
+            "roomId" : $("#homeNum").val(),
+            "isSpa" : isSpa,
+            "isMass" : isMass,
+            "isCup" : isCup,
+            "userId":userId
+        }
+    $.ajax({
+    type: "post",
+    url: "<%=basePath%>order/submitOrder",
+    contentType : "application/json;charset=utf-8",
+    data : JSON.stringify(datas),
+        dataType : "json",
+        async : false,
+        success : function(data) {
+            if(data){
+                alert("预约成功");
+            }
+        }
+    });
 		}
 			$(document).ready(function() {
 				// date time picker
@@ -216,36 +275,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     });
                 }
 			})
-			
-			
-			function save() {
-			    var id = $("#id").val();
-			        var datas = {
-			                "id" : id,
-			                "mobile" : $("#mobile").val(),
-			                "name" : $("#name").val(),
-			                "spaCharge" : $("#spaCharge").val(),
-			                "massCharge" : $("#massCharge").val(),
-			                "cupCharge" : $("#cupCharge").val(),
-			                "grade" : $("#grade").val(),
-			                "technicianStatus" : $("#technicianStatus").val()
-			            }
-			        $.ajax({
-			        type: "post",
-			        url: "<%=basePath%>user/editTechnician",
-			        contentType : "application/json;charset=utf-8",
-			        data : JSON.stringify(datas),
-			            dataType : "json",
-			            async : false,
-			            success : function(data) {
-			                if(data){
-			                    window.location.href="<%=basePath%>views/manager/technician-manager.jsp";
-			                }
-			            }
-			        });
-			    }
-
 		</script>
-		
 </body>
 </html>

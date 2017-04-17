@@ -21,4 +21,10 @@ public interface HomeMapper {
 
 	public int updateByHomeNum(@Param("userId")Integer userId,@Param("homeNum") int homeNum);
 
+	public List<Home> getHomeBySize(@Param("homeSize")int homeSize);
+
+	public int updateHomeByOrder(Home home);
+
+	public int updateHomeToStart(Home home);
+
 }

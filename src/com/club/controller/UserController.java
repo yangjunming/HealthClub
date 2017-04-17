@@ -96,15 +96,18 @@ public class UserController {
 	
 	@RequestMapping("/getUserByMobile")
 	@ResponseBody
-	public String getUserByMobile(@RequestParam String mobile) {
+	public User getUserByMobile(@RequestParam String mobile) {
+		User user = new User();
 		if(null == mobile || mobile.equals("")){
-			return "";
+			return user;
 		}
-		User user = userDao.getUserByMobile(mobile);
+		user = userDao.getUserByMobile(mobile);
 		if(null != user){
-			return user.getName();
+			return user;
 		}
-		return "";
+		user = new User();
+		user.setName("");
+		return user;
 	}
 	
 	@RequestMapping("/user/getTechnician")

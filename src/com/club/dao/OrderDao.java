@@ -3,6 +3,7 @@ package com.club.dao;
 import java.util.List;
 
 import com.club.model.Order;
+import com.club.model.OrderRes;
 import com.club.model.TechnicianPerform;
 import com.club.model.TechnicianSalary;
 
@@ -14,6 +15,12 @@ public interface OrderDao {
 	public List<TechnicianSalary> getSalaryByTechnician(int technicianId);
 	
 	public List<TechnicianPerform> getPerformByTechnician(int technicianId);
+
+	public boolean submitOrder(Order order);
+
+	public OrderRes getOrderByHomeId(Integer roomId);
+
+	public boolean updateOrder(Order order);
 	
 	
 }

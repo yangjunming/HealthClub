@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.club.mapper.OrderMapper;
 import com.club.model.Order;
+import com.club.model.OrderRes;
 import com.club.model.TechnicianPerform;
 import com.club.model.TechnicianSalary;
 
@@ -31,6 +32,29 @@ public class OrderImpl implements OrderDao{
 	public List<TechnicianPerform> getPerformByTechnician(int technicianId) {
 		List<TechnicianPerform> perform = orderMapper.getPerformByTechnician(technicianId);
 		return perform;
+	}
+
+	@Override
+	public boolean submitOrder(Order order) {
+		int result = orderMapper.insert(order);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public OrderRes getOrderByHomeId(Integer roomId) {
+		return orderMapper.getOrderByHomeId(roomId);
+	}
+
+	@Override
+	public boolean updateOrder(Order order) {
+		int result = orderMapper.updateOrder(order);
+		if(result>0){
+			return true;
+		}
+		return false;
 	}
 	
 

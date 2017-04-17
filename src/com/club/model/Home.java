@@ -10,6 +10,13 @@ public class Home {
 	private int hasUser;
 	private int technicianId;
 	private int homeNum;
+	private int size;
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
 	public int getTechnicianId() {
 		return technicianId;
 	}

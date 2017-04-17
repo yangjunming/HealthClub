@@ -75,99 +75,99 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row" style="padding-top: 40px">
 								<div class="col-md-5"></div>
 								<div class="col-md-3">
-										<h3>欢迎预约养生会馆服务</h3>
+										<h3>欢迎光临养生会馆服务</h3>
 								</div>
 						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>预技开始时间：</label> <input type="text" class="form-control1" id="startTime" value="">
-												<!--             <input class="form-control" style="cursor: pointer; background-color: #FFF" -->
-												<!-- 																						id="startTime" name="signDate" placeholder="选择签约时间" type="text"> -->
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-                                                <label>预计结束时间：</label> <input type="text" class="form-control1" id="endTime" value="">
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>技师选择：</label>
-												<select id="grade" style="width: 120px;height:30px;padding-left: 30px;font-size: 0.85em" onchange="javascript:showTechnician();">
-												<option value="1">初级技师</option>
-												<option value="2">中级技师</option>
-												<option value="3">高级技师</option>
-												</select>
-												<select id="technicianId" style="width: 150px;height:30px;padding-left: 30px;font-size: 0.85em">
-												</select>
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-                                <div class="row">
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                                <label>房间大小：</label>
-                                                <select id="homeSize" style="width: 100px;height:30px;padding-left: 40px;font-size: 0.85em" onchange="javascript:showHome();">
-                                                <option value="1">大</option>
-                                                <option value="2">中</option>
-                                                <option value="3">小</option>
-                                                </select>
-                                                <select id="homeNum" style="width: 150px;height:30px;padding-left: 30px;font-size: 0.85em">
-												             </select>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                </div>
-                        </div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>服务项目：</label><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="checkbox" name="chkItem"  id="spa" value="1">SPA&nbsp;&nbsp;
-												<input type="checkbox" name="chkItem" id="mass" value="2">按摩&nbsp;&nbsp;
-												<input type="checkbox" name="chkItem" id="cup" value="3">拔罐
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
+<!-- 						<div class="form-group"> -->
+<!-- 								<div class="row"> -->
+<!-- 										<div class="col-md-4"></div> -->
+<!-- 										<div class="col-md-4"> -->
+<!-- 												<label>预技开始时间：</label> <input type="text" class="form-control1" id="startTime" value=""> -->
+<!-- 												            <input class="form-control" style="cursor: pointer; background-color: #FFF" -->
+<!-- 																																		id="startTime" name="signDate" placeholder="选择签约时间" type="text"> -->
+<!-- 										</div> -->
+<!-- 										<div class="clearfix"></div> -->
+<!-- 								</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 								<div class="row"> -->
+<!-- 										<div class="col-md-4"></div> -->
+<!-- 										<div class="col-md-4"> -->
+<!--                                                 <label>预计结束时间：</label> <input type="text" class="form-control1" id="endTime" value=""> -->
+<!-- 										</div> -->
+<!-- 										<div class="clearfix"></div> -->
+<!-- 								</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 								<div class="row"> -->
+<!-- 										<div class="col-md-4"></div> -->
+<!-- 										<div class="col-md-4"> -->
+<!-- 												<label>技师选择：</label> -->
+<!-- 												<select id="grade" style="width: 120px;height:30px;padding-left: 30px;font-size: 0.85em" onchange="javascript:showTechnician();"> -->
+<!-- 												<option value="1">初级技师</option> -->
+<!-- 												<option value="2">中级技师</option> -->
+<!-- 												<option value="3">高级技师</option> -->
+<!-- 												</select> -->
+<!-- 												<select id="technicianId" style="width: 150px;height:30px;padding-left: 30px;font-size: 0.85em"> -->
+<!-- 												</select> -->
+<!-- 										</div> -->
+<!-- 										<div class="clearfix"></div> -->
+<!-- 								</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!--                                 <div class="row"> -->
+<!--                                         <div class="col-md-4"></div> -->
+<!--                                         <div class="col-md-4"> -->
+<!--                                                 <label>房间大小：</label> -->
+<!--                                                 <select id="homeSize" style="width: 100px;height:30px;padding-left: 40px;font-size: 0.85em" onchange="javascript:showHome();"> -->
+<!--                                                 <option value="1">大</option> -->
+<!--                                                 <option value="2">中</option> -->
+<!--                                                 <option value="3">小</option> -->
+<!--                                                 </select> -->
+<!--                                                 <select id="homeNum" style="width: 150px;height:30px;padding-left: 30px;font-size: 0.85em"> -->
+<!-- 												             </select> -->
+<!--                                         </div> -->
+<!--                                         <div class="clearfix"></div> -->
+<!--                                 </div> -->
+<!--                         </div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 								<div class="row"> -->
+<!-- 										<div class="col-md-4"></div> -->
+<!-- 										<div class="col-md-4"> -->
+<!-- 												<label>服务项目：</label><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 												<input type="checkbox" name="chkItem"  id="spa" value="1">SPA&nbsp;&nbsp; -->
+<!-- 												<input type="checkbox" name="chkItem" id="mass" value="2">按摩&nbsp;&nbsp; -->
+<!-- 												<input type="checkbox" name="chkItem" id="cup" value="3">拔罐 -->
+<!-- 										</div> -->
+<!-- 										<div class="clearfix"></div> -->
+<!-- 								</div> -->
+<!-- 						</div> -->
 						
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>预约人：</label> <input type="text" class="form-control1" readonly="readonly" value="${User.name}">
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>预约人手机号码：</label> <input type="text" class="form-control1" readonly="readonly"  value="${User.mobile}">
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-                                <div class="row" >
-                                        <div class="col-md-5"></div>
-                                        <a class="btn btn-primary" href="javascript:save();" style="margin-left: 70px">预约</a>
-                                        <div class="clearfix"></div>
-                                </div>
-                        </div>
+<!-- 						<div class="form-group"> -->
+<!-- 								<div class="row"> -->
+<!-- 										<div class="col-md-4"></div> -->
+<!-- 										<div class="col-md-4"> -->
+<%-- 												<label>预约人：</label> <input type="text" class="form-control1" readonly="readonly" value="${User.name}"> --%>
+<!-- 										</div> -->
+<!-- 										<div class="clearfix"></div> -->
+<!-- 								</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 								<div class="row"> -->
+<!-- 										<div class="col-md-4"></div> -->
+<!-- 										<div class="col-md-4"> -->
+<%-- 												<label>预约人手机号码：</label> <input type="text" class="form-control1" readonly="readonly"  value="${User.mobile}"> --%>
+<!-- 										</div> -->
+<!-- 										<div class="clearfix"></div> -->
+<!-- 								</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!--                                 <div class="row" > -->
+<!--                                         <div class="col-md-5"></div> -->
+<!--                                         <a class="btn btn-primary" href="javascript:save();" style="margin-left: 70px">预约</a> -->
+<!--                                         <div class="clearfix"></div> -->
+<!--                                 </div> -->
+<!--                         </div> -->
 						
 						
 				</div>

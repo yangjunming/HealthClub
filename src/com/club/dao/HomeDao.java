@@ -19,5 +19,11 @@ public interface HomeDao {
 	public boolean updateByHomeId(Home home1);
 
 	public boolean updateByHomeNum(Integer id, int homeNum);
+
+	public List<Home> getHomeBySize(int homeSize);
+
+	public boolean updateHomeByOrder(Home home);
+
+	public boolean updateHomeToStart(Home home);
 	
 }

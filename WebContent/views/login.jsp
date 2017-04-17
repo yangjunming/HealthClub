@@ -28,7 +28,7 @@
   <h2 class="form-heading">养生会馆登录</h2>
   <div class="app-cam">
 	  <form action="<%=basePath%>index">
-		<input type="text" class="text" value="E-mail address" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail address';}">
+		<input type="text" class="text" value="mobile" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mobile';}">
 		<input type="password" value="Password" name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 		<div class="submit"><input type="submit" onclick="myFunction()" value="登录"></div>
 <!-- 		<ul class="new"> -->

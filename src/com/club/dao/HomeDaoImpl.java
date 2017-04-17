@@ -61,5 +61,28 @@ public class HomeDaoImpl implements HomeDao{
 		}
 		return false;
 	}
+
+	@Override
+	public List<Home> getHomeBySize(int homeSize) {
+		return homeMapper.getHomeBySize(homeSize);
+	}
+
+	@Override
+	public boolean updateHomeByOrder(Home home) {
+		int result = homeMapper.updateHomeByOrder(home);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateHomeToStart(Home home) {
+		int result = homeMapper.updateHomeToStart(home);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
 	
 }
