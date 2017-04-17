@@ -47,7 +47,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
-            <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
+            
+                <a class="btn-success btn am-btn-default" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -58,8 +59,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="<%=basePath%>technician/salary?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>工资查看</a>
                         </li>
-                        <li>
-                            <a href="<%=basePath%>technician/performance?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>业绩查询</a>
+                        <li style="border-right:3px solid #fff;">
+                            <a href="<%=basePath%>technician/performance?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>业绩查询 </strong></a>
                         </li>
                     </ul>
                 </div>
