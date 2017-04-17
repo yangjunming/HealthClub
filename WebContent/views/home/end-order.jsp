@@ -114,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row">
 								<div class="col-md-4"></div>
 								<div class="col-md-4">
-										<label>房间号：</label> <input readonly="readonly" id="homeNum" value="${param.id}">
+										<label>房间号：</label> <label id="homeId">${param.id}</label>
 								</div>
 								<div class="clearfix"></div>
 						</div>
@@ -123,9 +123,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>技师：</label>
+												<label>技师：</label> <label id="technicianName"></label>
 												 <input type="text" id="technicianId" hidden="" value="">
-												 <input type="text" id="technicianName" class="form-control1" readonly="readonly" value="">
+<!-- 												 <input type="text" id="technicianName" class="form-control1" readonly="readonly" value=""> -->
+										</div>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+						<div class="form-group">
+								<div class="row">
+										<div class="col-md-4"></div>
+										<div class="col-md-4">
+												<label>客人手机号码：</label><label id="mobile"></label>
+										</div>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+						<div class="form-group">
+								<div class="row">
+										<div class="col-md-4"></div>
+										<div class="col-md-4">
+												<label >客人姓名：</label><label id="name" ></label>
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -147,9 +165,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
 												<label>各项目收费标准(元/小时)：</label><br>
-												<label>SPA：</label><input type="text" id="spaCharge" class="form-control1" readonly="readonly" value="">
-												<label>按摩：</label><input type="text" id="massCharge" class="form-control1" readonly="readonly" value="">
-												<label>拔罐：</label><input type="text" id="cupCharge" class="form-control1" readonly="readonly" value="">
+												<label style="padding-top: 15px">SPA：</label><label style="padding-top: 15px" id="spaCharge">100</label><br>
+												<label style="padding-top: 15px">按摩：</label><label style="padding-top: 15px" id="massCharge">200</label><br>
+												<label style="padding-top: 15px">拔罐：</label><label style="padding-top: 15px" id="cupCharge">300</label><br>
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -166,14 +184,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="clearfix"></div>
 								</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="Member" hidden="">
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
 										    <label>会员信息：</label><br>
-												<label>卡号：</label><input type="text" id="cardNum" class="form-control1" readonly="readonly" value="">
-												<label>持卡人：</label><input type="text" id="technicianName" class="form-control1" readonly="readonly" value="">
-												<label>折扣：</label><input type="text" id="technicianName" class="form-control1" readonly="readonly" value="">
+												<label >卡号：</label><label id="cardNum"></label><br>
+<!-- 												<label style="padding-top: 15px">持卡人：</label><label id="cardUserName" style="padding-top: 15px"></label><br> -->
+                                                <label style="padding-top: 15px">余额：</label><label id="balance" style="padding-top: 15px"></label><br>
+												<label style="padding-top: 15px">折扣：</label><label id="discount" style="padding-top: 15px"></label>
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -194,8 +213,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>客人手机号码：</label>
-												 <input type="text" class="form-control1" id="mobile" readonly="readonly"  value="">
+												<label>合计费用：</label>
+												<input type="text" id="nodiscountSalesVolume" class="form-control1" readonly="readonly" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -204,7 +223,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>客人姓名：</label> <input type="text" id="name" class="form-control1" readonly="readonly" value="">
+												<label>折后合计费用：</label>
+												<input type="text" id="salesVolume" class="form-control1" readonly="readonly" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -221,60 +241,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 		$(function (){
-			showTechnician();
-			showHome();
-		})
-		function showTechnician(){
-			var grade = $("#grade").val();
-			$("#technicianId option").remove();
-		//加载技师
-			$.ajax({
-		    type: "get",
-		    url: "<%=basePath%>technician/getTechnicianByGrade?grade="+grade+"",
-					data : {},
-					dataType : "json",
-					async:false,
-					success : function(data) {
-						if(data.length==0){
-							$("#technicianId").append("<option value='0'>无技师可选择</option>");
-						}else{
-						for (var i = 0; i < data.length; i++) {
-							$("#technicianId").append("<option value='"+data[i].id+"'>" + data[i].name + "</option>");
-						}
-						}
-					}
-				})
-		}
-		
-		function showHome(){
-			var homeSize = $("#homeSize").val();
-			$("#homeNum option").remove();
-		//加载技师
-			$.ajax({
-		    type: "get",
-		    url: "<%=basePath%>home/getHomeBySize?homeSize="+homeSize+"",
-					data : {},
-					dataType : "json",
-					async:false,
-					success : function(data) {
-						if(data.length==0){
-							$("#homeNum").append("<option value='0'>无房间可选择</option>");
-						}else{
-						for (var i = 0; i < data.length; i++) {
-							$("#homeNum").append("<option value='"+data[i].id+"'>" + data[i].homeNum + "</option>");
-						}
-						}
-					}
-				})
-		}
-		
+			var homeId= $("#homeId").text();
+			console.log(homeId);
+			 $.ajax({
+				    type: "get",
+				    url: "<%=basePath%>order/getOrderByHomeId?roomId="+homeId+"",
+				    contentType : "application/json;charset=utf-8",
+				    data : {},
+				        dataType : "json",
+				        async : false,
+				        success : function(data) {
+				        	console.log(data);
+				        	$("#mobile").text(data.mobile);
+				        	$("#name").text(data.name);
+				        	$("#technicianName").text(data.technicianName);
+				        	if(data.isSpa==1){
+			                	$("#spa").attr("checked", true);
+			                }
+			                if(data.isMass==1){
+			                	$("#mass").attr("checked", true);
+			                }
+			                if(data.isCup==1){
+			                	$("#cup").attr("checked", true);
+			                }
+			                $("#spaCharge").text(data.spaCharge);
+				        	$("#massCharge").text(data.massCharge);
+				        	$("#cupCharge").text(data.cupCharge);
+				            if(data.type==4){
+				            	var userId = data.userId;
+				            	$("#Member").show();
+				            	 $.ajax({
+				            		    type: "post",
+				            		    url: "<%=basePath%>memberCard/getMemCardByUserId?userId="+userId+"",
+				            		    contentType : "application/json;charset=utf-8",
+				            		    data : {},
+				            		        dataType : "json",
+				            		        async : false,
+				            		        success : function(data) {
+				            		        	console.log(data);
+// 				            		        	cardNum cardUserName discount balance
+                                                 $("#cardNum").text(data.cardNum);
+                                                 $("#discount").text(data.discount);
+                                                 $("#balance").text(data.balance);
+
+
+				            		        }
+				            		    });
+				            	console.log("会员");
+// 				                alert("预约成功");
+				            }
+				        }
+				    });
+		});
 		function save(){
 			var startTime = $("#startTime").val();
 			var entTime = $("#endTime").val();
 			var isSpa =0;
 			var isMass = 0;
 			var isCup = 0;
-			var userId= ${User.id};
 			$('input:checkbox[name=chkItem]').each(function() {
 				if($(this).context.checked){
 					if($(this).val()==1){
@@ -293,8 +317,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             "roomId" : $("#homeNum").val(),
             "isSpa" : isSpa,
             "isMass" : isMass,
-            "isCup" : isCup,
-            "userId":userId
+            "isCup" : isCup
         }
     $.ajax({
     type: "post",
@@ -310,23 +333,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
     });
 		}
-			$(document).ready(function() {
-				// date time picker
-				if ($("#startTime").length > 0) {
-					$("#startTime").datetimepicker({
-						locale : "zh-cn",
-						format : "YYYY-MM-DD HH:mm:ss",
-						dayViewHeaderFormat : "YYYY年 MMMM"
-					});
-				}
-                if ($("#endTime").length > 0) {
-                    $("#endTime").datetimepicker({
-                        locale : "zh-cn",
-                        format : "YYYY-MM-DD HH:mm:ss",
-                        dayViewHeaderFormat : "YYYY年 MMMM"
-                    });
-                }
-			})
 		</script>
 </body>
 </html>

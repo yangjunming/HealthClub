@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.club.dao.MemberCardDao;
@@ -145,6 +146,21 @@ public class MemberCardController {
 		mv.addObject("mCard", mCard);
 		mv.setViewName("customer/member-card");
 		return mv;
+	}
+	
+	/**
+	 * 根据userID查询会员卡信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/getMemCardByUserId")
+	@ResponseBody
+	public MemberCard getMemCardByUserId(@RequestParam(required = false) Integer userId){
+		if(null == userId || userId==0){
+			return new MemberCard();
+		}
+		MemberCard mCard = memberCardDao.getMemberCardByUserId(userId);
+		return mCard;
 	}
 	
 }

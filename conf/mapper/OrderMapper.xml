@@ -138,31 +138,36 @@
 		</select>
 		<select id="getOrderByHomeId" resultType="com.club.model.OrderRes">
 				SELECT
-				t_order.id,
-				room_id AS roomId,
-				t_order.technician_id AS technicianId,
-				teuser.name as technicianName,
-				t_order.user_id AS userId,
-				DATE_FORMAT(
-				res_starttime,
-				'%Y-%m-%d %H:%i:%s'
-				) AS startTime,
-				DATE_FORMAT(
-				res_endtime,
-				'%Y-%m-%d %H:%i:%s'
-				) AS endTime,
-				is_spa AS isSpa,
-				is_mass AS isMass,
-				is_cup AS isCup,
-				size,
-				home_num AS homeNum,
-				reuser.mobile,
-				reuser.`name`
-				FROM
-				t_order
-				LEFT JOIN t_home ON t_home.id = t_order.room_id
-				LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
-				LEFT JOIN `user` AS teuser ON teuser.id = t_order.technician_id
+	t_order.id,
+	room_id AS roomId,
+	t_order.technician_id AS technicianId,
+	teuser. NAME AS technicianName,
+	t_order.user_id AS userId,
+	DATE_FORMAT(
+		res_starttime,
+		'%Y-%m-%d %H:%i:%s'
+	) AS startTime,
+	DATE_FORMAT(
+		res_endtime,
+		'%Y-%m-%d %H:%i:%s'
+	) AS endTime,
+	is_spa AS isSpa,
+	is_mass AS isMass,
+	is_cup AS isCup,
+	size,
+	home_num AS homeNum,
+	reuser.mobile,
+	reuser.`name`,
+reuser.type,
+technician.spa_charge AS spaCharge,
+technician.mass_charge AS massCharge,
+technician.cup_charge AS cupCharge
+FROM
+	t_order
+LEFT JOIN t_home ON t_home.id = t_order.room_id
+LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
+LEFT JOIN technician ON technician.id = t_order.technician_id
+LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
 				WHERE
 				room_id=#{roomId}
 				AND t_order.is_end = 0

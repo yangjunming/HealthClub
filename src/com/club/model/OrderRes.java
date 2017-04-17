@@ -3,6 +3,7 @@
  */
 package com.club.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderRes {
@@ -27,6 +28,42 @@ public class OrderRes {
 	private int homeNum;
 	private String mobile;
 	private String name;
+	private int type;
+	private BigDecimal spaCharge;
+	private BigDecimal massCharge;
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public BigDecimal getSpaCharge() {
+		return spaCharge;
+	}
+
+	public void setSpaCharge(BigDecimal spaCharge) {
+		this.spaCharge = spaCharge;
+	}
+
+	public BigDecimal getMassCharge() {
+		return massCharge;
+	}
+
+	public void setMassCharge(BigDecimal massCharge) {
+		this.massCharge = massCharge;
+	}
+
+	public BigDecimal getCupCharge() {
+		return cupCharge;
+	}
+
+	public void setCupCharge(BigDecimal cupCharge) {
+		this.cupCharge = cupCharge;
+	}
+
+	private BigDecimal cupCharge;
 
 	public String getTechnicianName() {
 		return technicianName;
