@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.club.model.IncomeAndExpense;
 import com.club.model.Order;
 import com.club.model.OrderRes;
 import com.club.model.TechnicianPerform;
@@ -22,4 +23,9 @@ public interface OrderMapper {
 	public OrderRes getOrderByHomeId(@Param("roomId")Integer roomId);
 
 	public int updateOrder(Order order);
+	
+	public List<TechnicianPerform> getAllPerform();
+	
+	public List<IncomeAndExpense> getIncomeAndExpense();
+
 }

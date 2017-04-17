@@ -1,0 +1,112 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE HTML>
+<html>
+<head>
+<base href="<%=basePath%>resources/">
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+		content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=basePath%>resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=basePath%>resources/css/style.css" rel='stylesheet' type='text/css' />
+<!-- Graph CSS -->
+<link href="<%=basePath%>resources/css/lines.css" rel='stylesheet' type='text/css' />
+<link href="<%=basePath%>resources/css/font-awesome.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="<%=basePath%>resources/js/jquery.min.js"></script>
+<!----webfonts--->
+<!-- <link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'> -->
+<!---//webfonts--->
+<!-- Nav CSS -->
+<link href="<%=basePath%>resources/css/custom.css" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<%=basePath%>resources/js/metisMenu.min.js"></script>
+<script src="<%=basePath%>resources/js/custom.js"></script>
+<!-- Graph JavaScript -->
+<script src="<%=basePath%>resources/js/d3.v3.js"></script>
+<script src="<%=basePath%>resources/js/rickshaw.js"></script>
+</head>
+<body>
+		<div id="wrapper">
+				<!-- Navigation -->
+				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+						<div class="navbar-header">
+								<a class="navbar-brand">欢迎光临</a>
+						</div>
+						<div class="nav navbar-nav navbar-right"></div>
+						<div class="navbar-default sidebar" role="navigation">
+								<div class="sidebar-nav navbar-collapse">
+										<ul class="nav" id="side-menu">
+												<li><a href="index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
+												<li><a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>homebase">房间监控</a></li>
+														</ul></li>
+												<li><a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>memberCard/list">会员卡管理</a></li>
+																<li><a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a></li>
+																<li><a href="typography.html">人员管理</a></li>
+																<li><a href="typography.html">收支登记</a></li>
+														</ul> <!-- /.nav-second-level --></li>
+												<li><a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
+																<li><a href="typography.html">费用明细查询</a></li>
+																<li><a href="typography.html">收支登记</a></li>
+														</ul></li>
+										</ul>
+								</div>
+						</div>
+				</nav>
+		<div id="page-wrapper">
+			<div class="bs-example4" data-example-id="contextual-table">
+			   <table class="table">
+			     <thead>
+			        <tr>
+			            <th>日期</th>
+			            <th>技师姓名</th>
+			            <th>SPA总额</th>
+			            <th>按摩总额</th>
+			            <th>拔罐总额</th>
+			            <th>总金额</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			      <c:forEach items="${performs}" var = "performs" >
+			      <tr>
+			          <td> ${fn:substring(performs.day,0,4)}年${fn:substring(performs.day,4,6)}月${fn:substring(performs.day,6,8)}日 </td>
+			          <td>${performs.name}</td>
+			          <td>${performs.spaAmount}</td>
+			          <td>${performs.massAmount}</td>
+			          <td>${performs.cupAmount}</td>
+			          <td>${performs.salesVolume}</td>
+			      </tr>
+			      </c:forEach> 
+			      </tbody>
+			    </table>
+             </div>
+		</div>
+		</div>
+		<!-- /#wrapper -->
+		<!-- Bootstrap Core JavaScript -->
+		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
+</body>
+
+</html>

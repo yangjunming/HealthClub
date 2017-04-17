@@ -81,9 +81,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="graphs.html">业绩查询</a>
-                                </li>
+                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
                                 <li>
                                     <a href="typography.html">费用明细查询</a>
                                 </li>
