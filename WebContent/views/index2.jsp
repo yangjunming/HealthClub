@@ -29,9 +29,7 @@
         <ul class="productTab respl-option" data-option-key="filter">
             <li class="select"><a href="#" data-rl_value="*">全部</a></li>
             <li><a href="#" data-rl_value=".category-10">热卖</a></li>
-            <li><a href="#" data-rl_value=".category-20">新品</a></li>
-            <li><a href="<%=basePath%>views/login" >登录</a></li>
-           
+            <li><a href="#" data-rl_value=".category-20">新品</a></li>           
         </ul>
         
         <ul class="ProductList respl-items">
