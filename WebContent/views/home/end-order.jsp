@@ -114,6 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row">
 								<div class="col-md-4"></div>
 								<div class="col-md-4">
+								<input id="orderId" hidden="">
 										<label>房间号：</label> <label id="homeId">${param.id}</label>
 								</div>
 								<div class="clearfix"></div>
@@ -134,6 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
+										<input id="userId" hidden="">
 												<label>客人手机号码：</label><label id="mobile"></label>
 										</div>
 										<div class="clearfix"></div>
@@ -177,9 +179,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
 												<label>各项目时间(小时)：</label><br>
-												<label>SPA：</label><input type="text" id="sapTime" class="form-control1"   value="">
-												<label>按摩：</label><input type="text" id="massTime" class="form-control1"  value="">
-												<label>拔罐：</label><input type="text" id="cupTime" class="form-control1"   value="">
+												<label>SPA：</label><input type="text" id="spaTime" class="form-control1" onchange="javascript:spaAmount();"  value="">
+												<label>按摩：</label><input type="text" id="massTime" class="form-control1" onchange="javascript:massAmount();" value="">
+												<label>拔罐：</label><input type="text" id="cupTime" class="form-control1" onchange="javascript:cupAmount();"  value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -189,6 +191,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
 										    <label>会员信息：</label><br>
+										    <input id="memCardId" hidden="" value="0">
 												<label >卡号：</label><label id="cardNum"></label><br>
 <!-- 												<label style="padding-top: 15px">持卡人：</label><label id="cardUserName" style="padding-top: 15px"></label><br> -->
                                                 <label style="padding-top: 15px">余额：</label><label id="balance" style="padding-top: 15px"></label><br>
@@ -202,9 +205,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
 												<label>各项目计费：</label><br>
-												<label>SPA：</label><input type="text" id="technicianName" class="form-control1" readonly="readonly" value="">
-												<label>按摩：</label><input type="text" id="technicianName" class="form-control1" readonly="readonly" value="">
-												<label>拔罐：</label><input type="text" id="technicianName" class="form-control1" readonly="readonly" value="">
+												<label>SPA：</label><input type="text" id="spaAmount" class="form-control1" readonly="readonly" value="0">
+												<label>按摩：</label><input type="text" id="massAmount" class="form-control1" readonly="readonly" value="0">
+												<label>拔罐：</label><input type="text" id="cupAmount" class="form-control1" readonly="readonly" value="0">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -224,7 +227,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
 												<label>折后合计费用：</label>
-												<input type="text" id="salesVolume" class="form-control1" readonly="readonly" value="">
+												<input type="text" id="salesVolume" class="form-control1" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -232,7 +235,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="form-group">
                                 <div class="row" >
                                         <div class="col-md-7"></div>
-                                        <a class="btn btn-primary" href="javascript:save();" style="margin-left: 70px">结算</a>
+                                        <a class="btn btn-primary" href="<%=basePath%>homebase" >返回</a>
+                                        <a class="btn btn-primary" href="javascript:save(0);" >现金结算</a>
+                                        <a class="btn btn-primary" href="javascript:save(1);" >余额结算</a>
                                         <div class="clearfix"></div>
                                 </div>
            </div>
@@ -242,7 +247,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<script type="text/javascript">
 		$(function (){
 			var homeId= $("#homeId").text();
-			console.log(homeId);
 			 $.ajax({
 				    type: "get",
 				    url: "<%=basePath%>order/getOrderByHomeId?roomId="+homeId+"",
@@ -251,7 +255,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				        dataType : "json",
 				        async : false,
 				        success : function(data) {
-				        	console.log(data);
+				        	$("#orderId").val(data.id);
 				        	$("#mobile").text(data.mobile);
 				        	$("#name").text(data.name);
 				        	$("#technicianName").text(data.technicianName);
@@ -267,6 +271,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			                $("#spaCharge").text(data.spaCharge);
 				        	$("#massCharge").text(data.massCharge);
 				        	$("#cupCharge").text(data.cupCharge);
+				        	$("#userId").val(data.userId);
 				            if(data.type==4){
 				            	var userId = data.userId;
 				            	$("#Member").show();
@@ -283,55 +288,125 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                  $("#cardNum").text(data.cardNum);
                                                  $("#discount").text(data.discount);
                                                  $("#balance").text(data.balance);
+                                                 $("#memCardId").val(data.id);
 
 
 				            		        }
 				            		    });
-				            	console.log("会员");
-// 				                alert("预约成功");
 				            }
 				        }
 				    });
 		});
-		function save(){
-			var startTime = $("#startTime").val();
-			var entTime = $("#endTime").val();
-			var isSpa =0;
-			var isMass = 0;
-			var isCup = 0;
-			$('input:checkbox[name=chkItem]').each(function() {
-				if($(this).context.checked){
-					if($(this).val()==1){
-						isSpa = 1;
-					}else if($(this).val()==2){
-						isMass =1;
-					}else if($(this).val()==3){
-						isCup =1;
-					}
-				}
-			});
+		function save(flag){
 				var datas = {
-            "resStarttime" : startTime,
-            "resEndtime" : entTime,
-            "technicianId" : $("#technicianId").val(),
-            "roomId" : $("#homeNum").val(),
-            "isSpa" : isSpa,
-            "isMass" : isMass,
-            "isCup" : isCup
+            "orderId" : $("#orderId").val(),
+            "homeId": $("#homeId").text(),
+            "userId" : $("#userId").val(),
+            "memCardId" : $("#memCardId").val(),
+            "nodiscountSalesVolume": $("#nodiscountSalesVolume").val(),
+            "salesVolume": $("#salesVolume").val(),
+            "spaAmount" : $("#spaAmount").val(),
+            "massAmount" : $("#massAmount").val(),
+            "cupAmount" : $("#cupAmount").val(),
+             "balance":$("#balance").text(),
+             "flag":flag
         }
     $.ajax({
     type: "post",
-    url: "<%=basePath%>order/submitOrder",
+    url: "<%=basePath%>order/endOrder",
     contentType : "application/json;charset=utf-8",
     data : JSON.stringify(datas),
         dataType : "json",
         async : false,
         success : function(data) {
+        	console.log(data);
             if(data){
-                alert("预约成功");
+                alert("结算成功");
             }
         }
     });
+		}
+		function spaAmount(){
+		var amount = $("#spaCharge").text() * $("#spaTime").val();
+		if (isNaN(amount)) {
+			$("#spaAmount").val(0);
+		} else {
+			$("#spaAmount").val(getVal(amount, 2));
+		}
+		var spaAmount = $("#spaAmount").val();
+		var massAmount = $("#massAmount").val();
+		var cupAmount = $("#cupAmount").val();
+		$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+		var discount = $("#discount").text();
+		if(null ==discount|| discount ==''){
+			$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+		}else{
+			var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount);
+			$("#salesVolume").val(count*Number(discount));
+		}
+		}
+		
+		function massAmount(){
+			var amount = $("#massCharge").text() * $("#massTime").val();
+			if (isNaN(amount)) {
+				$("#massAmount").val(0);
+			} else {
+				$("#massAmount").val(getVal(amount, 2));
+			}
+			var spaAmount = $("#spaAmount").val();
+			var massAmount = $("#massAmount").val();
+			var cupAmount = $("#cupAmount").val();
+			$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			var discount = $("#discount").text();
+			if(null ==discount|| discount ==''){
+				$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			}else{
+				var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount);
+				$("#salesVolume").val(count*Number(discount));
+			}
+			}
+		function cupAmount(){
+			var amount = $("#cupCharge").text() * $("#cupTime").val();
+			if (isNaN(amount)) {
+				$("#cupAmount").val(0);
+			} else {
+				$("#cupAmount").val(getVal(amount, 2));
+			}
+			var spaAmount = $("#spaAmount").val();
+			var massAmount = $("#massAmount").val();
+			var cupAmount = $("#cupAmount").val();
+			$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			var discount = $("#discount").text();
+			if(null ==discount|| discount ==''){
+				$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			}else{
+				var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount);
+				$("#salesVolume").val(count*Number(discount));
+			}
+			}
+		
+		function getVal(value, num) {
+			if (typeof value !== "number") {
+				value = Number(value)
+			}
+			var val = value.toFixed(num)
+			if (val.indexOf(".") !== -1) {
+				for (var i = val.length - 1; i > -1; i--) {
+					if (val[i] !== '0') {
+						break;
+					}
+					val = val.slice(0, i)
+				}
+			}
+			if (val.split("")[val.length - 1] === ".") {
+				var arr = val.split("");
+				arr.pop();
+				val = arr.join("")
+			}
+			if (val == -0) {
+				val = 0;
+			}
+			return val
 		}
 		</script>
 </body>

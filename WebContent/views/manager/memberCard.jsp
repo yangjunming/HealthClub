@@ -125,17 +125,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <th>价格</th>
           <th>积分(消费1元/)</th>
           <th>折扣</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
       <c:forEach items="${cardList}" var = "cardList" >
       <tr>
           <td>${cardList.cardNum}</td>
-<%--           <td>${cardList.cardName}</td> --%>
           <td>${cardList.cardName}</td>
           <td>${cardList.price}</td>
           <td>${cardList.point}</td>
           <td>${cardList.discount}</td>
+          <td><a class='remove btn btn-primary input-xs' href="<%=basePath%>views/manager/edit-memberCard.jsp?id=${cardList.id}">编辑</a></td>
         	</tr>
         </c:forEach> 
       </tbody>

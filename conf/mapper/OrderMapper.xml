@@ -186,6 +186,7 @@ LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
 						<if test="resStarttime !=null ">res_starttime=#{resStarttime},</if>
 						<if test="resEndtime !=null ">res_endtime=#{resEndtime},</if>
 						<if test="orderStatus !=0 ">order_status=#{orderStatus},</if>
+						<if test="nodiscountSalesVolume !=null and nodiscountSalesVolume !='' ">nodiscount_sales_volume=#{nodiscountSalesVolume},</if>
 						<if test="salesVolume !=null and salesVolume !='' ">sales_volume=#{salesVolume},</if>
 						<if test="isSpa !=0 ">is_spa=#{isSpa},</if>
 						<if test="spaAmount !=null and spaAmount !='' ">spa_amount=#{spaAmount},</if>

@@ -30,6 +30,21 @@ public class MemberCardDaoImpl implements MemberCardDao{
 	public MemberCard getMemberCardByUserId(int userId){
 		MemberCard mCard = memberCardMapper.getMemberCardByUserId(userId);
 		return mCard;
+	}
+
+	@Override
+	public boolean updateMemberCard(MemberCard memberCard) {
+		int result = memberCardMapper.updateMemberCard(memberCard);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public MemberCard getMemCardByMemCardId(Integer id) {
+		MemberCard mCard = memberCardMapper.getMemCardByMemCardId(id);
+		return mCard;
 	};
 	
 }

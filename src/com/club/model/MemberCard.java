@@ -12,7 +12,28 @@ public class MemberCard {
 	private String cardName;
 	private String cardNum;
 	private BigDecimal balance;
+	private BigDecimal pointBalance;
+	private String name;
+	private String mobile;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public BigDecimal getPointBalance() {
+		return pointBalance;
+	}
+	public void setPointBalance(BigDecimal pointBalance) {
+		this.pointBalance = pointBalance;
+	}
 	public BigDecimal getBalance() {
 		return balance;
 	}

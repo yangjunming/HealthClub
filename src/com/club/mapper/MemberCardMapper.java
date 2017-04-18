@@ -14,4 +14,8 @@ public interface MemberCardMapper {
 	
 	public MemberCard getMemberCardByUserId(@Param("userId")int userId);
 
+	public int updateMemberCard(MemberCard memberCard);
+
+	public MemberCard getMemCardByMemCardId(@Param("id")Integer id);
+
 }

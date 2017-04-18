@@ -1,5 +1,6 @@
 package com.club.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.club.dao.HomeDao;
+import com.club.dao.MemberCardDao;
 import com.club.dao.OrderDao;
 import com.club.dao.UserDao;
 import com.club.model.Home;
+import com.club.model.MemberCard;
 import com.club.model.Order;
+import com.club.model.OrderEndDTO;
 import com.club.model.OrderRes;
 import com.club.model.User;
 
@@ -26,6 +30,8 @@ public class OrderController {
 	private HomeDao homeDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private MemberCardDao memberCardDao;
 	
 	/**
 	 * 预约提交订单
@@ -111,6 +117,53 @@ public class OrderController {
 		updateHome = homeDao.updateHomeByOrder(home);
 		}
 		updateOrder = orderDao.updateOrder(order);
+		if(updateOrder&&updateHome){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 结单
+	 * @param order
+	 * @return
+	 */
+	@RequestMapping("/endOrder")
+	@ResponseBody
+	public boolean endOrder(@RequestBody OrderEndDTO orderEndDTO){
+		boolean updateHome = false;
+		boolean updateOrder =false;
+		Home home = new Home();
+		home.setId(orderEndDTO.getHomeId());
+		home.setHasUser(0);
+		home.setIsEnd(1);
+		home.setTechnicianId(0);
+		home.setUserId(0);
+		updateHome = homeDao.updateHomeToEnd(home);
+		Order order = new Order();
+		order.setId(orderEndDTO.getOrderId());
+		order.setEndTime(new Date());
+		order.setIsEnd(1);
+		order.setOrderStatus(2);
+		order.setNodiscountSalesVolume(orderEndDTO.getNodiscountSalesVolume());
+		order.setSalesVolume(orderEndDTO.getSalesVolume());
+		order.setSpaAmount(orderEndDTO.getSpaAmount());
+		order.setMassAmount(orderEndDTO.getMassAmount());
+		order.setCupAmount(orderEndDTO.getCupAmount());
+		updateOrder = orderDao.updateOrder(order);
+		if(orderEndDTO.getMemCardId()!=0){
+			MemberCard memberCard =memberCardDao.getMemberCardByUserId(orderEndDTO.getUserId());
+			MemberCard MemberCard = new MemberCard();
+			MemberCard.setId(memberCard.getId());
+			BigDecimal pointBalance = memberCard.getPointBalance();
+			pointBalance = pointBalance.add(orderEndDTO.getSalesVolume().multiply(memberCard.getPoint()));
+			MemberCard.setPointBalance(pointBalance);
+			if(orderEndDTO.getFlag()==1){
+			BigDecimal balance = memberCard.getBalance();
+			balance = balance.subtract(orderEndDTO.getSalesVolume());
+			}
+			 memberCardDao.updateMemberCard(MemberCard);
+		}
 		if(updateOrder&&updateHome){
 			return true;
 		}
