@@ -1,8 +1,10 @@
 package com.club.model;
 
+import java.util.Date;
+
 public class Home {
 	private int id;
-	private String startTime;
+	private Date startTime;
 	private int isEnd;
 	private int isReservation;
 	private String resTime;
@@ -41,10 +43,10 @@ public class Home {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(String startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 	public int getIsEnd() {

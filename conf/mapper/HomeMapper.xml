@@ -5,7 +5,7 @@
 		<update id="updateByHomeId" parameterType="com.club.model.Home">
 				UPDATE t_home
 				<trim prefix="set" suffixOverrides=",">
-						<if test="startTime !=null and startTime !='' ">start_time=#{startTime},</if>
+						<if test="startTime !=null ">start_time=#{startTime},</if>
 						<if test="isEnd !=0 ">is_end=#{isEnd},</if>
 						<if test="isReservation !=0 ">is_reservation=#{isReservation},</if>
 						<if test="resTime !=null and resTime !='' ">res_time=#{resTime},</if>
