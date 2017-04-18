@@ -163,4 +163,14 @@ public class MemberCardController {
 		return mCard;
 	}
 	
+	@RequestMapping(value="/getMemCardByMemCardId")
+	@ResponseBody
+	public MemberCard getMemCardByMemCardId(@RequestParam(required = false) Integer id){
+		if(null == id || id==0){
+			return new MemberCard();
+		}
+		MemberCard mCard = memberCardDao.getMemCardByMemCardId(id);
+		return mCard;
+	}
+	
 }

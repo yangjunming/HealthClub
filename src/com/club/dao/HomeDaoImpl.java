@@ -84,5 +84,14 @@ public class HomeDaoImpl implements HomeDao{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean updateHomeToEnd(Home home) {
+		int result = homeMapper.updateHomeToEnd(home);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
 	
 }

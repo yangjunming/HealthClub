@@ -105,4 +105,9 @@
 				set is_reservation=#{isReservation},has_user=#{hasUser}
 				WHERE id=#{id}
 		</update>
+		<update id="updateHomeToEnd" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set is_end=#{isEnd},has_user=#{hasUser},technician_id=#{technicianId},user_id=#{userId}
+				WHERE id=#{id}
+		</update>
 </mapper>

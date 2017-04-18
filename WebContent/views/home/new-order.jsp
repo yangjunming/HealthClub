@@ -143,6 +143,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="form-group">
 						<div class="row">
 								<div class="col-md-7"></div>
+								<a class="btn btn-primary" href="<%=basePath%>homebase" >返回</a>
 								<a class="btn btn-primary" href="javascript:save();">提交订单</a>
 								<div class="clearfix"></div>
 						</div>
@@ -208,7 +209,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         async : false,
         success : function(data) {
             if(data){
-                alert("预约成功");
+                alert("开单成功");
             }
         }
     });

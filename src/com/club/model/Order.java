@@ -19,7 +19,8 @@ public class Order {
 	private String resStarttime;
 	private String resEndtime;
 	private int orderStatus;
-	private int salesVolume;
+	private BigDecimal nodiscountSalesVolume;
+	private BigDecimal salesVolume;
 	private int isSpa;
 	private int isMass;
 	private int isCup;
@@ -156,11 +157,19 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 
-	public int getSalesVolume() {
+	public BigDecimal getNodiscountSalesVolume() {
+		return nodiscountSalesVolume;
+	}
+
+	public void setNodiscountSalesVolume(BigDecimal nodiscountSalesVolume) {
+		this.nodiscountSalesVolume = nodiscountSalesVolume;
+	}
+
+	public BigDecimal getSalesVolume() {
 		return salesVolume;
 	}
 
-	public void setSalesVolume(int salesVolume) {
+	public void setSalesVolume(BigDecimal salesVolume) {
 		this.salesVolume = salesVolume;
 	}
 

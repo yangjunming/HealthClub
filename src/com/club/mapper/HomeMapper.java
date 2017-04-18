@@ -27,4 +27,6 @@ public interface HomeMapper {
 
 	public int updateHomeToStart(Home home);
 
+	public int updateHomeToEnd(Home home);
+
 }
