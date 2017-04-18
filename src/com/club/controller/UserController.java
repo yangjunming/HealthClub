@@ -72,7 +72,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("message", "Hello World!");
 		mv.addObject("flag", true);
-		mv.setViewName("login");
+		mv.setViewName("guan");
 		return mv;
 	}
 	@RequestMapping("/login")
