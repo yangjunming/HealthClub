@@ -80,7 +80,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <div class="col-md-4">
             </div>
             <div class="col-md-4">
-             <label>会员卡号：</label>
+            <h1>会员卡号：</h1>
+             <!-- <label>会员卡号：</label> -->
                 <input type="text" class="form-control1" readonly="readonly"  value="${mCard.cardNum}" >
             </div>
             <div class="clearfix"> </div>

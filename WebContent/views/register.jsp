@@ -25,17 +25,24 @@
 <body id="login">
   <div class="login-logo">
   </div>
-  <h2 class="form-heading">养生会馆登录</h2>
+  <h2 class="form-heading">养生会馆注册</h2>
   <div class="app-cam">
 	  <form action="<%=basePath%>index">
-		<input type="text" class="text" value="mobile" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mobile';}">
-		<input type="password" value="Password" name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-		<div class="submit"><input type="submit" onclick="myFunction()" value="登录"></div>
+	     <label>*用户名：</label>
+		<input type="text" class="text" value="Login Name" name="loginName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Login Name';}">
+		<label>*密码：</label>
+		<input type="password" value="Password" name="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Password';}">
+		<label>*真实姓名：</label>
+        <input type="text" class="text" value="Full Name" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Full Name';}">
+        <label>*手机号码：</label>
+        <input type="text" class="text" value="Mobile" name="Mobile" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Mobile';}">
+        
+		<div class="submit"><input type="submit" onclick="myFunction()" value="注册"></div>
 		
 		
         <ul class="new">
 			<!-- <li class="new_left"><p><a href="#">忘记密码 ?</a></p></li> -->
-			<li class="new_right"><p class="sign"><a href="<%=basePath%>views/register.jsp"> 还没有账户？去注册&gt;&gt;</a></p></li>
+			<li class="new_right"><p class="sign"><a href="<%=basePath%>views/login.jsp"> 已账户？去登录&gt;&gt;</a></p></li>
 			<div class="clearfix"></div>
 		</ul>
 	</form>

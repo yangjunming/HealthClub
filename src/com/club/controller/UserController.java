@@ -72,7 +72,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("message", "Hello World!");
 		mv.addObject("flag", true);
-		mv.setViewName("guan");
+		mv.setViewName("index");
 		return mv;
 	}
 	
@@ -85,7 +85,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("message", "Hello World!");
 		mv.addObject("flag", true);
-		mv.setViewName("guan");
+		mv.setViewName("index");
 		return mv;
 	}
 	@RequestMapping("/login")
