@@ -261,11 +261,41 @@
 				FROM
 				t_order
 				WHERE
-				t_order.order_status = 2 AND
-				t_order.technician_id =1
+				t_order.order_status = 2 
 				AND t_order.end_time LIKE CONCAT(date_format(NOW(),'%Y'),"%")) as
 				sv
 				GROUP BY
 				sv.mons,sv.cupAmount,sv.spaAmount,sv.massAmount
+		</select>
+		<select id="getExpenditureDetails" resultType="com.club.model.ExpenditureDetails"> 
+		SELECT
+	sv.mons AS MONTH,
+	sum(sv.cupAmount) AS cupAmount,
+	sum(sv.spaAmount) AS spaAmount,
+	sum(sv.massAmount) AS massAmount,
+    sum(sv.salesVolume) AS salesVolume,
+    sum(sv.salesVolume)*0.3 AS wages,
+    sum(sv.nodiscountSalesVolume) AS nodiscountSalesVolume
+    FROM
+	(
+		SELECT
+			date_format(t_order.end_time, '%m') AS mons,
+			t_order.sales_volume AS sals,
+			t_order.cup_amount AS cupAmount,
+			t_order.spa_amount AS spaAmount,
+			t_order.mass_amount AS massAmount,
+            t_order.sales_volume AS salesVolume,
+            t_order.nodiscount_sales_volume AS nodiscountSalesVolume
+ 		FROM
+			t_order
+		WHERE
+			t_order.order_status = 2
+		AND t_order.end_time LIKE CONCAT(
+			date_format(NOW(), '%Y'),
+			"%"
+		)
+	) AS sv
+GROUP BY
+	sv.mons
 		</select>
 </mapper>

@@ -42,56 +42,78 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 		<div id="wrapper">
-				<!-- Navigation -->
-				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-						<div class="navbar-header">
-								<a class="navbar-brand">欢迎光临</a>
-						</div>
-						<div class="nav navbar-nav navbar-right"></div>
-						<div class="navbar-default sidebar" role="navigation">
-								<div class="sidebar-nav navbar-collapse">
-										<ul class="nav" id="side-menu">
-												<li><a href="index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
-												<li><a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
-														<ul class="nav nav-second-level">
-																<li><a href="<%=basePath%>homebase">房间监控</a></li>
-														</ul></li>
-												<li><a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
-														<ul class="nav nav-second-level">
-																<li><a href="<%=basePath%>memberCard/list">会员卡管理</a></li>
-																<li><a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a></li>
-																<li><a href="typography.html">人员管理</a></li>
-																<li><a href="typography.html">收支登记</a></li>
-														</ul> <!-- /.nav-second-level --></li>
-												<li><a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
-														<ul class="nav nav-second-level">
-																<li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
-																<li><a href="typography.html">费用明细查询</a></li>
-																<li><a href="typography.html">收支登记</a></li>
-														</ul></li>
-										</ul>
-								</div>
-						</div>
-				</nav>
+     <!-- Navigation -->
+              <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">欢迎光临</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+            <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=basePath%>homebase">房间监控</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li style="border-right:3px solid #fff;">
+                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
+                                </li>
+                                <li>
+                                    <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
+                                </li>
+                                <li>
+                                    <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
+                                <li>
+                                    <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
+                                </li>
+                                <li>
+                                    <a href="<%=basePath%>views/manager/expenditure-details.jsp">收支登记</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		</div>
 				<div id="page-wrapper">
 						<div class="graphs">
 								<div class="graph_box">
 										<div class="col-md-4 grid_2">
 												<div class="grid_1">
-														<div style="width: 10px; height: 10px; background-color: #ef553a;margin-left: 10px;margin-top: 20px">
-														</div><div>
-														spa&nbsp;&nbsp;&nbsp;
+												<div style="text-align:center;">
+														<div style="width: 10px; height: 10px; background-color: #ef553a;display:inline;margin: 0 auto">SPA</div>
+														<div style="width: 10px; height: 10px; background-color: #00aced;display:inline;margin: 0 auto">按摩</div>
+														<div style="width: 10px; height: 10px; background-color: #9358ac;display:inline;margin: 0 auto">拔罐</div>
 														</div>
-														<div style="width: 10px; height: 10px; background-color: #00aced;margin-left: 10px;margin-top: 20px">mass&nbsp;&nbsp;&nbsp;</div>
-														<div style="width: 10px; height: 10px; background-color: #9358ac;margin-left: 10px;margin-top: 20px">cup</div>
 														<canvas id="bar" height="300" width="400" style="width: 400px; height: 300px;"></canvas>
 												</div>
 										</div>
 										<div class="col-md-4 grid_2">
 												<div class="grid_1">
-														<h3><div style="width: 10px; height: 10px; background-color: #ef553a;">spa</div>
-														<div style="width: 10px; height: 10px; background-color: #00aced;">mass</div>
-														<div style="width: 10px; height: 10px; background-color: #9358ac;">cup</div></h3>
+														<div style="width: 10px; height: 10px; background-color: #ef553a;display:inline;margin: 0 auto">SPA</div>
+														<div style="width: 10px; height: 10px; background-color: #00aced;display:inline;margin: 0 auto">按摩</div>
+														<div style="width: 10px; height: 10px; background-color: #9358ac;display:inline;margin: 0 auto">拔罐</div>
 														<canvas id="pie" height="300" width="400" style="width: 400px; height: 300px;"></canvas>
 												</div>
 										</div>
@@ -208,22 +230,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														massAmount = massAmount+data[i].massAmount;
 														cupAmount = cupAmount+data[i].cupAmount;
 												}
-													var pieData = [ {
-														value : spaAmount,
-														color : "#ef553a"
-													}, {
-														value : massAmount,
-														color : "#00aced"
-													}, {
-														value : cupAmount,
-														color : "#9358ac"
-													}
-
-													];
-													new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-													new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
 											}
 										}
+											var pieData = [ {
+												value : spaAmount,
+												color : "#ef553a"
+											}, {
+												value : massAmount,
+												color : "#00aced"
+											}, {
+												value : cupAmount,
+												color : "#9358ac"
+											}
+
+											];
+											new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+										new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
 											}
 									});
 								})

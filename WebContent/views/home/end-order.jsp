@@ -44,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<%=basePath%>resources/js/rickshaw.js"></script>
 </head>
 <body>
-<div id="wrapper">
+		<div id="wrapper">
      <!-- Navigation -->
               <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -70,8 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
+                                <li style="border-right:3px solid #fff;">
+                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
@@ -79,23 +79,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li>
                                     <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
                                 </li>
-                                <li>
-                                    <a href="typography.html">收支登记</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
                                 <li>
-                                    <a href="graphs.html">业绩查询</a>
+                                    <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">费用明细查询</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">收支登记</a>
+                                    <a href="<%=basePath%>views/manager/expenditure-details.jsp">收支登记</a>
                                 </li>
                             </ul>
                         </li>
@@ -103,6 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
         </nav>
+		</div>
 				<div id="page-wrapper">
 						<div class="row" style="padding-top: 40px">
 								<div class="col-md-5"></div>

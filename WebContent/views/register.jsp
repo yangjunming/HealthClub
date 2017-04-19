@@ -27,35 +27,46 @@
   </div>
   <h2 class="form-heading">养生会馆注册</h2>
   <div class="app-cam">
-	  <form action="<%=basePath%>index">
 	     <label>*用户名：</label>
-		<input type="text" class="text" value="Login Name" name="loginName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Login Name';}">
+		<input type="text" class="text" value="Login Name" name="loginName" id="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Login Name';}">
 		<label>*密码：</label>
-		<input type="password" value="Password" name="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Password';}">
+		<input type="password" value="Password" name="password" id="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Password';}">
 		<label>*真实姓名：</label>
-        <input type="text" class="text" value="Full Name" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Full Name';}">
+        <input type="text" class="text" value="Full Name" name="userName" id="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Full Name';}">
         <label>*手机号码：</label>
-        <input type="text" class="text" value="Mobile" name="Mobile" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Mobile';}">
-        
-		<div class="submit"><input type="submit" onclick="myFunction()" value="注册"></div>
-		
-		
+        <input type="text" class="text" value="Mobile" name="Mobile" id="mobile" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Mobile';}">
+		 <a class="btn btn-primary" style="width: 300px" href="javascript:save();" type="submit">注册</a>
         <ul class="new">
-			<!-- <li class="new_left"><p><a href="#">忘记密码 ?</a></p></li> -->
 			<li class="new_right"><p class="sign"><a href="<%=basePath%>views/login.jsp"> 已有账户？去登录&gt;&gt;</a></p></li>
 			<div class="clearfix"></div>
 		</ul>
-	</form>
   </div>
 </body>
 <script src="<%=basePath%>resources/js/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-var s = "${message}";
-var flag = "${flag}"
-if(flag=="false"){
-	alert(s);
-}
-});
+function save() {
+	console.log(132);
+		var datas = {
+				"userName" : $("#userName").val(),
+				"mobile" : $("#mobile").val(),
+				"name" : $("#name").val(),
+				"password" : $("#password").val(),
+				"type" : 3,
+				"status" : 1
+			}
+		$.ajax({
+	    type: "post",
+	    url: "<%=basePath%>user/addUser",
+	    contentType : "application/json;charset=utf-8",
+	    data : JSON.stringify(datas),
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				if(data){
+					window.location.href="<%=basePath%>views/login.jsp";
+				}
+			}
+		});
+	}
 </script>
 </html>

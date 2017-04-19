@@ -56,7 +56,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li><a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
+                        <li>
+                            <a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -68,17 +70,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
+                                <li style="border-right:3px solid #fff;">
+                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">收支登记</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -88,10 +87,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <ul class="nav nav-second-level">
                                 <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
                                 <li>
-                                    <a href="typography.html">费用明细查询</a>
+                                    <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">收支登记</a>
+                                    <a href="<%=basePath%>views/manager/expenditure-details.jsp">收支登记</a>
                                 </li>
                             </ul>
                         </li>
@@ -99,6 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
         </nav>
+		</div>
 				<div id="page-wrapper">
 						<div class="row" style="padding-top: 30px">
 								<div class="col-md-5"></div>
@@ -175,9 +175,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<a class="btn btn-primary" href="${pageContext.request.contextPath}/views/manager/technician-manager.jsp">返回</a>
 														<a class="btn btn-primary" href="javascript:save();">保存</a>
 												</div>
-												</fdiv>
+												</div>
 										</div>
 						</footer>
+						</div>
 						<!-- /#wrapper -->
 						<!-- Bootstrap Core JavaScript -->
 						<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>

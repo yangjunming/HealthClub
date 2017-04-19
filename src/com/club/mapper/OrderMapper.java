@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.club.model.AchievementOfMonth;
+import com.club.model.ExpenditureDetails;
 import com.club.model.IncomeAndExpense;
 import com.club.model.Order;
 import com.club.model.OrderRes;
@@ -30,5 +31,7 @@ public interface OrderMapper {
 	public List<IncomeAndExpense> getIncomeAndExpense();
 
 	public List<AchievementOfMonth> getAchievementOfMonth();
+
+	public List<ExpenditureDetails> getExpenditureDetails();
 
 }

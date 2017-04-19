@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.club.mapper.OrderMapper;
 import com.club.model.AchievementOfMonth;
+import com.club.model.ExpenditureDetails;
 import com.club.model.IncomeAndExpense;
 import com.club.model.Order;
 import com.club.model.OrderRes;
@@ -74,6 +75,11 @@ public class OrderImpl implements OrderDao{
 	@Override
 	public List<AchievementOfMonth> getAchievementOfMonth() {
 		return orderMapper.getAchievementOfMonth();
+	}
+
+	@Override
+	public List<ExpenditureDetails> getExpenditureDetails() {
+		return orderMapper.getExpenditureDetails();
 	}
 	
 

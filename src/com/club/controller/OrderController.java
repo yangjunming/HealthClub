@@ -17,6 +17,7 @@ import com.club.dao.MemberCardDao;
 import com.club.dao.OrderDao;
 import com.club.dao.UserDao;
 import com.club.model.AchievementOfMonth;
+import com.club.model.ExpenditureDetails;
 import com.club.model.Home;
 import com.club.model.MemberCard;
 import com.club.model.Order;
@@ -202,5 +203,16 @@ public class OrderController {
 		achievementOfMonth = orderDao.getAchievementOfMonth();
 		return achievementOfMonth;
 	}
+	/**
+	 * 查询收支明细
+	 * @return
+	 */
+	 @RequestMapping("/getExpenditureDetails")
+		@ResponseBody
+		public List<ExpenditureDetails> getExpenditureDetails() {
+			List<ExpenditureDetails> list = new ArrayList<>();
+			list = orderDao.getExpenditureDetails();
+			return list;
+		}
 
 }

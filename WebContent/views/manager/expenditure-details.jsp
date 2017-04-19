@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -16,11 +19,7 @@
 		content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="<%=basePath%>resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -99,120 +98,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
 		</div>
-				<div id="page-wrapper">
-						<div class="row" style="padding-top: 30px">
-								<div class="col-md-5"></div>
-								<div class="col-md-3">
-										<h5>人员编辑</h5>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<input id="id" hidden="" value="${param.id}"> <label>姓名:</label> <input type="text"
-														class="form-control1" id="name" name="name" value="">
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label>电话:</label> <input type="text" class="form-control1" value="" id="mobile" name="mobile">
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label class="control-label ">人员类型：</label> <select id="userType"
-														style="width: 100px; padding-left: 2px">
-<!-- 														(1:管理员，2：技师，3客人，4会员) -->
-														<option value="1">管理员</option>
-														<option value="2">员工</option>
-														<option value="3">游客</option>
-														<option value="4">会员</option>
-												</select>
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<div class="form-group">
-								<div class="row">
-										<div class="col-md-4"></div>
-										<div class="col-md-4">
-												<label class="control-label ">登录状态：</label>
-												 <select id="userStatus" style="width: 100px; padding-left: 20px">
-														<option value="1">正常</option>
-														<option value="2">停用</option>
-														<option value="3">已删除</option>
-												</select>
-										</div>
-										<div class="clearfix"></div>
-								</div>
-						</div>
-						<footer>
-								<div class="form-actions">
-										<div class="row">
-												<div class="col-md-8"></div>
-												<div class="col-md-4">
-														<a class="btn btn-primary" href="<%=basePath%>/views/manager/manager-user.jsp">返回</a>
-														<a class="btn btn-primary" href="javascript:save();">保存</a>
-												</div>
-												</fdiv>
-										</div>
-										</div>
-						</footer>
-						</div>
-						<!-- /#wrapper -->
-						<!-- Bootstrap Core JavaScript -->
-						<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
+		<div id="page-wrapper">
+			<div class="bs-example4" data-example-id="contextual-table">
+			   <table class="table">
+			     <thead>
+			        <tr>
+			            <th>月</th>
+			            <th>无折总收入(元)</th>
+			            <th>折后总收入(元)</th>
+			            <th>总支出(元)</th>
+			            <th>SPA总额(元)</th>
+			            <th>按摩总额(元)</th>
+			            <th>拔罐总额(元)</th>
+			        </tr>
+			      </thead>
+			      <tbody id="expenditure">
+			      </tbody>
+			    </table>
+             </div>
+		</div>
+		<!-- /#wrapper -->
+		<!-- Bootstrap Core JavaScript -->
+		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		$(function (){
+			 $.ajax({
+				    type: "get",
+				    url: "<%=basePath%>order/getExpenditureDetails",
+				    contentType : "application/json;charset=utf-8",
+				    data : {},
+				        dataType : "json",
+				        async : false,
+				        success : function(data) {
+				        	console.log(data);
+				        	var tr = "";
+							for (var i = 0; i < data.length; i++) {
+								tr += "<tr>";
+								tr += "<td>" + data[i].month + "</td>";
+								tr += "<td>" + data[i].nodiscountSalesVolume + "</td>";
+								tr += "<td>" + data[i].salesVolume + "</td>";
+								tr += "<td>" + data[i].wages + "</td>";
+								tr += "<td>" + data[i].spaAmount + "</td>";
+								tr += "<td>" + data[i].massAmount + "</td>";
+								tr += "<td>" + data[i].cupAmount + "</td>";
+								tr += "</tr>";
+							}
+							$("#expenditure").append(tr);
+				        }
+				    });
+		});
+		</script>
 </body>
-<script type="text/javascript">
-$(function (){
-	var id = $("#id").val();
-	//加载人员信息
-	$.ajax({
-    type: "get",
-    url: "<%=basePath%>user/getUserById?id="+id+"",
-			data : {},
-			dataType : "json",
-			async:false,
-			success : function(data) {
-					$("#mobile").val(data.mobile);
-					$("#name").val(data.name);
-					$("#userType").val(data.type);
-					$("#userStatus").val(data.status);
-				}
-		});
-	})
 
-	function save() {
-	var id = $("#id").val();
-		var datas = {
-				"id" : id,
-				"mobile" : $("#mobile").val(),
-				"name" : $("#name").val(),
-				"type" : $("#userType").val(),
-				"status" : $("#userStatus").val()
-			}
-		$.ajax({
-	    type: "post",
-	    url: "<%=basePath%>user/editUser",
-	    contentType : "application/json;charset=utf-8",
-	    data : JSON.stringify(datas),
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				if(data){
-					window.location.href="<%=basePath%>views/manager/manager-user.jsp";
-				}
-			}
-		});
-	}
-</script>
 </html>

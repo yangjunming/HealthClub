@@ -69,7 +69,9 @@ public class UserDaoImpl implements UserDao{
 	}
 	@Override
 	public boolean addUser(User user) {
-		user.setPassword("123456");
+		if(null == user.getPassword() || user.getPassword().equals("")){
+			user.setPassword("123456");
+		}
 		int result = userMapper.insert(user);
 		if(result>0){
 			return true;

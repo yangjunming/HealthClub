@@ -69,8 +69,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
             </div>
+            </nav>
 						</div>
-				</nav>
 				<div id="page-wrapper">
 						<div class="row" style="padding-top: 40px">
 								<div class="col-md-5"></div>
