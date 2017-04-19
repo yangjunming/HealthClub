@@ -32,15 +32,16 @@ public class OrderController {
 	private UserDao userDao;
 	@Autowired
 	private MemberCardDao memberCardDao;
-	
+
 	/**
 	 * 预约提交订单
+	 * 
 	 * @param order
 	 * @return
 	 */
 	@RequestMapping("/submitOrder")
 	@ResponseBody
-	public boolean submitOrder(@RequestBody Order order){
+	public boolean submitOrder(@RequestBody Order order) {
 		order.setResTime(new Date());
 		order.setIsReservation(1);
 		boolean insertOrder = orderDao.submitOrder(order);
@@ -51,24 +52,25 @@ public class OrderController {
 		home.setTechnicianId(order.getTechnicianId());
 		home.setHasUser(2);
 		boolean updateHome = homeDao.updateByHomeId(home);
-		if(insertOrder&&updateHome){
+		if (insertOrder && updateHome) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 管理员直接提交订单
+	 * 
 	 * @param order
 	 * @return
 	 */
 	@RequestMapping("/submitOrderByManager")
 	@ResponseBody
-	public boolean submitOrderByManager(@RequestBody Order order){
+	public boolean submitOrderByManager(@RequestBody Order order) {
 		String mobile = order.getMobile();
 		User user = userDao.getUserByMobile(mobile);
 		Home home = new Home();
-		if(null!=user){
+		if (null != user) {
 			order.setUserId(user.getId());
 			home.setUserId(user.getId());
 		}
@@ -80,59 +82,70 @@ public class OrderController {
 		home.setTechnicianId(order.getTechnicianId());
 		home.setHasUser(1);
 		boolean updateHome = homeDao.updateByHomeId(home);
-		if(insertOrder&&updateHome){
+		if (insertOrder && updateHome) {
 			return true;
 		}
 		return false;
 	}
-	
+
+	/**
+	 * 根据房间id获取订单
+	 * @param roomId
+	 * @return
+	 */
 	@RequestMapping("/getOrderByHomeId")
 	@ResponseBody
-	public OrderRes getOrderByHomeId(@RequestParam(required=false) Integer roomId){
-		OrderRes order =new OrderRes();
-		if(null == roomId || roomId==0){
+	public OrderRes getOrderByHomeId(@RequestParam(required = false) Integer roomId) {
+		OrderRes order = new OrderRes();
+		if (null == roomId || roomId == 0) {
 			return order;
 		}
 		order = orderDao.getOrderByHomeId(roomId);
 		return order;
 	}
-	
+
+	/**
+	 * 更新订单
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping("/updateOrder")
 	@ResponseBody
-	public boolean updateOrder(@RequestBody Order order){
+	public boolean updateOrder(@RequestBody Order order) {
 		Home home = new Home();
 		boolean updateHome = false;
-		boolean updateOrder =false;
-		if(order.getOrderStatus() == 1){
+		boolean updateOrder = false;
+		if (order.getOrderStatus() == 1) {
 			order.setStartTime(new Date());
 			home.setId(order.getRoomId());
 			home.setIsReservation(0);
 			home.setHasUser(1);
 			updateHome = homeDao.updateHomeToStart(home);
-		}else{
-		home.setId(order.getRoomId());
-		home.setIsReservation(0);
-		home.setTechnicianId(0);
-		home.setStartTime(new Date());
-		updateHome = homeDao.updateHomeByOrder(home);
+		} else {
+			home.setId(order.getRoomId());
+			home.setIsReservation(0);
+			home.setTechnicianId(0);
+			home.setStartTime(new Date());
+			updateHome = homeDao.updateHomeByOrder(home);
 		}
 		updateOrder = orderDao.updateOrder(order);
-		if(updateOrder&&updateHome){
+		if (updateOrder && updateHome) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 结单
+	 * 
 	 * @param order
 	 * @return
 	 */
 	@RequestMapping("/endOrder")
 	@ResponseBody
-	public boolean endOrder(@RequestBody OrderEndDTO orderEndDTO){
+	public boolean endOrder(@RequestBody OrderEndDTO orderEndDTO) {
 		boolean updateHome = false;
-		boolean updateOrder =false;
+		boolean updateOrder = false;
 		Home home = new Home();
 		home.setId(orderEndDTO.getHomeId());
 		home.setHasUser(0);
@@ -147,24 +160,28 @@ public class OrderController {
 		order.setOrderStatus(2);
 		order.setNodiscountSalesVolume(orderEndDTO.getNodiscountSalesVolume());
 		order.setSalesVolume(orderEndDTO.getSalesVolume());
-		order.setSpaAmount(orderEndDTO.getSpaAmount());
-		order.setMassAmount(orderEndDTO.getMassAmount());
-		order.setCupAmount(orderEndDTO.getCupAmount());
-		updateOrder = orderDao.updateOrder(order);
-		if(orderEndDTO.getMemCardId()!=0){
-			MemberCard memberCard =memberCardDao.getMemberCardByUserId(orderEndDTO.getUserId());
+		if (orderEndDTO.getMemCardId() != 0) {
+			MemberCard memberCard = memberCardDao.getMemberCardByUserId(orderEndDTO.getUserId());
 			MemberCard MemberCard = new MemberCard();
 			MemberCard.setId(memberCard.getId());
 			BigDecimal pointBalance = memberCard.getPointBalance();
 			pointBalance = pointBalance.add(orderEndDTO.getSalesVolume().multiply(memberCard.getPoint()));
 			MemberCard.setPointBalance(pointBalance);
-			if(orderEndDTO.getFlag()==1){
-			BigDecimal balance = memberCard.getBalance();
-			balance = balance.subtract(orderEndDTO.getSalesVolume());
+			if (orderEndDTO.getFlag() == 1) {
+				BigDecimal balance = memberCard.getBalance();
+				balance = balance.subtract(orderEndDTO.getSalesVolume());
 			}
-			 memberCardDao.updateMemberCard(MemberCard);
+			memberCardDao.updateMemberCard(MemberCard);
+			order.setSpaAmount(orderEndDTO.getSpaAmount().multiply(memberCard.getPoint()));
+			order.setMassAmount(orderEndDTO.getMassAmount().multiply(memberCard.getPoint()));
+			order.setCupAmount(orderEndDTO.getCupAmount().multiply(memberCard.getPoint()));
+		} else {
+			order.setSpaAmount(orderEndDTO.getSpaAmount());
+			order.setMassAmount(orderEndDTO.getMassAmount());
+			order.setCupAmount(orderEndDTO.getCupAmount());
 		}
-		if(updateOrder&&updateHome){
+		updateOrder = orderDao.updateOrder(order);
+		if (updateOrder && updateHome) {
 			return true;
 		}
 		return false;

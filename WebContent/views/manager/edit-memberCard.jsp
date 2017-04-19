@@ -16,7 +16,11 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 </script>
 <!-- Bootstrap Core CSS -->
@@ -38,62 +42,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 		<div id="wrapper">
-     <!-- Navigation -->
-              <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand">欢迎光临</a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
-            </div>
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>homebase">房间监控</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
-                                </li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
-                                </li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">收支登记</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
-                                <li>
-                                    <a href="typography.html">费用明细查询</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">收支登记</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+				<!-- Navigation -->
+				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+						<div class="navbar-header">
+								<a class="navbar-brand">欢迎光临</a>
+						</div>
+						<div class="nav navbar-nav navbar-right">
+								<a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
+						</div>
+						<div class="navbar-default sidebar" role="navigation">
+								<div class="sidebar-nav navbar-collapse">
+										<ul class="nav" id="side-menu">
+												<li><a href="index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
+												<li><a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>homebase">房间监控</a></li>
+														</ul></li>
+												<li><a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>memberCard/list">会员卡管理</a></li>
+																<li><a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a></li>
+																<li><a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a></li>
+																<li><a href="typography.html">收支登记</a></li>
+														</ul> <!-- /.nav-second-level --></li>
+												<li><a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
+																<li><a href="typography.html">费用明细查询</a></li>
+																<li><a href="typography.html">收支登记</a></li>
+														</ul></li>
+										</ul>
+								</div>
+						</div>
+				</nav>
 		</div>
 		<div id="page-wrapper">
 				<div class="row">
@@ -105,10 +86,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<form action="<%=basePath%>memberCard/addMemberCard.do" method="get" accept-charset="utf-8">
 						<div class="form-group">
 								<div class="row">
-								<input id="memberCardId" value="${param.id}" hidden="">
+										<input id="memberCardId" value="${param.id}" hidden="">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>会员卡等级:</label> <select name="grade">
+												<label>会员卡等级:</label> <select name="grade" id="grade">
 														<option value="1">普通会员</option>
 														<option value="2">银卡会员</option>
 														<option value="3">金卡会员</option>
@@ -123,8 +104,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>卡号:</label> <input type="text" class="form-control1" name="cardNum" id="cardNum" value=""
-														onblur="cardNums(this)">
+												<label>卡号:</label> <input type="text" readonly="readonly" class="form-control1" name="cardNum" id="cardNum"
+														value=""">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -133,8 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>售价:</label> <input type="text" class="form-control1" name="price" id="price" value=""
-														onblur="prices(this)">
+												<label>售价:</label> <input type="text" class="form-control1" name="price" id="price" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -149,8 +129,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>消费积分比:</label> <input type="text" class="form-control1" name="point" id="point" value=""
-														onblur="points(this)">
+												<label>卡内余额:</label> <input type="text" class="form-control1" name="balance" id="balance" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -159,8 +138,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>折扣:</label> <input type="text" class="form-control1" name="discount" value=""
-														onblur="discounts(this)">
+												<label>消费积分比:</label> <input type="text" class="form-control1" name="point" id="point" value="">
+										</div>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+						<div class="form-group">
+								<div class="row">
+										<div class="col-md-4"></div>
+										<div class="col-md-4">
+												<label>折扣:</label> <input type="text" class="form-control1" id="discount" name="discount" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -175,7 +162,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>用户电话:</label> <input type="text" class="form-control1" name="mobile" value="">
+												<label>用户电话:</label> <input type="text" readonly="readonly" class="form-control1" id="mobile" name="mobile"
+														value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -184,7 +172,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>用户姓名:</label> <input type="text" class="form-control1" name="userName" id="userName" value="">
+												<label>用户姓名:</label> <input type="text" readonly="readonly" class="form-control1" name="userName"
+														id="userName" value="">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -193,7 +182,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-8"></div>
 										<div class="col-md-4">
-												<input class="btn-success btn" type="submit" value="确定" id="memberButton" />
+										<a class="btn btn-primary" href="javascript:save();">确定</a>
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -207,27 +196,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var memberCardId = $("#memberCardId").val();
 			$.ajax({
 		    type: "get",
-		    url: "<%=basePath%>memberCard/getMemCardByMemCardId?id="+memberCardId+"",
-		    contentType : "application/json;charset=utf-8",
-		    data : {},
-		        dataType : "json",
-		        async : false,
-		        success : function(data) {
-		        	console.log(data);
-		        	   $("#balance").val(data.balance);
-		        	   $("#cardNum").val(data.cardNum);
-		        	   $("#discount").val(data.discount);
-		        	   $("#grade").val(data.grade);
-		        	   $("#point").val(data.point);
-                 $("#pointBalance").val(data.pointBalance);
-                            $("#name").text(data.name);
-                            $("#mobile").text(data.mobile);
-                            $("#memCardId").val(data.id);
+		    url: "<%=basePath%>memberCard/getMemCardByMemCardId?id=" + memberCardId + "",
+					contentType : "application/json;charset=utf-8",
+					data : {},
+					dataType : "json",
+					async : false,
+					success : function(data) {
+						$("#balance").val(data.balance);
+						$("#cardNum").val(data.cardNum);
+						$("#discount").val(data.discount);
+						$("#grade").val(data.grade);
+						$("#point").val(data.point);
+						$("#balance").val(data.balance);
+// 						$("#pointBalance").val(data.pointBalance);
+						$("#userName").val(data.name);
+						$("#mobile").val(data.mobile);
+						$("#memCardId").val(data.id);
+						$("#price").val(data.price);
+					}
+				});
+			})
+			function save(){
+			var memberCardId = $("#memberCardId").val();
+			var datas = {
+					"id":memberCardId,
+			"discount":$("#discount").val(),
+			"grade":$("#grade").val(),
+			"point":$("#point").val(),
+			"price":$("#price").val(),
+			"balance":$("#balance").val()
+			}
+			$.ajax({
+		    type: "post",
+		    url: "<%=basePath%>memberCard/editMemCard",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(datas),
+					dataType : "json",
+					async : false,
+					success : function(data) {
+						if(data){
+							window.location.href = "<%=basePath%>memberCard/list"
+						}
 
-
-		        }
-		    });
-		})
+					}
+				});
+			}
 		</script>
 </body>
 </html>

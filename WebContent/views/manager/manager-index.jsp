@@ -71,11 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li>
                                     <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
                                 </li>
-                                <li>
-                                    <a href="typography.html">收支登记</a>
-                                </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>

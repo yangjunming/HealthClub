@@ -15,5 +15,4 @@ public interface MemberCardDao {
 	public boolean updateMemberCard(MemberCard memberCard);
 
 	public MemberCard getMemCardByMemCardId(Integer id);
-
 }

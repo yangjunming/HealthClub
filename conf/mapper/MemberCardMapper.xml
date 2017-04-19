@@ -78,6 +78,7 @@
 		<select id="getMemCardByMemCardId" resultType="com.club.model.MemberCard">
 				SELECT
 				member_card.id,
+				member_card.price,
 				member_card.card_num as cardNum,
 				member_card.card_name as cardName,
 				member_card.grade,
@@ -99,6 +100,7 @@
 						<if test="price !=null and price!='' ">price=#{price},</if>
 						<if test="point !=null and point !='' ">point=#{point},</if>
 						<if test="discount !=null and discount !='' ">discount=#{discount},</if>
+						<if test="grade !=0 ">grade=#{grade},</if>
 						<if test="balance !=null and balance !='' ">balance=#{balance},</if>
 						<if test="pointBalance !=null and pointBalance !='' ">point_balance=#{pointBalance},</if>
 				</trim>

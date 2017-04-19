@@ -182,7 +182,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					dataType : "json",
 					async:false,
 					success : function(data) {
-						console.log(data);
 						if(data.length==0){
 							$("#technicianId").append("<option value='0'>无技师可选择</option>");
 						}else{

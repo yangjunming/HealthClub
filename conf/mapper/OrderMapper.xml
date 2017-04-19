@@ -107,7 +107,7 @@
 		</select>
 
 		<select id="getSalaryByTechnician" resultType="com.club.model.TechnicianSalary">
-                SELECT sv.mons as month,sum(sv.sals)*0.3 as salary
+				SELECT sv.mons as month,sum(sv.sals)*0.3 as salary
 				FROM
 				(SELECT
 				date_format(t_order.end_time,'%Y%m') as mons,
@@ -117,7 +117,8 @@
 				t_order
 				WHERE
 				t_order.order_status = 2 AND
-				t_order.technician_id =#{technicianId} ) as sv
+				t_order.technician_id =#{technicianId} ) as
+				sv
 				GROUP BY sv.mons
 		</select>
 
@@ -125,7 +126,7 @@
 				SELECT
 				date_format(t_order.end_time,'%Y%m%d') as day,
 				t_order.spa_amount as spaAmount,
-				t_order.mass_amout as massAmount,
+				t_order.mass_amount as massAmount,
 				t_order.cup_amount as cupAmount,
 				t_order.sales_volume as salesVolume
 				FROM
@@ -138,42 +139,42 @@
 		</select>
 		<select id="getOrderByHomeId" resultType="com.club.model.OrderRes">
 				SELECT
-	t_order.id,
-	room_id AS roomId,
-	t_order.technician_id AS technicianId,
-	teuser. NAME AS technicianName,
-	t_order.user_id AS userId,
-	DATE_FORMAT(
-		res_starttime,
-		'%Y-%m-%d %H:%i:%s'
-	) AS startTime,
-	DATE_FORMAT(
-		res_endtime,
-		'%Y-%m-%d %H:%i:%s'
-	) AS endTime,
-	is_spa AS isSpa,
-	is_mass AS isMass,
-	is_cup AS isCup,
-	size,
-	home_num AS homeNum,
-	reuser.mobile,
-	reuser.`name`,
-reuser.type,
-technician.spa_charge AS spaCharge,
-technician.mass_charge AS massCharge,
-technician.cup_charge AS cupCharge
-FROM
-	t_order
-LEFT JOIN t_home ON t_home.id = t_order.room_id
-LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
-LEFT JOIN technician ON technician.id = t_order.technician_id
-LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
+				t_order.id,
+				room_id AS roomId,
+				t_order.technician_id AS technicianId,
+				teuser. NAME AS technicianName,
+				t_order.user_id AS userId,
+				DATE_FORMAT(
+				res_starttime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS startTime,
+				DATE_FORMAT(
+				res_endtime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS endTime,
+				is_spa AS isSpa,
+				is_mass AS isMass,
+				is_cup AS isCup,
+				size,
+				home_num AS homeNum,
+				reuser.mobile,
+				reuser.`name`,
+				reuser.type,
+				technician.spa_charge AS spaCharge,
+				technician.mass_charge AS massCharge,
+				technician.cup_charge AS cupCharge
+				FROM
+				t_order
+				LEFT JOIN t_home ON t_home.id = t_order.room_id
+				LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
+				LEFT JOIN technician ON technician.id = t_order.technician_id
+				LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
 				WHERE
 				room_id=#{roomId}
 				AND t_order.is_end = 0
 		</select>
 		<update id="updateOrder" parameterType="com.club.model.Order">
-		UPDATE t_order
+				UPDATE t_order
 				<trim prefix="set" suffixOverrides=",">
 						<if test="roomId !=0 ">room_id=#{roomId},</if>
 						<if test="technicianId !=0 ">technician_id=#{technicianId},</if>
@@ -197,19 +198,19 @@ LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
 				</trim>
 				WHERE id=#{id}
 		</update>
-        <select id="getAllPerform" resultType="com.club.model.TechnicianPerform">
-                SELECT tb.dt as day,
-                `user`.`name` as name,
-                tb.spa as spaAmount,
-                tb.mas as massAmount,
-                tb.cup as cupAmount,
-                tb.vol as salesVolume
-				From 
+		<select id="getAllPerform" resultType="com.club.model.TechnicianPerform">
+				SELECT tb.dt as day,
+				`user`.`name` as name,
+				tb.spa as spaAmount,
+				tb.mas as massAmount,
+				tb.cup as cupAmount,
+				tb.vol as salesVolume
+				From
 				(SELECT
 				DATE_FORMAT(t_order.end_time,"%Y%m%d") as dt,
 				t_order.technician_id as id,
 				sum(t_order.spa_amount) as spa,
-				sum(t_order.mass_amout) as mas,
+				sum(t_order.mass_amount) as mas,
 				sum(t_order.cup_amount) as cup,
 				sum(t_order.sales_volume) as vol
 				FROM
@@ -221,19 +222,19 @@ LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
 				ORDER BY
 				DATE_FORMAT(t_order.end_time,"%Y%m%d") ASC) tb,user
 				WHERE tb.id=`user`.id
-        </select>
-        
-        <select id="getIncomeAndExpense" resultType="com.club.model.IncomeAndExpense">
-                SELECT
-					DATE_FORMAT(t_order.end_time,"%Y%m") as month,
-					sum(t_order.sales_volume) as income,
-					sum(t_order.sales_volume)*0.3 as expense,
-					sum(t_order.sales_volume)-sum(t_order.sales_volume)*0.3 as profit
-					FROM
-					t_order
-					WHERE
-					t_order.order_status = 2
-					GROUP BY
-					DATE_FORMAT(t_order.end_time,"%Y%m")
-        </select>
+		</select>
+
+		<select id="getIncomeAndExpense" resultType="com.club.model.IncomeAndExpense">
+				SELECT
+				DATE_FORMAT(t_order.end_time,"%Y%m") as month,
+				sum(t_order.sales_volume) as income,
+				sum(t_order.sales_volume)*0.3 as expense,
+				sum(t_order.sales_volume)-sum(t_order.sales_volume)*0.3 as profit
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2
+				GROUP BY
+				DATE_FORMAT(t_order.end_time,"%Y%m")
+		</select>
 </mapper>
