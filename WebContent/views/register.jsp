@@ -42,7 +42,7 @@
 		
         <ul class="new">
 			<!-- <li class="new_left"><p><a href="#">忘记密码 ?</a></p></li> -->
-			<li class="new_right"><p class="sign"><a href="<%=basePath%>views/login.jsp"> 已账户？去登录&gt;&gt;</a></p></li>
+			<li class="new_right"><p class="sign"><a href="<%=basePath%>views/login.jsp"> 已有账户？去登录&gt;&gt;</a></p></li>
 			<div class="clearfix"></div>
 		</ul>
 	</form>
