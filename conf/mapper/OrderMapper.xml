@@ -141,7 +141,8 @@
 				SELECT
 				t_order.id,
 				room_id AS roomId,
-				t_order.technician_id AS technicianId,
+				t_order.technician_id AS
+				technicianId,
 				teuser. NAME AS technicianName,
 				t_order.user_id AS userId,
 				DATE_FORMAT(
@@ -154,7 +155,8 @@
 				) AS endTime,
 				is_spa AS isSpa,
 				is_mass AS isMass,
-				is_cup AS isCup,
+				is_cup AS
+				isCup,
 				size,
 				home_num AS homeNum,
 				reuser.mobile,
@@ -165,13 +167,16 @@
 				technician.cup_charge AS cupCharge
 				FROM
 				t_order
-				LEFT JOIN t_home ON t_home.id = t_order.room_id
+				LEFT JOIN t_home ON t_home.id =
+				t_order.room_id
 				LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
-				LEFT JOIN technician ON technician.id = t_order.technician_id
+				LEFT JOIN technician ON technician.id =
+				t_order.technician_id
 				LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
 				WHERE
 				room_id=#{roomId}
-				AND t_order.is_end = 0
+				AND
+				t_order.is_end = 0
 		</select>
 		<update id="updateOrder" parameterType="com.club.model.Order">
 				UPDATE t_order
@@ -202,7 +207,8 @@
 				SELECT tb.dt as day,
 				`user`.`name` as name,
 				tb.spa as spaAmount,
-				tb.mas as massAmount,
+				tb.mas as
+				massAmount,
 				tb.cup as cupAmount,
 				tb.vol as salesVolume
 				From
@@ -211,7 +217,8 @@
 				t_order.technician_id as id,
 				sum(t_order.spa_amount) as spa,
 				sum(t_order.mass_amount) as mas,
-				sum(t_order.cup_amount) as cup,
+				sum(t_order.cup_amount)
+				as cup,
 				sum(t_order.sales_volume) as vol
 				FROM
 				t_order
@@ -220,7 +227,8 @@
 				GROUP BY
 				DATE_FORMAT(t_order.end_time,"%Y%m%d"),t_order.technician_id
 				ORDER BY
-				DATE_FORMAT(t_order.end_time,"%Y%m%d") ASC) tb,user
+				DATE_FORMAT(t_order.end_time,"%Y%m%d") ASC)
+				tb,user
 				WHERE tb.id=`user`.id
 		</select>
 
@@ -236,5 +244,28 @@
 				t_order.order_status = 2
 				GROUP BY
 				DATE_FORMAT(t_order.end_time,"%Y%m")
+		</select>
+		<select id="getAchievementOfMonth" resultType="com.club.model.AchievementOfMonth">
+				SELECT sv.mons as month,
+				sum(sv.cupAmount) AS cupAmount,
+				sum(sv.spaAmount) AS spaAmount,
+				sum(sv.massAmount) AS massAmount
+				FROM
+				(SELECT
+				date_format(t_order.end_time,'%m') as mons,
+				t_order.sales_volume
+				as sals,
+				t_order.cup_amount AS cupAmount,
+				t_order.spa_amount AS spaAmount,
+				t_order.mass_amount AS massAmount
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2 AND
+				t_order.technician_id =1
+				AND t_order.end_time LIKE CONCAT(date_format(NOW(),'%Y'),"%")) as
+				sv
+				GROUP BY
+				sv.mons,sv.cupAmount,sv.spaAmount,sv.massAmount
 		</select>
 </mapper>

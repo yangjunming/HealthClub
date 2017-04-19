@@ -2,6 +2,7 @@ package com.club.dao;
 
 import java.util.List;
 
+import com.club.model.AchievementOfMonth;
 import com.club.model.IncomeAndExpense;
 import com.club.model.Order;
 import com.club.model.OrderRes;
@@ -26,6 +27,8 @@ public interface OrderDao {
 	public List<TechnicianPerform> getAllPerform();
 	
 	public List<IncomeAndExpense> getIncomeAndExpense();
+
+	public List<AchievementOfMonth> getAchievementOfMonth();
 
 
 	

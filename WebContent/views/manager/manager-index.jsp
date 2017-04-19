@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                    <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
                                 </li>
                                 <li>
-                                    <a href="typography.html">费用明细查询</a>
+                                    <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
                                 </li>
                                 <li>
                                     <a href="typography.html">收支登记</a>

@@ -1,7 +1,9 @@
 package com.club.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import com.club.dao.HomeDao;
 import com.club.dao.MemberCardDao;
 import com.club.dao.OrderDao;
 import com.club.dao.UserDao;
+import com.club.model.AchievementOfMonth;
 import com.club.model.Home;
 import com.club.model.MemberCard;
 import com.club.model.Order;
@@ -185,6 +188,19 @@ public class OrderController {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 查询三种服务各月数据明细
+	 * @param roomId
+	 * @return
+	 */
+	@RequestMapping("/getAchievementOfMonth")
+	@ResponseBody
+	public List<AchievementOfMonth> getAchievementOfMonth() {
+		List<AchievementOfMonth> achievementOfMonth = new ArrayList<>();
+		achievementOfMonth = orderDao.getAchievementOfMonth();
+		return achievementOfMonth;
 	}
 
 }
