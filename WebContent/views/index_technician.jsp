@@ -39,7 +39,7 @@
             <ul class="nav fr navmobile">
                 <li><a href="<%=basePath%>views/index.jsp">会馆世界</a></li>
                 <li class="on"><a href="<%=basePath%>views/index_technician.jsp" title="">技师风采</a></li>
-                <li><a href="<%=basePath%>views/login.jsp" title="">预约</a></li>
+                <li><a href="<%=basePath%>reserveIndex" title="">预约登录</a></li>
             </ul>
         </div>
     </div>

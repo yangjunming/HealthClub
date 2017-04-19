@@ -63,6 +63,35 @@ public class UserController {
 		mv.setViewName("login");
 		return mv;
 	}
+	@RequestMapping("/reserveIndex")
+	public ModelAndView getReserveIndex(HttpSession httpSession) {
+		
+		User user = (User) httpSession.getAttribute("User");
+		ModelAndView mv = new ModelAndView();
+		if(null != user){
+			switch (user.getType()) {
+			case 1:
+				mv.setViewName("manager/manager-index");
+				break;
+			case 2:
+				mv.setViewName("technician/technician-index");
+				break;
+			case 3:
+				mv.setViewName("customer/tourist-index");
+				break;
+			case 4:
+				mv.setViewName("customer/member-index");
+				break;
+			}
+			mv.addObject("result", user);
+			httpSession.setAttribute("User", user);
+			return mv;
+		}
+		/*mv.addObject("message", "登录失败");*/
+		/*mv.addObject("flag", false);*/
+		mv.setViewName("login");
+		return mv;
+	}
 	@RequestMapping("/")
 	public ModelAndView start(HttpSession httpSession) {
 		User user = (User) httpSession.getAttribute("User");
@@ -100,10 +129,10 @@ public class UserController {
 	@RequestMapping("/loginout")
 	public ModelAndView loginOut(HttpSession httpSession) {
 		ModelAndView mv = new ModelAndView();
-		if(httpSession != null){
+		if(null != httpSession.getAttribute("User")){
 			httpSession.removeAttribute("User"); 
 		}
-		mv.setViewName("login");
+		mv.setViewName("index");
 		return mv;
 	}
 	
