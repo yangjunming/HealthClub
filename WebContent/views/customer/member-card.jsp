@@ -50,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
-            <a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
+            <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -80,7 +80,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <div class="col-md-4">
             </div>
             <div class="col-md-4">
-             <label>会员卡号：</label>
+            <h1>会员卡号：</h1>
+             <!-- <label>会员卡号：</label> -->
                 <input type="text" class="form-control1" readonly="readonly"  value="${mCard.cardNum}" >
             </div>
             <div class="clearfix"> </div>

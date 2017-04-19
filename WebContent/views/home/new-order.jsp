@@ -50,15 +50,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<a class="navbar-brand">欢迎光临</a>
 						</div>
 						<div class="nav navbar-nav navbar-right">
-								<a class="btn-success btn" href="<%=basePath%>views/login.jsp">退出</a>
+								<a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
 						</div>
 						<div class="navbar-default sidebar" role="navigation">
 								<div class="sidebar-nav navbar-collapse">
 										<ul class="nav" id="side-menu">
-												<li><a href="index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
+												<li><a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
 												<li><a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
 														<ul class="nav nav-second-level">
-																<li><a href="<%=basePath%>homebase">房间监控</a></li>
+																<li style="border-right:3px solid #fff;"><a href="<%=basePath%>homebase"><strong>房间监控</strong></a></li>
 														</ul></li>
 												<li><a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
 														<ul class="nav nav-second-level">
