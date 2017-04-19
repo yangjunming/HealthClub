@@ -75,6 +75,19 @@ public class UserController {
 		mv.setViewName("guan");
 		return mv;
 	}
+	
+	@RequestMapping("")
+	public ModelAndView start2(HttpSession httpSession) {
+		User user = (User) httpSession.getAttribute("User");
+		if(user != null){
+			httpSession.removeAttribute("User");
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("message", "Hello World!");
+		mv.addObject("flag", true);
+		mv.setViewName("guan");
+		return mv;
+	}
 	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();
