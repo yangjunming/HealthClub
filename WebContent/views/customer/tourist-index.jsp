@@ -52,6 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right" style="padding-top:10px;">
+            ${sessionScope.User.name}(游客)
             <a class="btn-success btn" href="<%=basePath%>views/login.jsp" style="padding-top:0px;">退出</a>
             </div>
 						<div class="navbar-default sidebar" role="navigation">
