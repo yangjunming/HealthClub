@@ -180,4 +180,39 @@ public class MemberCardController {
 		boolean result = memberCardDao.updateMemberCard(memberCard);
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/getMemCardPoint")
+	public ModelAndView getMemberCardPoint(@RequestParam(required = false) int id){
+		MemberCard mCard = memberCardDao.getMemberCardByUserId(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("mCard", mCard);
+		mv.setViewName("customer/point-exchange");
+		return mv;
+	}
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/minusMemCardPoint")
+	@ResponseBody
+	public ModelAndView minusMemberCardPoint(@RequestParam(required = false) int id, 
+			@RequestParam(required = false) BigDecimal minus,@RequestParam(required = false) BigDecimal balance){
+		BigDecimal balan = balance.subtract(minus);
+		boolean result = memberCardDao.minusMemberCardPoint(id, balan);
+		ModelAndView mv = new ModelAndView();
+		if (!result) {
+			mv.addObject("message","兑换失败！");
+		}
+		mv.addObject("message","兑换成功！");
+		MemberCard mCard = memberCardDao.getMemberCardByUserId(id);
+		mv.addObject("mCard", mCard);
+		mv.setViewName("customer/point-exchange");
+		return mv;
+	}
 }

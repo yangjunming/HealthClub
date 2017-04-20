@@ -106,4 +106,9 @@
 				</trim>
 				WHERE id=#{id}
 		</update>
+		
+		<update id="minusMemberCardPoint" parameterType="com.club.model.MemberCard">
+		      UPDATE member_card SET point_balance=#{balan}
+              WHERE id=#{id}
+		</update>
 </mapper>

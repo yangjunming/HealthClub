@@ -52,13 +52,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<a class="navbar-brand">欢迎光临</a>
 						</div>
 						<div class="nav navbar-nav navbar-right">
-								<a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
+								<a class="btn-success btn" href="<%=basePath%>loginout" style="padding-top:0px;">退出</a>
 						</div>
 						<div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<%=basePath%>/views/customer/member-reserve.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a>
+						<a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
+						</li>
+                        <li style="border-right:3px solid #fff;">
+                            <a href="<%=basePath%>/views/customer/member-reserve.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>预约&nbsp;&gt;&gt;</strong></a>
                         </li>
                         <li>
                             <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
@@ -171,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 						
 				</div>
-		</div>
+		
 		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
 		<script src="<%=basePath%>resources/js/moment.js"></script>
 		<script src="<%=basePath%>resources/js/bootstrap-datetimepicker.js"></script>

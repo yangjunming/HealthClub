@@ -1,5 +1,6 @@
 package com.club.mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -17,5 +18,7 @@ public interface MemberCardMapper {
 	public int updateMemberCard(MemberCard memberCard);
 
 	public MemberCard getMemCardByMemCardId(@Param("id")Integer id);
+	
+	public int minusMemberCardPoint(@Param("id")Integer id,@Param("balan")BigDecimal balan);
 
 }

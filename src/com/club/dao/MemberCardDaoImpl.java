@@ -1,5 +1,6 @@
 package com.club.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,15 @@ public class MemberCardDaoImpl implements MemberCardDao{
 	public MemberCard getMemCardByMemCardId(Integer id) {
 		MemberCard mCard = memberCardMapper.getMemCardByMemCardId(id);
 		return mCard;
+	}
+
+	@Override
+	public boolean minusMemberCardPoint(Integer id, BigDecimal balan) {
+		int result = memberCardMapper.minusMemberCardPoint(id, balan);
+		if(result>0){
+			return true;
+		}
+		return false;
 	};
 	
 }
