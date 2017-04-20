@@ -201,18 +201,14 @@ public class MemberCardController {
 	 */
 	@RequestMapping(value="/minusMemCardPoint")
 	@ResponseBody
-	public ModelAndView minusMemberCardPoint(@RequestParam(required = false) int id, 
+	public BigDecimal minusMemberCardPoint(@RequestParam(required = false) int id, 
 			@RequestParam(required = false) BigDecimal minus,@RequestParam(required = false) BigDecimal balance){
 		BigDecimal balan = balance.subtract(minus);
 		boolean result = memberCardDao.minusMemberCardPoint(id, balan);
-		ModelAndView mv = new ModelAndView();
-		if (!result) {
-			mv.addObject("message","兑换失败！");
+		if(result){
+			MemberCard memberCard = memberCardDao.getMemCardByMemCardId(id);
+			return memberCard.getPointBalance();
 		}
-		mv.addObject("message","兑换成功！");
-		MemberCard mCard = memberCardDao.getMemberCardByUserId(id);
-		mv.addObject("mCard", mCard);
-		mv.setViewName("customer/point-exchange");
-		return mv;
+		return balance;
 	}
 }

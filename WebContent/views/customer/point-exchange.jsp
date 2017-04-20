@@ -299,16 +299,17 @@ function fn(num){
         if(confirm("是否确定进行兑换？")){
             var id = ${mCard.id};
         	 $.ajax({
-        		    type: "post",
-        		    url: "<%=basePath%>memberCard/minusMemberCardPoint?id="+id+"&minus=" + lab +"&balance=" + p,
+        		    type: "get",
+        		    url: "<%=basePath%>memberCard/minusMemCardPoint?id="+id+"&minus=" + lab +"&balance="+pb+"",
         		    contentType : "application/json;charset=utf-8",
-        		    data : JSON.stringify(datas),
+        		    data : {},
         		        dataType : "json",
         		        async : false,
         		        success : function(data) {
         		            console.log(data);
         		            if(data){
         		                alert("兑换成功");
+        		                $("#pb").text(data);
         		            }
         		        }
         		    });
