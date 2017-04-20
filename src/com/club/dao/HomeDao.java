@@ -27,5 +27,7 @@ public interface HomeDao {
 	public boolean updateHomeToStart(Home home);
 
 	public boolean updateHomeToEnd(Home home);
+
+	public boolean updateHome(Home home);
 	
 }

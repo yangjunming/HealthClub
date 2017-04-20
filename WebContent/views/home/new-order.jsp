@@ -231,6 +231,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         success : function(data) {
             if(data){
                 alert("开单成功");
+                window.location.href="<%=basePath%>homebase";
             }
         }
     });

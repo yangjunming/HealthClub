@@ -174,6 +174,7 @@ public class OrderController {
 			if (orderEndDTO.getFlag() == 1) {
 				BigDecimal balance = memberCard.getBalance();
 				balance = balance.subtract(orderEndDTO.getSalesVolume());
+				MemberCard.setBalance(balance);
 			}
 			memberCardDao.updateMemberCard(MemberCard);
 			order.setSpaAmount(orderEndDTO.getSpaAmount().multiply(memberCard.getPoint()));

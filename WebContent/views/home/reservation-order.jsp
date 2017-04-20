@@ -195,8 +195,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					async:false,
 					success : function(data) {
 						  $("#orderId").val(data.id);
-							$("#startTime").val(data.startTime);
-							$("#endTime").val(data.endTime);
+							$("#startTime").val(initTableTime(data.startTime));
+							$("#endTime").val(initTableTime(data.endTime));
 							$("#technicianId").val(data.technicianId);
 							$("#homeNum").val(data.roomId);
                 if(data.isSpa==1){
@@ -250,13 +250,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						if (data) {
 							if(val==1){
 								alert("开始服务");
+								 window.location.href="<%=basePath%>homebase";
 							}else{
 							alert("取消成功");
+							 window.location.href="<%=basePath%>homebase";
 							}
 						}
 					}
 				});
 			}
+		initTableTime = function(longTime) {
+	    if (longTime === null || arguments.length === 0) {
+		return ""
+	    }
+	    if (typeof longTime !== "number") {
+		var longTime = parseInt(longTime.trim())
+	    }
+	    var _time = new Date(longTime)
+	    var year = _time.getFullYear().toString()
+	    var month = (_time.getMonth() + 1).toString().length === 1 ? "0" + (_time.getMonth() + 1) : (_time.getMonth() + 1)
+		    .toString()
+	    var day = _time.getDate().toString().length === 1 ? "0" + _time.getDate() : _time.getDate().toString()
+	    var hour = _time.getHours().toString().length === 1 ? "0" + _time.getHours() : _time.getHours().toString()
+	    var minute = _time.getMinutes().toString().length === 1 ? "0" + _time.getMinutes() : _time.getMinutes().toString()
+	    var second = _time.getSeconds().toString().length === 1 ? "0" + _time.getSeconds() : _time.getSeconds().toString()
+	    var list = []
+	    list.splice(0, 0, year, '-', month, '-', day, ' ', hour, ':', minute, ':', second)
+
+	    return list.join('')
+	}
 		</script>
 </body>
 </html>

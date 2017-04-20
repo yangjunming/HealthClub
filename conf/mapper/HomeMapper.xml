@@ -11,6 +11,7 @@
 						<if test="resTime !=null and resTime !='' ">res_time=#{resTime},</if>
 						<if test="userId !=0 ">user_id=#{userId},</if>
 						<if test="hasUser !=0 ">has_user=#{hasUser},</if>
+						<if test="charge !=null and charge !='' ">charge=#{charge},</if>
 						<if test="technicianId !=0 ">technician_id=#{technicianId},</if>
 						<if test="homeNum !=0 ">home_num=#{homeNum},</if>
 						<if test="size !=0 ">size=#{size},</if>
@@ -40,6 +41,8 @@
 				user_id as userId,
 				has_user as hasUser,
 				technician_id as technicianId,
+				size,
+				charge,
 				home_num as
 				homeNum
 				FROM t_home WHERE id=#{homeId}

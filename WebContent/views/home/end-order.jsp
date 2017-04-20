@@ -307,6 +307,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              "balance":$("#balance").text(),
              "flag":flag
         }
+				console.log(flag);
     $.ajax({
     type: "post",
     url: "<%=basePath%>order/endOrder",
@@ -318,6 +319,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         	console.log(data);
             if(data){
                 alert("结算成功");
+                window.location.href="<%=basePath%>homebase";
             }
         }
     });
