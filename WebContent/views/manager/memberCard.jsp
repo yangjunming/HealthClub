@@ -40,6 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            ${sessionScope.User.name}(管理员)
             <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
@@ -89,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </nav>
 		</div>
         <div id="page-wrapper">
-         <div class="panel-body1">
+         <!-- <div class="panel-body1"> -->
          <div class="row">
          <div class="navbar-right">
          <div class="col_md_2">
@@ -139,7 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     </div>
        </div>
-   </div>
+ <!--   </div> -->
         
         <div class="col-md-3 widget widget1">
         </div>

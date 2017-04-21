@@ -50,6 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            ${sessionScope.User.name}(管理员)
             <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
@@ -69,8 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li style="border-right:3px solid #fff;">
-                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
+                                <li>
+                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
@@ -84,7 +85,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
+                                <li  style="border-right:3px solid #fff;">
+                                <a href="<%=basePath%>technician/all_performance"><strong>业绩查询</strong></a></li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
                                 </li>

@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<input id="min" name="" type="button" value="-" />  
 						<input id="text_box" name="" type="text" value="1" style="width:50px;padding-left:15px;" readonly="readonly" />  
 						<input id="add" name="" type="button" value="+" /> </p> 
-						<p style="padding-top:3px;">消耗积分：<label id="total" style="padding-left:8px;padding-top:4px;"></label> 
+						<p style="padding-top:3px;">消耗积分：<label id="total1" style="padding-left:8px;padding-top:4px;"></label> 
 						</p> 
                     </div>
                     <div style="padding-left:50px;padding-top:3px;width:160px;height:40px;">
@@ -337,8 +337,11 @@ $(function(){
           
     })  
     function setTotal(){  
-        $("#total").html(( parseInt(t.val()) *parseInt((p.val()))).toFixed(2));  
-    }  
+    	var sum = parseInt(t.val()) *parseInt(p.val());
+    	$("#total1").text(sum);
+
+/*         $("#total1").html(( parseInt(t.val()) *parseInt((p.val()))).toFixed(2));  
+ */    }  
     setTotal();  
     
     var t2 = $("#text_box2");
@@ -355,8 +358,10 @@ $(function(){
         setTotal2();}  
     })  
     function setTotal2(){  
-        $("#total2").html(parseInt((parseInt(t2.val())*parseInt((p2.val())))).toFixed(2));  
-    }  
+    	var sum = parseInt(t2.val()) *parseInt(p2.val());
+        $("#total2").text(sum);
+/*         $("#total2").html(parseInt((parseInt(t2.val())*parseInt((p2.val())))).toFixed(2));  
+ */    }  
     setTotal2(); 
     
     var t3 = $("#text_box3");
@@ -372,8 +377,10 @@ $(function(){
         t3.val(parseInt(t3.val())-1)  
         setTotal3(); } 
     })  
-    function setTotal3(){  
-        $("#total3").html(parseInt((parseInt(t3.val())*parseInt((p3.val())))).toFixed(2));  
+    function setTotal3(){ 
+    	var sum = parseInt(t3.val()) *parseInt(p3.val());
+        $("#total3").text(sum);
+        /* $("#total3").html(parseInt((parseInt(t3.val())*parseInt((p3.val())))).toFixed(2));   */
     }  
     setTotal3(); 
     
@@ -391,8 +398,10 @@ $(function(){
         setTotal4(); } 
     })  
     function setTotal4(){  
-        $("#total4").html(parseInt((parseInt(t4.val())*parseInt((p4.val())))).toFixed(2));  
-    }  
+    	var sum = parseInt(t4.val()) *parseInt(p4.val());
+        $("#total4").text(sum);
+/*         $("#total4").html(parseInt((parseInt(t4.val())*parseInt((p4.val())))).toFixed(2));  
+ */    }  
     setTotal4();
     
     var t5 = $("#text_box5");
@@ -409,8 +418,10 @@ $(function(){
         setTotal5(); } 
     })  
     function setTotal5(){  
-        $("#total5").html(parseInt((parseInt(t5.val())*parseInt((p5.val())))).toFixed(2));  
-    }  
+    	var sum = parseInt(t5.val()) *parseInt(p5.val());
+        $("#total5").text(sum);
+/*         $("#total5").html(parseInt((parseInt(t5.val())*parseInt((p5.val())))).toFixed(2));  
+ */    }  
     setTotal5(); 
     
     var t6 = $("#text_box6");
@@ -426,9 +437,11 @@ $(function(){
         t6.val(parseInt(t6.val())-1)  
         setTotal6();}  
     })  
-    function setTotal6(){  
-        $("#total6").html(parseInt((parseInt(t6.val())*parseInt((p6.val())))).toFixed(2));  
-    }  
+    function setTotal6(){
+    	var sum = parseInt(t6.val()) *parseInt(p6.val());
+        $("#total6").text(sum);
+/*         $("#total6").html(parseInt((parseInt(t6.val())*parseInt((p6.val())))).toFixed(2));  
+ */    }  
     setTotal6(); 
     
     var t7 = $("#text_box7");
@@ -445,8 +458,10 @@ $(function(){
         setTotal7();}  
     })  
     function setTotal7(){  
-        $("#total7").html(parseInt((parseInt(t7.val())*parseInt((p7.val())))).toFixed(2));  
-    }  
+    	var sum = parseInt(t7.val()) *parseInt(p7.val());
+        $("#total7").text(sum);
+/*         $("#total7").html(parseInt((parseInt(t7.val())*parseInt((p7.val())))).toFixed(2));  
+ */    }  
     setTotal7(); 
     
     var t8 = $("#text_box8");
@@ -462,9 +477,11 @@ $(function(){
         t8.val(parseInt(t8.val())-1)  
         setTotal8(); } 
     })  
-    function setTotal8(){  
-        $("#total8").html(parseInt((parseInt(t8.val())*parseInt((p8.val())))).toFixed(2));  
-    }  
+    function setTotal8(){ 
+    	var sum = parseInt(t8.val()) *parseInt(p8.val());
+        $("#total8").text(sum);
+/*         $("#total8").html(parseInt((parseInt(t8.val())*parseInt((p8.val())))).toFixed(2));  
+ */    }  
     setTotal8(); 
 })  
 </script> 

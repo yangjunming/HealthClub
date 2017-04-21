@@ -59,8 +59,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li style="border-right:3px solid #fff;">
-                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
+                                <li>
+                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
