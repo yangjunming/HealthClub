@@ -97,8 +97,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </nav>
 		</div>
 				<div id="page-wrapper">
-<!-- 						<div class="panel-body1">
- -->         <div class="row">
+ 				<div class="panel-body1">
+        <div class="row">
 <!--          <div class="navbar-right"> -->
 <!--          <div class="col_md_2"> -->
 <!--                         类型： -->
@@ -134,8 +134,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </table>
     </div>
     </div>
-<!-- 				</div>
- -->				<!-- /#page-wrapper -->
+				</div>
+				<!-- /#page-wrapper -->
 		</div>
 		<!-- /#wrapper -->
 		<!-- Bootstrap Core JavaScript -->

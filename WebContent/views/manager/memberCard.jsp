@@ -90,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </nav>
 		</div>
         <div id="page-wrapper">
-         <!-- <div class="panel-body1"> -->
+         <div class="panel-body1">
          <div class="row">
          <div class="navbar-right">
          <div class="col_md_2">
@@ -140,7 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     </div>
        </div>
- <!--   </div> -->
+ </div>
         
         <div class="col-md-3 widget widget1">
         </div>
