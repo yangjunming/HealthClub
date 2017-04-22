@@ -164,7 +164,8 @@
 				reuser.type,
 				technician.spa_charge AS spaCharge,
 				technician.mass_charge AS massCharge,
-				technician.cup_charge AS cupCharge
+				technician.cup_charge AS cupCharge,
+				t_home.charge as homeCharge
 				FROM
 				t_order
 				LEFT JOIN t_home ON t_home.id =

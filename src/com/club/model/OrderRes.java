@@ -31,6 +31,15 @@ public class OrderRes {
 	private int type;
 	private BigDecimal spaCharge;
 	private BigDecimal massCharge;
+	private BigDecimal homeCharge;
+	public BigDecimal getHomeCharge() {
+		return homeCharge;
+	}
+
+	public void setHomeCharge(BigDecimal homeCharge) {
+		this.homeCharge = homeCharge;
+	}
+
 	public int getType() {
 		return type;
 	}

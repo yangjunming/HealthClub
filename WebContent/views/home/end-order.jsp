@@ -163,6 +163,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
+												<label>房间收费：</label><br>
+												<label style="padding-top: 15px" id="homeCharge"></label><br>
+										</div>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+						<div class="form-group">
+								<div class="row">
+										<div class="col-md-4"></div>
+										<div class="col-md-4">
 												<label>各项目收费标准(元/小时)：</label><br>
 												<label style="padding-top: 15px">SPA：</label><label style="padding-top: 15px" id="spaCharge">100</label><br>
 												<label style="padding-top: 15px">按摩：</label><label style="padding-top: 15px" id="massCharge">200</label><br>
