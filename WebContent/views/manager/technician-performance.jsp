@@ -110,6 +110,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			            <th>SPA总额</th>
 			            <th>按摩总额</th>
 			            <th>拔罐总额</th>
+			            <th>房间收费总额</th>
 			            <th>总金额</th>
 			        </tr>
 			      </thead>
@@ -121,6 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			          <td>${performs.spaAmount}</td>
 			          <td>${performs.massAmount}</td>
 			          <td>${performs.cupAmount}</td>
+			          <td>${performs.homeAmount}</td>
 			          <td>${performs.salesVolume}</td>
 			      </tr>
 			      </c:forEach> 

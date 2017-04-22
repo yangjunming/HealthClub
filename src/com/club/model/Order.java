@@ -28,6 +28,15 @@ public class Order {
 	private BigDecimal massAmount;
 	private BigDecimal cupAmount;
 	private String mobile;
+	private BigDecimal homeCharge;
+
+	public BigDecimal getHomeCharge() {
+		return homeCharge;
+	}
+
+	public void setHomeCharge(BigDecimal homeCharge) {
+		this.homeCharge = homeCharge;
+	}
 
 	public String getMobile() {
 		return mobile;

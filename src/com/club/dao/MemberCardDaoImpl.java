@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.club.mapper.MemberCardMapper;
 import com.club.model.MemberCard;
+import com.club.model.MemberCardIncome;
 @Component
 public class MemberCardDaoImpl implements MemberCardDao{
     @Autowired
@@ -51,6 +52,15 @@ public class MemberCardDaoImpl implements MemberCardDao{
 	@Override
 	public boolean minusMemberCardPoint(Integer id, BigDecimal balan) {
 		int result = memberCardMapper.minusMemberCardPoint(id, balan);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean insertMemberCardIncome(MemberCardIncome memberCardIncome) {
+		int result = memberCardMapper.insertMemberCardIncome(memberCardIncome);
 		if(result>0){
 			return true;
 		}

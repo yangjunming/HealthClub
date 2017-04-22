@@ -10,6 +10,15 @@ public class AchievementOfMonth {
 	private BigDecimal cupAmount;
 	private BigDecimal spaAmount;
 	private BigDecimal massAmount;
+	private BigDecimal homeAmount;
+
+	public BigDecimal getHomeAmount() {
+		return homeAmount;
+	}
+
+	public void setHomeAmount(BigDecimal homeAmount) {
+		this.homeAmount = homeAmount;
+	}
 
 	public String getMonth() {
 		return month;

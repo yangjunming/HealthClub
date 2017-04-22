@@ -163,8 +163,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>房间收费：</label><br>
-												<label style="padding-top: 15px" id="homeCharge"></label><br>
+												<label>房间收费(元)：</label>
+												<label id="homeCharge"></label>
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -244,7 +244,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <div class="col-md-7"></div>
                                         <a class="btn btn-primary" href="<%=basePath%>homebase" >返回</a>
                                         <a class="btn btn-primary" href="javascript:save(0);" >现金结算</a>
-                                        <a class="btn btn-primary" href="javascript:save(1);" >余额结算</a>
+                                        <a id="newButton" class="btn btn-primary" href="javascript:save(1);" >余额结算</a>
                                         <div class="clearfix"></div>
                                 </div>
            </div>
@@ -262,6 +262,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				        dataType : "json",
 				        async : false,
 				        success : function(data) {
+				        	$("#homeCharge").text(data.homeCharge);
 				        	$("#orderId").val(data.id);
 				        	$("#mobile").text(data.mobile);
 				        	$("#name").text(data.name);
@@ -290,21 +291,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				            		        dataType : "json",
 				            		        async : false,
 				            		        success : function(data) {
-				            		        	console.log(data);
 // 				            		        	cardNum cardUserName discount balance
                                                  $("#cardNum").text(data.cardNum);
                                                  $("#discount").text(data.discount);
                                                  $("#balance").text(data.balance);
                                                  $("#memCardId").val(data.id);
-
-
 				            		        }
 				            		    });
+				            }else{
+				            	$('#newButton').attr('disabled',"true");
 				            }
 				        }
 				    });
 		});
 		function save(flag){
+			var saveFlag = 1;
+			if(flag == 1){
+				var salesVolume = $("#salesVolume").val();
+				console.log(salesVolume);
+				var balance = $("#balance").text();
+				console.log(balance);
+				if(Number(balance)<Number(salesVolume)){
+					saveFlag = 0;
+					alert("余额不足");
+				}
+			}
+			if(saveFlag == 1){
 				var datas = {
             "orderId" : $("#orderId").val(),
             "homeId": $("#homeId").text(),
@@ -315,10 +327,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             "spaAmount" : $("#spaAmount").val(),
             "massAmount" : $("#massAmount").val(),
             "cupAmount" : $("#cupAmount").val(),
+            "homeCharge" : $("#homeCharge").text(),
              "balance":$("#balance").text(),
              "flag":flag
         }
-				console.log(flag);
     $.ajax({
     type: "post",
     url: "<%=basePath%>order/endOrder",
@@ -327,13 +339,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         dataType : "json",
         async : false,
         success : function(data) {
-        	console.log(data);
             if(data){
                 alert("结算成功");
                 window.location.href="<%=basePath%>homebase";
             }
         }
     });
+			}
 		}
 		function spaAmount(){
 		var amount = $("#spaCharge").text() * $("#spaTime").val();
@@ -345,12 +357,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		var spaAmount = $("#spaAmount").val();
 		var massAmount = $("#massAmount").val();
 		var cupAmount = $("#cupAmount").val();
-		$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+		var homeCharge = $("#homeCharge").text();
+		$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge));
 		var discount = $("#discount").text();
 		if(null ==discount|| discount ==''){
-			$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge));
 		}else{
-			var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount);
+			var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge);
 			$("#salesVolume").val(count*Number(discount));
 		}
 		}
@@ -365,12 +378,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var spaAmount = $("#spaAmount").val();
 			var massAmount = $("#massAmount").val();
 			var cupAmount = $("#cupAmount").val();
-			$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			var homeCharge = $("#homeCharge").text();
+			$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge));
 			var discount = $("#discount").text();
 			if(null ==discount|| discount ==''){
-				$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+				$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge));
 			}else{
-				var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount);
+				var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge);
 				$("#salesVolume").val(count*Number(discount));
 			}
 			}
@@ -384,12 +398,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var spaAmount = $("#spaAmount").val();
 			var massAmount = $("#massAmount").val();
 			var cupAmount = $("#cupAmount").val();
-			$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+			var homeCharge = $("#homeCharge").text();
+			$("#nodiscountSalesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge));
 			var discount = $("#discount").text();
 			if(null ==discount|| discount ==''){
-				$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount));
+				$("#salesVolume").val(Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge));
 			}else{
-				var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount);
+				var count = Number(spaAmount)+Number(massAmount)+Number(cupAmount)+Number(homeCharge);
 				$("#salesVolume").val(count*Number(discount));
 			}
 			}

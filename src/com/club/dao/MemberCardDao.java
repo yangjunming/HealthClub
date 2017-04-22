@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.club.model.MemberCard;
+import com.club.model.MemberCardIncome;
 
 public interface MemberCardDao {
 
@@ -18,4 +19,6 @@ public interface MemberCardDao {
 	public MemberCard getMemCardByMemCardId(Integer id);
 	
 	public boolean minusMemberCardPoint(Integer id, BigDecimal balan);
+
+	public boolean insertMemberCardIncome(MemberCardIncome memberCardIncome);
 }

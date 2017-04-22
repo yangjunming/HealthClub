@@ -2,6 +2,7 @@ package com.club.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.club.dao.MemberCardDao;
 import com.club.dao.UserDao;
 import com.club.model.MemberCard;
+import com.club.model.MemberCardIncome;
 import com.club.model.User;
 
 @Controller
@@ -177,6 +179,14 @@ public class MemberCardController {
 	@RequestMapping(value="/editMemCard")
 	@ResponseBody
 	public Object editMemCard(@RequestBody MemberCard memberCard){
+		MemberCard oldMemberCard = memberCardDao.getMemCardByMemCardId(memberCard.getId());
+		if(oldMemberCard.getPrice().compareTo(memberCard.getPrice())!=0){
+			MemberCardIncome memberCardIncome = new MemberCardIncome();
+			memberCardIncome.setMemberCardId(memberCard.getId());
+			memberCardIncome.setCreateDate(new Date());
+			memberCardIncome.setCharge(memberCard.getPrice().subtract(oldMemberCard.getPrice()));
+			memberCardDao.insertMemberCardIncome(memberCardIncome);
+		}
 		boolean result = memberCardDao.updateMemberCard(memberCard);
 		return result;
 	}
