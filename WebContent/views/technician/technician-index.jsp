@@ -50,8 +50,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
+                        </li>
                         <li>
-                            <a href="<%=basePath%>technician/schedule?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>技师安排</strong></a>
+                            <a href="<%=basePath%>technician/schedule?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>技师安排</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>technician/salary?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>工资查看</a>
@@ -64,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </nav>
         <div id="page-wrapper">
-        <div>你是技师</div>
+        <div></div>
        </div>
    </div>
     <!-- Bootstrap Core JavaScript -->
