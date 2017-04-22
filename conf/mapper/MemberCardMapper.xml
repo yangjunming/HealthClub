@@ -22,7 +22,7 @@
 						</if>
 				</where>
 		</select>
-		<insert id="addMemberCard" parameterType="com.club.model.MemberCard">
+		<insert id="addMemberCard" parameterType="com.club.model.MemberCard" useGeneratedKeys="true" keyProperty="id">
 				insert into member_card
 				(
 				<if test="grade !=0 ">
