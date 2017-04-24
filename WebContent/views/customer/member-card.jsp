@@ -50,19 +50,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            ${sessionScope.User.name}(会员)
             <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
+                    <li>
+                        <a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
+                        </li>
+                        <li >
                             <a href="<%=basePath%>/views/customer/member-reserve.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>预约</a>
                         </li>
-                        <li>
-                            <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>会员卡</a>
+                        <li style="border-right:3px solid #fff;">
+                            <a href="<%=basePath%>memberCard/getMemCard?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>会员卡&nbsp;&gt;&gt;</strong></a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>/views/customer/point-exchange.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>
+                            <a href="<%=basePath%>memberCard/getMemCardPoint?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i>积分兑换</a>
                         </li>
                     </ul>
                 </div>
@@ -80,8 +84,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <div class="col-md-4">
             </div>
             <div class="col-md-4">
-            <h1>会员卡号：</h1>
-             <!-- <label>会员卡号：</label> -->
+            <!-- <h1>会员卡号：</h1> -->
+             <label>会员卡号：</label>
                 <input type="text" class="form-control1" readonly="readonly"  value="${mCard.cardNum}" >
             </div>
             <div class="clearfix"> </div>
@@ -128,7 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <div class="col-md-4">
             </div>
             <div class="col-md-4">
-             <label>累计积分：</label>
+             <label>消费积分比：</label>
                 <input type="text" class="form-control1" readonly="readonly" value="${mCard.point}" >
             </div>
             <div class="clearfix"> </div>
@@ -141,6 +145,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-md-4">
              <label>享受折扣：</label>
                 <input type="text" class="form-control1" readonly="readonly" value="${mCard.discount}" >
+            </div>
+            <div class="clearfix"> </div>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+             <label>剩余积分：</label>
+                <input type="text" class="form-control1" readonly="readonly" value="${mCard.pointBalance}" >
             </div>
             <div class="clearfix"> </div>
            </div>

@@ -164,6 +164,8 @@ public class OrderController {
 		order.setOrderStatus(2);
 		order.setNodiscountSalesVolume(orderEndDTO.getNodiscountSalesVolume());
 		order.setSalesVolume(orderEndDTO.getSalesVolume());
+		order.setHomeCharge(orderEndDTO.getHomeCharge());
+		//会员
 		if (orderEndDTO.getMemCardId() != 0) {
 			MemberCard memberCard = memberCardDao.getMemberCardByUserId(orderEndDTO.getUserId());
 			MemberCard MemberCard = new MemberCard();
@@ -171,14 +173,16 @@ public class OrderController {
 			BigDecimal pointBalance = memberCard.getPointBalance();
 			pointBalance = pointBalance.add(orderEndDTO.getSalesVolume().multiply(memberCard.getPoint()));
 			MemberCard.setPointBalance(pointBalance);
+			//余额支付
 			if (orderEndDTO.getFlag() == 1) {
 				BigDecimal balance = memberCard.getBalance();
 				balance = balance.subtract(orderEndDTO.getSalesVolume());
+				MemberCard.setBalance(balance);
 			}
 			memberCardDao.updateMemberCard(MemberCard);
-			order.setSpaAmount(orderEndDTO.getSpaAmount().multiply(memberCard.getPoint()));
-			order.setMassAmount(orderEndDTO.getMassAmount().multiply(memberCard.getPoint()));
-			order.setCupAmount(orderEndDTO.getCupAmount().multiply(memberCard.getPoint()));
+			order.setSpaAmount(orderEndDTO.getSpaAmount());
+			order.setMassAmount(orderEndDTO.getMassAmount());
+			order.setCupAmount(orderEndDTO.getCupAmount());
 		} else {
 			order.setSpaAmount(orderEndDTO.getSpaAmount());
 			order.setMassAmount(orderEndDTO.getMassAmount());

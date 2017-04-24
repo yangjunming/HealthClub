@@ -44,6 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            ${sessionScope.User.name}(管理员)
             <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
@@ -55,16 +56,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>homebase">房间监控</a>
+                                <li style="border-right:3px solid #fff;">
+                                    <a href="<%=basePath%>homebase"><strong>房间监控</strong></a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li style="border-right:3px solid #fff;">
-                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
+                                <li>
+                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>

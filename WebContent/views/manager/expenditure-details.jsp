@@ -50,6 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="navbar-brand">欢迎光临</a>
             </div>
             <div class="nav navbar-nav navbar-right">
+            ${sessionScope.User.name}(管理员)
             <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
             </div>
             <div class="navbar-default sidebar" role="navigation">
@@ -69,8 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li style="border-right:3px solid #fff;">
-                                    <a href="<%=basePath%>memberCard/list"><strong>会员卡管理</strong></a>
+                                <li>
+                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
                                 </li>
                                 <li>
                                     <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
@@ -88,8 +89,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li>
                                     <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
                                 </li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/expenditure-details.jsp">收支登记</a>
+                                <li  style="border-right:3px solid #fff;">
+                                    <a href="<%=basePath%>views/manager/expenditure-details.jsp"><strong>收支登记</strong></a>
                                 </li>
                             </ul>
                         </li>
@@ -106,10 +107,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			            <th>月</th>
 			            <th>无折总收入(元)</th>
 			            <th>折后总收入(元)</th>
+			            <th>会员卡收入(元)</th>
 			            <th>总支出(元)</th>
+			            <th>结余(元)</th>
 			            <th>SPA总额(元)</th>
 			            <th>按摩总额(元)</th>
 			            <th>拔罐总额(元)</th>
+			            <th>房间总额(元)</th>
 			        </tr>
 			      </thead>
 			      <tbody id="expenditure">
@@ -137,10 +141,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								tr += "<td>" + data[i].month + "</td>";
 								tr += "<td>" + data[i].nodiscountSalesVolume + "</td>";
 								tr += "<td>" + data[i].salesVolume + "</td>";
+								tr += "<td>" + data[i].cardAmount + "</td>";
 								tr += "<td>" + data[i].wages + "</td>";
+								tr += "<td>" + data[i].balance + "</td>";
 								tr += "<td>" + data[i].spaAmount + "</td>";
 								tr += "<td>" + data[i].massAmount + "</td>";
 								tr += "<td>" + data[i].cupAmount + "</td>";
+								tr += "<td>" + data[i].homeAmount + "</td>";
 								tr += "</tr>";
 							}
 							$("#expenditure").append(tr);

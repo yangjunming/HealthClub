@@ -22,7 +22,7 @@
 						</if>
 				</where>
 		</select>
-		<insert id="addMemberCard" parameterType="com.club.model.MemberCard">
+		<insert id="addMemberCard" parameterType="com.club.model.MemberCard" useGeneratedKeys="true" keyProperty="id">
 				insert into member_card
 				(
 				<if test="grade !=0 ">
@@ -70,7 +70,8 @@
 				SELECT
 				id,
 				member_card.card_num as cardNum,
-				member_card.card_name as cardName,
+				member_card.card_name as
+				cardName,
 				member_card.grade,
 				member_card.balance,
 				member_card.point_balance as pointBalance,
@@ -85,18 +86,21 @@
 				SELECT
 				member_card.id,
 				member_card.price,
-				member_card.card_num as cardNum,
+				member_card.card_num as
+				cardNum,
 				member_card.card_name as cardName,
 				member_card.grade,
 				member_card.balance,
-				member_card.point_balance as pointBalance,
+				member_card.point_balance as
+				pointBalance,
 				member_card.point,
 				member_card.discount,
 				`name`,
 				mobile
 				FROM
 				member_card
-				LEFT JOIN `user` ON `user`.id = member_card.user_id
+				LEFT JOIN `user` ON `user`.id =
+				member_card.user_id
 				WHERE
 				member_card.id = #{id}
 		</select>
@@ -112,4 +116,34 @@
 				</trim>
 				WHERE id=#{id}
 		</update>
+
+		<update id="minusMemberCardPoint" parameterType="com.club.model.MemberCard">
+				UPDATE member_card SET point_balance=#{balan}
+				WHERE id=#{id}
+		</update>
+		<insert id="insertMemberCardIncome" parameterType="com.club.model.MemberCardIncome">
+				insert into member_card_income
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+						<if test="charge !=null ">
+								charge,
+						</if>
+						<if test="createDate !=null ">
+								create_date,
+						</if>
+						<if test="memberCardId !=0 ">
+								member_card_id,
+						</if>
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+						<if test="charge !=null ">
+								#{charge},
+						</if>
+						<if test="createDate !=null ">
+								#{createDate},
+						</if>
+						<if test="memberCardId !=0 ">
+								#{memberCardId},
+						</if>
+				</trim>
+		</insert>
 </mapper>

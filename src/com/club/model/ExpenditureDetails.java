@@ -13,6 +13,33 @@ public class ExpenditureDetails {
 	private BigDecimal nodiscountSalesVolume;
 	private BigDecimal salesVolume;
 	private BigDecimal wages;
+	private BigDecimal homeAmount;
+	private BigDecimal balance;
+	private BigDecimal cardAmount;
+
+	public BigDecimal getHomeAmount() {
+		return homeAmount;
+	}
+
+	public void setHomeAmount(BigDecimal homeAmount) {
+		this.homeAmount = homeAmount;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getCardAmount() {
+		return cardAmount;
+	}
+
+	public void setCardAmount(BigDecimal cardAmount) {
+		this.cardAmount = cardAmount;
+	}
 
 	public BigDecimal getNodiscountSalesVolume() {
 		return nodiscountSalesVolume;

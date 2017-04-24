@@ -35,7 +35,7 @@
         <input type="text" class="text" value="Full Name" name="userName" id="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Full Name';}">
         <label>*手机号码：</label>
         <input type="text" class="text" value="Mobile" name="Mobile" id="mobile" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'enter your Mobile';}">
-		 <a class="btn btn-primary" style="width: 300px" href="javascript:save();" type="submit">注册</a>
+		 <a class="btn btn-primary" style="width: 333px" href="javascript:save();" type="submit">注册</a>
         <ul class="new">
 			<li class="new_right"><p class="sign"><a href="<%=basePath%>views/login.jsp"> 已有账户？去登录&gt;&gt;</a></p></li>
 			<div class="clearfix"></div>
