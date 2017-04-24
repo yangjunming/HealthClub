@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.club.mapper.TechnicianMapper">
+<insert id="insert" parameterType="com.club.model.Technician">
+ insert into technician
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="grade !=0 ">
+						grade,
+				</if>
+				<if test="userId !=0 ">
+						user_id,
+				</if>
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="grade !=0 ">
+						#{grade},
+				</if>
+				<if test="userId !=0 ">
+						#{userId},
+				</if>
+				</trim>
+</insert>
 		<update id="updateByUserId" parameterType="com.club.model.Technician">
 				UPDATE technician
 				<trim prefix="set" suffixOverrides=",">

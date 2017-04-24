@@ -99,12 +99,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<h3 style="padding-top:20px;">新增会员卡</h3><br/>
 						</div>
 				</div>
-				<form action="<%=basePath%>memberCard/addMemberCard.do" method="get" accept-charset="utf-8">
+				<form>
 						<div class="form-group">
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>会员卡等级:</label> <select name="grade">
+												<label>会员卡等级:</label> <select name="grade" id="grade">
 														<option value="1">普通会员</option>
 														<option value="2">银卡会员</option>
 														<option value="3">金卡会员</option>
@@ -167,7 +167,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>折扣:</label> <input type="text" class="form-control1" name="discount" value=""
+												<label>折扣:</label> <input type="text" class="form-control1" id="discount" name="discount" value=""
 														onblur="discounts(this)">
 										</div>
 										<div class="clearfix"></div>
@@ -183,7 +183,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4">
-												<label>用户电话:</label> <input type="text" class="form-control1" name="mobile" value="" onblur="mobiles(this)">
+												<label>用户电话:</label> <input type="text" class="form-control1" id="mobile" name="mobile" value="" onblur="mobiles(this)">
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -215,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="row">
 										<div class="col-md-8"></div>
 										<div class="col-md-4">
-												<input class="btn-success btn" type="submit" value="确定" id="memberButton" />
+												<a class="btn-success btn" href="javascript:save();" id="memberButton">确定</a>
 										</div>
 										<div class="clearfix"></div>
 								</div>
@@ -297,6 +297,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					$("#userNameRow").hide();
 				}
 			}
+			
+			function save() {
+					var datas = {
+							"grade" : $("#grade").val(),
+							"cardNum" : $("#cardNum").val(),
+							"price" : $("#price").val(),
+							"point" : $("#point").val(),
+							"discount" : $("#discount").val(),
+							"mobile" : $("#mobile").val(),
+							"name" : $("#userName").val(),
+						}
+					$.ajax({
+				    type: "post",
+				    url: "<%=basePath%>memberCard/addMemberCard",
+				    contentType : "application/json;charset=utf-8",
+				    data : JSON.stringify(datas),
+						dataType : "json",
+						async : false,
+						success : function(data) {
+							if(data){
+								window.location.href="<%=basePath%>memberCard/list";
+							}
+						}
+					});
+				}
 		</script>
 </body>
 </html>

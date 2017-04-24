@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.club.mapper.TechnicianMapper;
 import com.club.mapper.UserMapper;
+import com.club.model.Technician;
 import com.club.model.TechnicianDetailRes;
 import com.club.model.User;
 @Component
 public class UserDaoImpl implements UserDao{
     @Autowired
 	private UserMapper userMapper;
+    @Autowired
+    private TechnicianMapper technicianMapper;
 	@Override
 	public User findUserById(int id) {
 		User user = userMapper.selectUserById(id);
@@ -73,6 +77,12 @@ public class UserDaoImpl implements UserDao{
 			user.setPassword("123456");
 		}
 		int result = userMapper.insert(user);
+		if(user.getType()== 2 ){
+			Technician technician = new Technician();
+			technician.setUserId(user.getId());
+			technician.setGrade(1);
+			technicianMapper.insert(technician);
+		}
 		if(result>0){
 			return true;
 		}
