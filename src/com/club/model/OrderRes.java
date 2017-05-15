@@ -32,6 +32,16 @@ public class OrderRes {
 	private BigDecimal spaCharge;
 	private BigDecimal massCharge;
 	private BigDecimal homeCharge;
+	private int appointmentId;
+
+	public int getAppointmentId() {
+		return appointmentId;
+	}
+
+	public void setAppointmentId(int appointmentId) {
+		this.appointmentId = appointmentId;
+	}
+
 	public BigDecimal getHomeCharge() {
 		return homeCharge;
 	}

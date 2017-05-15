@@ -18,7 +18,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript">
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 </script>
@@ -46,60 +48,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 		<div id="wrapper">
-     <!-- Navigation -->
-              <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand">欢迎光临</a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-            ${sessionScope.User.name}(管理员)
-            <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
-            </div>
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>homebase">房间监控</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<%=basePath%>memberCard/list">会员卡管理</a>
-                                </li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a>
-                                </li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a>
-                                </li>
-                                <li>
-                                    <a href="<%=basePath%>views/manager/expenditure-details.jsp">收支登记</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+				<!-- Navigation -->
+				<nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+						<div class="navbar-header">
+								<a class="navbar-brand">欢迎光临</a>
+						</div>
+						<div class="nav navbar-nav navbar-right">
+								${sessionScope.User.name}(管理员) <a class="btn-success btn" href="<%=basePath%>loginout">退出</a>
+						</div>
+						<div class="navbar-default sidebar" role="navigation">
+								<div class="sidebar-nav navbar-collapse">
+										<ul class="nav" id="side-menu">
+												<li><a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a></li>
+												<li><a href="#"><i class="fa fa-laptop nav_icon"></i>监控<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>homebase">房间监控</a></li>
+														</ul></li>
+												<li><a href="#"><i class="fa fa-indent nav_icon"></i>管理<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>memberCard/list">会员卡管理</a></li>
+																<li><a href="<%=basePath%>views/manager/technician-manager.jsp">技师安排</a></li>
+																<li><a href="<%=basePath%>views/manager/manager-user.jsp">人员管理</a></li>
+														</ul> <!-- /.nav-second-level --></li>
+												<li><a href="#"><i class="fa fa-indent nav_icon"></i>查询<span class="fa arrow"></span></a>
+														<ul class="nav nav-second-level">
+																<li><a href="<%=basePath%>technician/all_performance">业绩查询</a></li>
+																<li><a href="<%=basePath%>views/manager/charges-details.jsp">费用明细查询</a></li>
+																<li><a href="<%=basePath%>views/manager/expenditure-details.jsp">收支登记</a></li>
+														</ul></li>
+										</ul>
+								</div>
+						</div>
+				</nav>
 		</div>
 		<div id="page-wrapper">
 				<div class="row" style="padding-top: 40px">
@@ -112,7 +92,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row">
 								<div class="col-md-4"></div>
 								<div class="col-md-4">
-										<label>预技开始时间：</label> <input id="homeId" hidden="" value="${param.id}"> <input type="text"
+										<label>预技开始时间：</label> <input id="homeId" hidden="" value="${param.homeId}">
+										<input id="orderId" hidden="" value="${param.id}"> <input type="text"
 												class="form-control1" id="startTime" readonly="readonly" value="">
 								</div>
 								<div class="clearfix"></div>
@@ -149,6 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 				</div>
 
+				<input id="homeNum" hidden="">
 				<div class="form-group">
 						<div class="row">
 								<div class="col-md-4"></div>
@@ -170,10 +152,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="form-group">
 						<div class="row">
 								<div class="col-md-6"></div>
-								<input id="orderId" hidden="">
-								<a class="btn btn-primary" href="<%=basePath%>homebase" style="margin-left: 70px">返回</a>
-								<a class="btn btn-primary" href="javascript:save(3);" style="margin-left: 70px">取消</a>
-								<a class="btn btn-primary" href="javascript:save(1);" style="margin-left: 70px">开始</a>
+								<a class="btn btn-primary" href="javascript:back();"
+										style="margin-left: 70px">返回</a> <a class="btn btn-primary" href="javascript:save(3);"
+										style="margin-left: 70px">取消</a> <a class="btn btn-primary" href="javascript:save(1);"
+										style="margin-left: 70px">开始</a>
 								<div class="clearfix"></div>
 						</div>
 				</div>
@@ -187,10 +169,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			getOrder();
 		})
 		function getOrder(){
-			var homeId = $("#homeId").val();
+			var orderId = $("#orderId").val();
 			$.ajax({
 		    type: "get",
-		    url: "<%=basePath%>order/getOrderByHomeId?roomId="+homeId+"",
+		    url: "<%=basePath%>order/getOrderByOrderId?orederId="+orderId+"",
 					data : {},
 					dataType : "json",
 					async:false,
@@ -220,7 +202,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var isSpa =0;
 			var isMass = 0;
 			var isCup = 0;
-			var roomId = $("#homeId").val();
+			var roomId = $("#homeNum").val();
 			$('input:checkbox[name=chkItem]').each(function() {
 				if($(this).context.checked){
 					if($(this).val()==1){
@@ -237,7 +219,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             "isSpa" : isSpa,
             "isMass" : isMass,
             "isCup" : isCup,
-            "roomId":$("#homeId").val(),
+            "roomId":roomId,
             "orderStatus":val
         }
     $.ajax({
@@ -260,26 +242,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					}
 				});
 			}
-		initTableTime = function(longTime) {
-	    if (longTime === null || arguments.length === 0) {
-		return ""
-	    }
-	    if (typeof longTime !== "number") {
-		var longTime = parseInt(longTime.trim())
-	    }
-	    var _time = new Date(longTime)
-	    var year = _time.getFullYear().toString()
-	    var month = (_time.getMonth() + 1).toString().length === 1 ? "0" + (_time.getMonth() + 1) : (_time.getMonth() + 1)
-		    .toString()
-	    var day = _time.getDate().toString().length === 1 ? "0" + _time.getDate() : _time.getDate().toString()
-	    var hour = _time.getHours().toString().length === 1 ? "0" + _time.getHours() : _time.getHours().toString()
-	    var minute = _time.getMinutes().toString().length === 1 ? "0" + _time.getMinutes() : _time.getMinutes().toString()
-	    var second = _time.getSeconds().toString().length === 1 ? "0" + _time.getSeconds() : _time.getSeconds().toString()
-	    var list = []
-	    list.splice(0, 0, year, '-', month, '-', day, ' ', hour, ':', minute, ':', second)
+			initTableTime = function(longTime) {
+				if (longTime === null || arguments.length === 0) {
+					return ""
+				}
+				if (typeof longTime !== "number") {
+					var longTime = parseInt(longTime.trim())
+				}
+				var _time = new Date(longTime)
+				var year = _time.getFullYear().toString()
+				var month = (_time.getMonth() + 1).toString().length === 1 ? "0" + (_time.getMonth() + 1)
+						: (_time.getMonth() + 1).toString()
+				var day = _time.getDate().toString().length === 1 ? "0" + _time.getDate() : _time.getDate().toString()
+				var hour = _time.getHours().toString().length === 1 ? "0" + _time.getHours() : _time.getHours().toString()
+				var minute = _time.getMinutes().toString().length === 1 ? "0" + _time.getMinutes() : _time.getMinutes()
+						.toString()
+				var second = _time.getSeconds().toString().length === 1 ? "0" + _time.getSeconds() : _time.getSeconds()
+						.toString()
+				var list = []
+				list.splice(0, 0, year, '-', month, '-', day, ' ', hour, ':', minute, ':', second)
 
-	    return list.join('')
-	}
+				return list.join('')
+			}
+			
+			function back(){
+				var id = $("#homeId").val();
+				window.location.href="<%=basePath%>views/home/reservation-order-list.jsp?id="+id+"";
+			}
 		</script>
 </body>
 </html>

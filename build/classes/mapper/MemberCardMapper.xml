@@ -2,75 +2,148 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.club.mapper.MemberCardMapper">
-	<select id="gethomeList" resultType="com.club.model.MemberCard">
-		SELECT
-		id,
-		user_id as userId,
-		grade,
-		price,
-		point,
-		discount,
-		card_name as cardName,
-		card_num as cardNum
-		FROM member_card
-		<where>
-			<if test="query !=null and query!='' ">
-				card_num like CONCAT('%',#{query},'%') 
-			</if>
-			<if test="grade !=null and grade !=0 ">
-				and grade=#{grade} 
-			</if>
-		</where>
-	</select>
-	<insert id="addMemberCard" parameterType="com.club.model.MemberCard">
-	insert into member_card 
-	(
-	<if test="grade !=0 ">
-	grade,
-	</if>
-	<if test="cardNum !=null and cardNum !='' ">
-	card_num,
-	</if>
-	<if test="price !=null and price !='' ">
-	price,
-	</if>
-	<if test="point !=null and point !='' ">
-	point,
-	</if>
-	<if test="discount !=null and discount !='' ">
-	discount
-	</if>
-	)
-	values(
-	<if test="grade !=0 ">
-	#{grade},
-	</if>
-	<if test="cardNum !=null and cardNum !='' ">
-	#{cardNum},
-	</if>
-	<if test="price !=null and price !='' ">
-	#{price},
-	</if>
-	<if test="point !=null and point !='' ">
-	#{point},
-	</if>
-	<if test="discount !=null and discount !='' ">
-	#{discount}
-	</if>)
-	</insert>
-	
-	<select id="getMemberCardByUserId" resultType="com.club.model.MemberCard">
-        SELECT
-		member_card.card_num as cardNum,
-		member_card.card_name as cardName,
-		member_card.grade,
-		member_card.balance,
-		member_card.point,
-		member_card.discount
-		FROM
-		member_card
-		WHERE
-		member_card.user_id = #{userId}
-    </select>
-	
+		<select id="gethomeList" resultType="com.club.model.MemberCard">
+				SELECT
+				id,
+				user_id as userId,
+				grade,
+				price,
+				point,
+				discount,
+				card_name as cardName,
+				card_num as cardNum
+				FROM member_card
+				<where>
+						<if test="query !=null and query!='' ">
+								card_num like CONCAT('%',#{query},'%')
+						</if>
+						<if test="grade !=null and grade !=0 ">
+								and grade=#{grade}
+						</if>
+				</where>
+		</select>
+		<insert id="addMemberCard" parameterType="com.club.model.MemberCard" useGeneratedKeys="true" keyProperty="id">
+				insert into member_card
+				(
+				<if test="grade !=0 ">
+						grade,
+				</if>
+				<if test="userId !=0 ">
+						user_id,
+				</if>
+				<if test="cardNum !=null and cardNum !='' ">
+						card_num,
+				</if>
+				<if test="price !=null and price !='' ">
+						price,
+				</if>
+				<if test="point !=null and point !='' ">
+						point,
+				</if>
+				<if test="discount !=null and discount !='' ">
+						discount
+				</if>
+				)
+				values(
+				<if test="grade !=0 ">
+						#{grade},
+				</if>
+				<if test="userId !=0 ">
+						#{userId},
+				</if>
+				<if test="cardNum !=null and cardNum !='' ">
+						#{cardNum},
+				</if>
+				<if test="price !=null and price !='' ">
+						#{price},
+				</if>
+				<if test="point !=null and point !='' ">
+						#{point},
+				</if>
+				<if test="discount !=null and discount !='' ">
+						#{discount}
+				</if>
+				)
+		</insert>
+
+		<select id="getMemberCardByUserId" resultType="com.club.model.MemberCard">
+				SELECT
+				id,
+				member_card.card_num as cardNum,
+				member_card.card_name as
+				cardName,
+				member_card.grade,
+				member_card.balance,
+				member_card.point_balance as pointBalance,
+				member_card.point,
+				member_card.discount
+				FROM
+				member_card
+				WHERE
+				member_card.user_id = #{userId}
+		</select>
+		<select id="getMemCardByMemCardId" resultType="com.club.model.MemberCard">
+				SELECT
+				member_card.id,
+				member_card.price,
+				member_card.card_num as
+				cardNum,
+				member_card.card_name as cardName,
+				member_card.grade,
+				member_card.balance,
+				member_card.point_balance as
+				pointBalance,
+				member_card.point,
+				member_card.discount,
+				`name`,
+				mobile
+				FROM
+				member_card
+				LEFT JOIN `user` ON `user`.id =
+				member_card.user_id
+				WHERE
+				member_card.id = #{id}
+		</select>
+		<update id="updateMemberCard" parameterType="com.club.model.MemberCard">
+				UPDATE member_card
+				<trim prefix="set" suffixOverrides=",">
+						<if test="price !=null and price!='' ">price=#{price},</if>
+						<if test="point !=null and point !='' ">point=#{point},</if>
+						<if test="discount !=null and discount !='' ">discount=#{discount},</if>
+						<if test="grade !=0 ">grade=#{grade},</if>
+						<if test="balance !=null and balance !='' ">balance=#{balance},</if>
+						<if test="pointBalance !=null and pointBalance !='' ">point_balance=#{pointBalance},</if>
+				</trim>
+				WHERE id=#{id}
+		</update>
+
+		<update id="minusMemberCardPoint" parameterType="com.club.model.MemberCard">
+				UPDATE member_card SET point_balance=#{balan}
+				WHERE id=#{id}
+		</update>
+		<insert id="insertMemberCardIncome" parameterType="com.club.model.MemberCardIncome">
+				insert into member_card_income
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+						<if test="charge !=null ">
+								charge,
+						</if>
+						<if test="createDate !=null ">
+								create_date,
+						</if>
+						<if test="memberCardId !=0 ">
+								member_card_id,
+						</if>
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+						<if test="charge !=null ">
+								#{charge},
+						</if>
+						<if test="createDate !=null ">
+								#{createDate},
+						</if>
+						<if test="memberCardId !=0 ">
+								#{memberCardId},
+						</if>
+				</trim>
+		</insert>
 </mapper>

@@ -34,4 +34,8 @@ public interface OrderMapper {
 
 	public List<ExpenditureDetails> getExpenditureDetails();
 
+	public List<OrderRes> getOrderListByHomeId(@Param("roomId")Integer roomId);
+
+	public OrderRes getOrderByOrderId(@Param("orderId")Integer orderId);
+
 }

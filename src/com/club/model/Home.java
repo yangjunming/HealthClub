@@ -15,6 +15,15 @@ public class Home {
 	private int homeNum;
 	private int size;
 	private BigDecimal charge;
+	private int orderId;
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 
 	public BigDecimal getCharge() {
 		return charge;

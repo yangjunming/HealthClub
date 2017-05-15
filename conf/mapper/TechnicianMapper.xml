@@ -40,9 +40,56 @@
 				charge
 				FROM
 				technician
-				LEFT JOIN `user` ON `user`.id = technician.user_id
+				LEFT JOIN
+				`user` ON `user`.id = technician.user_id
 				WHERE
 				technician. STATUS = 4 AND `user`.`status` = '1'
-			  AND grade = #{grade}
+				AND grade = #{grade}
+		</select>
+		<select id="getTechnician" resultType="com.club.model.TechnicianDetailRes">
+				SELECT
+				technician.id,
+				NAME,
+				mobile,
+				charge
+				FROM
+				technician
+				LEFT JOIN `user` ON `user`.id = technician.user_id
+				WHERE
+				technician. STATUS = 4
+				AND `user`.`status` = '1'
+				AND grade = #{grade}
+				AND technician.id NOT in (
+				SELECT technician_id FROM
+				t_order
+				WHERE
+				order_status = 1
+				)
+		</select>
+		<select id="getTechnicianHasAppointment" resultType="com.club.model.Appointment">
+				SELECT
+				id,
+				technician_id as technicianId,
+				room_id as roomId,
+				DATE_FORMAT(
+				start_time,
+				'%Y-%m-%d %H:%i:%s'
+				) AS startTime,
+				DATE_FORMAT(
+				end_time,
+				'%Y-%m-%d %H:%i:%s'
+				) AS endTime,
+				`status`
+				FROM
+				t_appointment
+				WHERE
+				`status` =1
+				<if test="roomId !=0 ">
+						AND room_id = #{roomId}
+				</if>
+				<if test="technicianId !=0 ">
+						AND technician_id = #{technicianId}
+				</if>
+				ORDER BY start_time
 		</select>
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.club.model.Appointment;
 import com.club.model.Home;
 public interface HomeMapper {
 
@@ -28,5 +29,11 @@ public interface HomeMapper {
 	public int updateHomeToStart(Home home);
 
 	public int updateHomeToEnd(Home home);
+
+	public int insertAppointment(Appointment appointment);
+
+	public int updateAppointment(Appointment appointment);
+
+	public int updateAppointmentByOrderId(@Param("orderId")int orderId);
 
 }

@@ -2,43 +2,338 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.club.mapper.OrderMapper">
+		<insert id="insert" parameterType="com.club.model.Order">
+				insert into t_order
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+						<if test="roomId !=0 ">
+								room_id,
+						</if>
+						<if test="technicianId !=0 ">
+								technician_id,
+						</if>
+						<if test="startTime !=null ">
+								start_time,
+						</if>
+						<if test="endTime !=null ">
+								end_time,
+						</if>
+						<if test="isReservation !=0 ">
+								is_reservation,
+						</if>
+						<if test="userId !=0 ">
+								user_id,
+						</if>
+						<if test="resTime !=null ">
+								res_time,
+						</if>
+						<if test="resStarttime !=null and resStarttime !='' ">
+								res_starttime,
+						</if>
+						<if test="resEndtime !=null and resEndtime !='' ">
+								res_endtime,
+						</if>
+						<if test="orderStatus !=0 ">
+								order_status,
+						</if>
+						<if test="salesVolume !=null and salesVolume !='' ">
+								sales_volume,
+						</if>
+						<if test="isSpa !=0 ">
+								is_spa,
+						</if>
+						<if test="isMass !=0 ">
+								is_mass,
+						</if>
+						<if test="isCup !=0 ">
+								is_cup,
+						</if>
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+						<if test="roomId !=0 ">
+								#{roomId},
+						</if>
+						<if test="technicianId !=0 ">
+								#{technicianId},
+						</if>
+						<if test="startTime !=null ">
+								#{startTime},
+						</if>
+						<if test="endTime !=null ">
+								end_time,
+						</if>
+						<if test="isReservation !=0 ">
+								#{isReservation},
+						</if>
+						<if test="userId !=0 ">
+								#{userId},
+						</if>
+						<if test="resTime !=null ">
+								#{resTime},
+						</if>
+						<if test="resStarttime !=null and resStarttime !='' ">
+								#{resStarttime},
+						</if>
+						<if test="resEndtime !=null and resEndtime !='' ">
+								#{resEndtime},
+						</if>
+						<if test="orderStatus !=0 ">
+								#{orderStatus},
+						</if>
+						<if test="salesVolume !=null and salesVolume !='' ">
+								#{salesVolume},
+						</if>
+						<if test="isSpa !=0 ">
+								#{isSpa},
+						</if>
+						<if test="isMass !=0 ">
+								#{isMass},
+						</if>
+						<if test="isCup !=0 ">
+								#{isCup},
+						</if>
+				</trim>
+		</insert>
 		<select id="getOrderByTechnician" resultType="com.club.model.Order">
 				SELECT room_id as roomId,
 				res_starttime as startTime,
-				res_endtime as endTime,
+				res_endtime as
+				endTime,
 				is_spa as isSpa,
 				is_mass as isMass,
 				is_cup as isCup
-				FROM t_order WHERE technician_id=#{technicianId} and order_status = 0
+				FROM 
+				t_order 
+				LEFT JOIN technician ON technician.id=t_order.technician_id
+				WHERE technician.user_id=#{technicianId} and
+				order_status = 0
 				ORDER BY res_starttime ASC
 		</select>
-		
+
 		<select id="getSalaryByTechnician" resultType="com.club.model.TechnicianSalary">
-                SELECT sv.mons as month,sum(sv.sals) as salary
+				SELECT sv.mons as month,sum(sv.sals)*0.3 as salary
 				FROM
 				(SELECT
 				date_format(t_order.end_time,'%Y%m') as mons,
-				t_order.sales_volume as  sals
+				t_order.sales_volume
+				as sals
 				FROM
 				t_order
+				LEFT JOIN technician ON technician.id=t_order.technician_id
 				WHERE
 				t_order.order_status = 2 AND
-				t_order.technician_id =#{technicianId} ) as sv
+				technician.user_id =#{technicianId} ) as
+				sv
 				GROUP BY sv.mons
-        </select>
-        
-        <select id="getPerformByTechnician" resultType="com.club.model.TechnicianPerform">
-                SELECT
-				date_format(t_order.end_time,'%Y%m%d') as day,
-				t_order.spa_amount as spaAmount,
-				t_order.mass_amout as massAmount,
-				t_order.cup_amount as cupAmount,
-				t_order.sales_volume as salesVolume
+		</select>
+
+		<select id="getPerformByTechnician" resultType="com.club.model.TechnicianPerform">
+				SELECT
+				date_format(t_order.end_time, '%Y%m%d') AS DAY,
+				t_order.spa_amount AS spaAmount,
+				t_order.mass_amount AS massAmount,
+				t_order.cup_amount AS cupAmount,
+				t_order.sales_volume AS salesVolume
+				FROM
+				t_order
+				LEFT JOIN technician ON technician.id=t_order.technician_id
+				WHERE
+				technician.user_id = #{technicianId} AND
+				t_order.order_status = 2
+				ORDER BY
+				t_order.end_time ASC
+		</select>
+		<select id="getOrderByHomeId" resultType="com.club.model.OrderRes">
+				SELECT
+				t_order.id,
+				room_id AS roomId,
+				t_order.technician_id AS
+				technicianId,
+				teuser. NAME AS technicianName,
+				t_order.user_id AS userId,
+				DATE_FORMAT(
+				res_starttime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS startTime,
+				DATE_FORMAT(
+				res_endtime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS endTime,
+				is_spa AS isSpa,
+				is_mass AS isMass,
+				is_cup AS
+				isCup,
+				size,
+				home_num AS homeNum,
+				reuser.mobile,
+				reuser.`name`,
+				reuser.type,
+				technician.spa_charge AS spaCharge,
+				technician.mass_charge AS massCharge,
+				technician.cup_charge AS cupCharge,
+				t_home.charge as homeCharge
+				FROM
+				t_order
+				LEFT
+				JOIN t_home ON t_home.id =
+				t_order.room_id
+				LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
+				LEFT JOIN
+				technician ON technician.id =
+				t_order.technician_id
+				LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
+				WHERE
+				room_id=#{roomId}
+				AND
+				t_order.is_end = 0
+		</select>
+		<update id="updateOrder" parameterType="com.club.model.Order">
+				UPDATE t_order
+				<trim prefix="set" suffixOverrides=",">
+						<if test="roomId !=0 ">room_id=#{roomId},</if>
+						<if test="technicianId !=0 ">technician_id=#{technicianId},</if>
+						<if test="startTime !=null ">start_time=#{startTime},</if>
+						<if test="endTime !=null ">end_time=#{endTime},</if>
+						<if test="isEnd !=0 ">is_end=#{isEnd},</if>
+						<if test="isReservation !=0 ">is_reservation=#{isReservation},</if>
+						<if test="userId !=0 ">user_id=#{userId},</if>
+						<if test="resTime !=null ">res_time=#{resTime},</if>
+						<if test="resStarttime !=null ">res_starttime=#{resStarttime},</if>
+						<if test="resEndtime !=null ">res_endtime=#{resEndtime},</if>
+						<if test="orderStatus !=0 ">order_status=#{orderStatus},</if>
+						<if test="nodiscountSalesVolume !=null and nodiscountSalesVolume !='' ">nodiscount_sales_volume=#{nodiscountSalesVolume},</if>
+						<if test="salesVolume !=null and salesVolume !='' ">sales_volume=#{salesVolume},</if>
+						<if test="isSpa !=0 ">is_spa=#{isSpa},</if>
+						<if test="spaAmount !=null and spaAmount !='' ">spa_amount=#{spaAmount},</if>
+						<if test="isMass !=0 ">is_mass=#{isMass},</if>
+						<if test="massAmount !=null and massAmount !='' ">mass_amount=#{massAmount},</if>
+						<if test="isCup !=0 ">is_cup=#{isCup},</if>
+						<if test="cupAmount !=null and cupAmount !='' ">cup_amount=#{cupAmount},</if>
+						<if test="homeCharge !=null and homeCharge !='' ">home_charge=#{homeCharge},</if>
+				</trim>
+				WHERE id=#{id}
+		</update>
+		<select id="getAllPerform" resultType="com.club.model.TechnicianPerform">
+				SELECT tb.dt as day,
+				`user`.`name` as name,
+				tb.spa as spaAmount,
+				tb.mas as
+				massAmount,
+				tb.cup as cupAmount,
+				tb.vol as salesVolume,
+				tb.home AS homeAmount
+				From
+				(SELECT
+				DATE_FORMAT(t_order.end_time,"%Y%m%d") as dt,
+				t_order.technician_id as id,
+				sum(t_order.spa_amount) as spa,
+				sum(t_order.mass_amount) as mas,
+				sum(t_order.cup_amount)
+				as cup,
+				sum(t_order.sales_volume) as vol,
+				sum(t_order.home_charge) AS home
 				FROM
 				t_order
 				WHERE
-				t_order.technician_id =#{technicianId} AND
 				t_order.order_status = 2
-				order by t_order.end_time ASC
-        </select>
+				GROUP BY
+				DATE_FORMAT(t_order.end_time,"%Y%m%d"),t_order.technician_id
+				ORDER BY
+				DATE_FORMAT(t_order.end_time,"%Y%m%d") ASC)
+				tb,user
+				WHERE tb.id=`user`.id
+				ORDER BY DAY DESC
+		</select>
+
+		<select id="getIncomeAndExpense" resultType="com.club.model.IncomeAndExpense">
+				SELECT
+				DATE_FORMAT(t_order.end_time,"%Y%m") as month,
+				sum(t_order.sales_volume) as income,
+				sum(t_order.sales_volume)*0.3 as expense,
+				sum(t_order.sales_volume)-sum(t_order.sales_volume)*0.3 as profit
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2
+				GROUP BY
+				DATE_FORMAT(t_order.end_time,"%Y%m")
+		</select>
+		<select id="getAchievementOfMonth" resultType="com.club.model.AchievementOfMonth">
+				SELECT sv.mons as month,
+				sum(sv.cupAmount) AS cupAmount,
+				sum(sv.spaAmount) AS spaAmount,
+				sum(sv.massAmount) AS massAmount,
+				sum(sv.homeAmount) AS homeAmount
+				FROM
+				(SELECT
+				date_format(t_order.end_time,'%m') as mons,
+				t_order.sales_volume
+				as sals,
+				t_order.cup_amount AS cupAmount,
+				t_order.spa_amount AS spaAmount,
+				t_order.mass_amount AS massAmount,
+				t_order.home_charge AS homeAmount
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2
+				AND t_order.end_time LIKE CONCAT(date_format(NOW(),'%Y'),"%")) as
+				sv
+				GROUP BY
+				sv.mons,sv.cupAmount,sv.spaAmount,sv.massAmount,sv.homeAmount
+		</select>
+		<select id="getExpenditureDetails" resultType="com.club.model.ExpenditureDetails">
+				SELECT
+				sv.mons AS MONTH,
+				sum(sv.cupAmount) AS cupAmount,
+				sum(sv.spaAmount) AS spaAmount,
+				sum(sv.massAmount) AS massAmount,
+				sum(sv.salesVolume) AS salesVolume,
+				sum(sv.salesVolume) * 0.3 AS wages,
+				sum(sv.nodiscountSalesVolume) AS nodiscountSalesVolume,
+				sum(sv.homeAmount) AS
+				homeAmount,
+				sum(sv.cardAmount) AS cardAmount,
+				sum(sv.salesVolume)* 0.7 +sum(sv.cardAmount) AS balance
+				FROM
+				(
+				SELECT
+				date_format(t_order.end_time, '%m') AS mons,
+				t_order.sales_volume AS sals,
+				t_order.cup_amount AS cupAmount,
+				t_order.spa_amount AS spaAmount,
+				t_order.mass_amount AS massAmount,
+				t_order.sales_volume AS salesVolume,
+				t_order.nodiscount_sales_volume AS nodiscountSalesVolume,
+				t_order.home_charge AS homeAmount,
+				0 AS cardAmount
+				FROM
+				t_order
+				WHERE
+				t_order.order_status = 2
+				AND t_order.end_time LIKE CONCAT(
+				date_format(NOW(), '%Y'),
+				"%"
+				)UNION
+				SELECT
+				date_format(member_card_income.create_date, '%m') AS mons,
+				0 AS sals,
+				0 AS cupAmount,
+				0 AS spaAmount,
+				0 AS massAmount,
+				0
+				AS salesVolume,
+				0 AS nodiscountSalesVolume,
+				0 AS homeAmount,
+				charge AS cardAmount
+				FROM
+				member_card_income
+				WHERE
+				member_card_income.create_date LIKE CONCAT(
+				date_format(NOW(), '%Y'),
+				"%"
+				)
+				) AS sv
+				GROUP BY
+				sv.mons
+		</select>
 </mapper>

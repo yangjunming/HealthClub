@@ -103,12 +103,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                       <h5><strong> 
             <button class="btn-success btn" type="submit">房间${id.id}</button>
             <c:if test="${id.isReservation== 1}">
-            <a class="btn-success btn" href="<%=basePath%>views/home/reservation-order.jsp?id=${id.id}">已预约</a>
+            <a class="btn-success btn" href="<%=basePath%>views/home/reservation-order-list.jsp?id=${id.id}">已预约</a>
             </c:if>
-            <c:if test="${id.isReservation== 0  and id.hasUser!= 0}" >
-            <a class="btn-success btn" href="<%=basePath%>views/home/end-order.jsp?id=${id.id}">结单</a>
+            <c:if test="${id.orderId!= 0}" >
+            <a class="btn-success btn" href="<%=basePath%>views/home/end-order.jsp?id=${id.id}&orderId=${id.orderId}">结单</a>
             </c:if>
-            <c:if test="${id.isReservation== 0  and id.hasUser== 0}" >
+            <c:if test="${id.isReservation== 0  and id.orderId == 0}" >
             <a class="btn btn-primary" href="<%=basePath%>views/home/new-order.jsp?id=${id.id}">空闲</a>
             </c:if>
             </strong></h5>

@@ -38,12 +38,12 @@ public class OrderImpl implements OrderDao{
 	}
 
 	@Override
-	public boolean submitOrder(Order order) {
+	public int submitOrder(Order order) {
 		int result = orderMapper.insert(order);
 		if(result>0){
-			return true;
+			return order.getId();
 		}
-		return false;
+		return 0;
 	}
 
 	@Override
@@ -80,6 +80,16 @@ public class OrderImpl implements OrderDao{
 	@Override
 	public List<ExpenditureDetails> getExpenditureDetails() {
 		return orderMapper.getExpenditureDetails();
+	}
+
+	@Override
+	public List<OrderRes> getOrderListByHomeId(Integer roomId) {
+		return orderMapper.getOrderListByHomeId(roomId);
+	}
+
+	@Override
+	public OrderRes getOrderByOrderId(Integer orederId) {
+		return orderMapper.getOrderByOrderId(orederId);
 	}
 	
 

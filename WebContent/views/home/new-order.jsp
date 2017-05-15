@@ -182,7 +182,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		//加载房间
 			$.ajax({
 		    type: "get",
-		    url: "<%=basePath%>technician/getTechnicianByGrade?grade="+grade+"",
+		    url: "<%=basePath%>technician/getTechnician?grade="+grade+"",
 					data : {},
 					dataType : "json",
 					async:false,

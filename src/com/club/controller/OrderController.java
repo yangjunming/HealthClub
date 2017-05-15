@@ -17,6 +17,7 @@ import com.club.dao.MemberCardDao;
 import com.club.dao.OrderDao;
 import com.club.dao.UserDao;
 import com.club.model.AchievementOfMonth;
+import com.club.model.Appointment;
 import com.club.model.ExpenditureDetails;
 import com.club.model.Home;
 import com.club.model.MemberCard;
@@ -48,15 +49,22 @@ public class OrderController {
 	public boolean submitOrder(@RequestBody Order order) {
 		order.setResTime(new Date());
 		order.setIsReservation(1);
-		boolean insertOrder = orderDao.submitOrder(order);
+		int insertOrderId = orderDao.submitOrder(order);
 		Home home = new Home();
 		home.setId(order.getRoomId());
-		home.setIsReservation(1);
+		home.setIsReservation(0);
 		home.setResTime(order.getResStarttime());
 		home.setTechnicianId(order.getTechnicianId());
-		home.setHasUser(2);
+		home.setHasUser(0);
 		boolean updateHome = homeDao.updateByHomeId(home);
-		if (insertOrder && updateHome) {
+		if (insertOrderId > 0 && updateHome) {
+			Appointment appointment = new Appointment();
+			appointment.setRoomId(order.getRoomId());
+			appointment.setTechnicianId(order.getTechnicianId());
+			appointment.setStartTime(order.getResStarttime());
+			appointment.setEndTime(order.getResEndtime());
+			appointment.setOrderId(insertOrderId);
+			homeDao.insertAppointment(appointment);
 			return true;
 		}
 		return false;
@@ -80,13 +88,14 @@ public class OrderController {
 		}
 		order.setOrderStatus(1);
 		order.setStartTime(new Date());
-		boolean insertOrder = orderDao.submitOrder(order);
+		int insertOrderId = orderDao.submitOrder(order);
 		home.setId(order.getRoomId());
 		home.setStartTime(new Date());
 		home.setTechnicianId(order.getTechnicianId());
 		home.setHasUser(1);
+		home.setOrderId(insertOrderId);
 		boolean updateHome = homeDao.updateByHomeId(home);
-		if (insertOrder && updateHome) {
+		if (insertOrderId > 0 && updateHome) {
 			return true;
 		}
 		return false;
@@ -94,6 +103,7 @@ public class OrderController {
 
 	/**
 	 * 根据房间id获取订单
+	 * 
 	 * @param roomId
 	 * @return
 	 */
@@ -107,9 +117,43 @@ public class OrderController {
 		order = orderDao.getOrderByHomeId(roomId);
 		return order;
 	}
+	
+	/**
+	 * 根据订单id获取订单信息
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping("/getOrderByOrderId")
+	@ResponseBody
+	public OrderRes getOrderByOrderId(@RequestParam(required = false) Integer orederId) {
+		OrderRes order = new OrderRes();
+		if (null == orederId || orederId == 0) {
+			return order;
+		}
+		order = orderDao.getOrderByOrderId(orederId);
+		return order;
+	}
+	
+	/**
+	 * 根据房间id获取订单列表
+	 * 
+	 * @param roomId
+	 * @return
+	 */
+	@RequestMapping("/getOrderListByHomeId")
+	@ResponseBody
+	public List<OrderRes> getOrderListByHomeId(@RequestParam(required = false) Integer roomId) {
+		List<OrderRes> order = new ArrayList<>();
+		if (null == roomId || roomId == 0) {
+			return order;
+		}
+		order = orderDao.getOrderListByHomeId(roomId);
+		return order;
+	}
 
 	/**
 	 * 更新订单
+	 * 
 	 * @param order
 	 * @return
 	 */
@@ -123,6 +167,7 @@ public class OrderController {
 			order.setStartTime(new Date());
 			home.setId(order.getRoomId());
 			home.setIsReservation(0);
+			home.setOrderId(order.getId());
 			home.setHasUser(1);
 			updateHome = homeDao.updateHomeToStart(home);
 		} else {
@@ -134,7 +179,10 @@ public class OrderController {
 		}
 		updateOrder = orderDao.updateOrder(order);
 		if (updateOrder && updateHome) {
+			boolean result = homeDao.updateAppointmentByOrderId(order.getId());
+			if(result){
 			return true;
+			}
 		}
 		return false;
 	}
@@ -165,7 +213,7 @@ public class OrderController {
 		order.setNodiscountSalesVolume(orderEndDTO.getNodiscountSalesVolume());
 		order.setSalesVolume(orderEndDTO.getSalesVolume());
 		order.setHomeCharge(orderEndDTO.getHomeCharge());
-		//会员
+		// 会员
 		if (orderEndDTO.getMemCardId() != 0) {
 			MemberCard memberCard = memberCardDao.getMemberCardByUserId(orderEndDTO.getUserId());
 			MemberCard MemberCard = new MemberCard();
@@ -173,7 +221,7 @@ public class OrderController {
 			BigDecimal pointBalance = memberCard.getPointBalance();
 			pointBalance = pointBalance.add(orderEndDTO.getSalesVolume().multiply(memberCard.getPoint()));
 			MemberCard.setPointBalance(pointBalance);
-			//余额支付
+			// 余额支付
 			if (orderEndDTO.getFlag() == 1) {
 				BigDecimal balance = memberCard.getBalance();
 				balance = balance.subtract(orderEndDTO.getSalesVolume());
@@ -194,9 +242,10 @@ public class OrderController {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 查询三种服务各月数据明细
+	 * 
 	 * @param roomId
 	 * @return
 	 */
@@ -207,16 +256,44 @@ public class OrderController {
 		achievementOfMonth = orderDao.getAchievementOfMonth();
 		return achievementOfMonth;
 	}
+
 	/**
 	 * 查询收支明细
+	 * 
 	 * @return
 	 */
-	 @RequestMapping("/getExpenditureDetails")
-		@ResponseBody
-		public List<ExpenditureDetails> getExpenditureDetails() {
-			List<ExpenditureDetails> list = new ArrayList<>();
-			list = orderDao.getExpenditureDetails();
-			return list;
+	@RequestMapping("/getExpenditureDetails")
+	@ResponseBody
+	public List<ExpenditureDetails> getExpenditureDetails() {
+		List<ExpenditureDetails> list = new ArrayList<>();
+		list = orderDao.getExpenditureDetails();
+		return list;
+	}
+
+	/**
+	 * 取消订单
+	 * @param orderId
+	 * @param appointmentId
+	 * @return
+	 */
+	@RequestMapping("/cancelOrder")
+	@ResponseBody
+	public boolean cancelOrder(@RequestParam Integer orderId, @RequestParam Integer appointmentId) {
+		Order order = new Order();
+		order.setId(orderId);
+		order.setOrderStatus(3);
+		boolean updateOrder = orderDao.updateOrder(order);
+		if (updateOrder) {
+			Appointment appointment = new Appointment();
+			appointment.setId(appointmentId);
+			appointment.setStatus(2);
+			boolean result = homeDao.updateAppointment(appointment);
+			if (result) {
+				return true;
+			}
 		}
+		return false;
+
+	}
 
 }

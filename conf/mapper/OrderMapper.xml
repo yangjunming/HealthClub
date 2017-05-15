@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.club.mapper.OrderMapper">
-		<insert id="insert" parameterType="com.club.model.Order">
+		<insert id="insert" parameterType="com.club.model.Order" useGeneratedKeys="true" keyProperty="id">
 				insert into t_order
 				<trim prefix="(" suffix=")" suffixOverrides=",">
 						<if test="roomId !=0 ">
@@ -101,12 +101,14 @@
 				is_spa as isSpa,
 				is_mass as isMass,
 				is_cup as isCup
-				FROM 
-				t_order 
-				LEFT JOIN technician ON technician.id=t_order.technician_id
+				FROM
+				t_order
+				LEFT JOIN technician ON
+				technician.id=t_order.technician_id
 				WHERE technician.user_id=#{technicianId} and
 				order_status = 0
-				ORDER BY res_starttime ASC
+				ORDER BY
+				res_starttime ASC
 		</select>
 
 		<select id="getSalaryByTechnician" resultType="com.club.model.TechnicianSalary">
@@ -118,12 +120,14 @@
 				as sals
 				FROM
 				t_order
-				LEFT JOIN technician ON technician.id=t_order.technician_id
+				LEFT JOIN technician ON
+				technician.id=t_order.technician_id
 				WHERE
 				t_order.order_status = 2 AND
 				technician.user_id =#{technicianId} ) as
 				sv
-				GROUP BY sv.mons
+				GROUP
+				BY sv.mons
 		</select>
 
 		<select id="getPerformByTechnician" resultType="com.club.model.TechnicianPerform">
@@ -172,10 +176,8 @@
 				technician.cup_charge AS cupCharge,
 				t_home.charge as homeCharge
 				FROM
-				t_order
-				LEFT
-				JOIN t_home ON t_home.id =
-				t_order.room_id
+				t_home
+				LEFT JOIN t_order ON t_home.order_id = t_order.id
 				LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
 				LEFT JOIN
 				technician ON technician.id =
@@ -335,5 +337,77 @@
 				) AS sv
 				GROUP BY
 				sv.mons
+		</select>
+		<select id="getOrderListByHomeId" resultType="com.club.model.OrderRes">
+				SELECT
+				t_order.id,
+				t_order.room_id AS roomId,
+				t_order.user_id AS
+				userId,
+				DATE_FORMAT(
+				res_starttime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS startTime,
+				DATE_FORMAT(
+				res_endtime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS
+				endTime,
+				reuser.mobile,
+				reuser.`name`,
+				t_appointment.id AS appointmentId
+				FROM
+				t_order
+				LEFT JOIN `user` AS reuser ON
+				reuser.id = t_order.user_id
+				LEFT JOIN t_appointment ON t_appointment.order_id = t_order.id
+				WHERE
+				t_order.room_id
+				=#{roomId}
+				AND t_order.is_reservation = 1
+				AND order_status =0
+				AND t_appointment.`status`=1
+		</select>
+		<select id="getOrderByOrderId" resultType="com.club.model.OrderRes">
+				SELECT
+				t_order.id,
+				room_id AS roomId,
+				t_order.technician_id AS
+				technicianId,
+				teuser. NAME AS technicianName,
+				t_order.user_id AS userId,
+				DATE_FORMAT(
+				res_starttime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS startTime,
+				DATE_FORMAT(
+				res_endtime,
+				'%Y-%m-%d %H:%i:%s'
+				) AS endTime,
+				is_spa AS isSpa,
+				is_mass AS isMass,
+				is_cup AS
+				isCup,
+				size,
+				home_num AS homeNum,
+				reuser.mobile,
+				reuser.`name`,
+				reuser.type,
+				technician.spa_charge AS spaCharge,
+				technician.mass_charge AS massCharge,
+				technician.cup_charge AS cupCharge,
+				t_home.charge as homeCharge
+				FROM
+				t_order
+				LEFT
+				JOIN t_home ON t_home.id =
+				t_order.room_id
+				LEFT JOIN `user` AS reuser ON reuser.id = t_order.user_id
+				LEFT JOIN
+				technician ON technician.id =
+				t_order.technician_id
+				LEFT JOIN `user` AS teuser ON teuser.id = technician.user_id
+				WHERE
+				t_order.id=#{orderId}
 		</select>
 </mapper>
