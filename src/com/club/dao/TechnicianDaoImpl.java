@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.club.mapper.TechnicianMapper;
+import com.club.model.Appointment;
 import com.club.model.Technician;
 import com.club.model.TechnicianDetailRes;
 
@@ -26,6 +27,16 @@ public class TechnicianDaoImpl implements TechnicianDao {
 	@Override
 	public List<TechnicianDetailRes> getTechnicianByGrade(Integer grade) {
 		return technicianMapper.getTechnicianByGrade(grade);
+	}
+
+	@Override
+	public List<Appointment> getTechnicianHasAppointment(Integer technicianId,Integer roomId) {
+		return technicianMapper.getTechnicianHasAppointment(technicianId,roomId);
+	}
+
+	@Override
+	public List<TechnicianDetailRes> getTechnician(Integer grade) {
+		return technicianMapper.getTechnician(grade);
 	}
 
 }

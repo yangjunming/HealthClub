@@ -17,9 +17,12 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
+
 </script>
+
 <!-- Bootstrap Core CSS -->
 <link href="<%=basePath%>resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
@@ -34,7 +37,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!---//webfonts--->
 <!-- Nav CSS -->
 <link href="<%=basePath%>resources/css/custom.css" rel="stylesheet">
-<link href="<%=basePath%>resources/css/select.css" rel='stylesheet' type='text/css' />
 <!-- Metis Menu Plugin JavaScript -->
 <script src="<%=basePath%>resources/js/metisMenu.min.js"></script>
 <script src="<%=basePath%>resources/js/custom.js"></script>
@@ -42,6 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<%=basePath%>resources/js/d3.v3.js"></script>
 <script src="<%=basePath%>resources/js/rickshaw.js"></script>
 </head>
+<body>
 		<div id="wrapper">
      <!-- Navigation -->
               <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -99,170 +102,103 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </nav>
 		</div>
 		<div id="page-wrapper">
-				<div class="row" style="padding-top: 40px">
-						<div class="col-md-5"></div>
-						<div class="col-md-3">
-								<h3>欢迎使用养生会馆服务</h3>
-						</div>
-				</div>
-				<div class="form-group" style="padding-top: 40px">
-						<div class="row">
-								<div class="col-md-4"></div>
-								<div class="col-md-4">
-										<label>房间号：</label> <input readonly="readonly" id="homeNum" value="${param.id}">
-								</div>
-								<div class="clearfix"></div>
-						</div>
-				</div>
-				<div class="form-group">
-						<div class="row">
-								<div class="col-md-4"></div>
-								<div class="col-md-4">
-										<label>技师选择：</label>
-										 <select id="grade"
-												style="width: 120px; height: 30px; padding-left: 30px; font-size: 0.85em"
-												onchange="javascript:showTechnician();">
-												<option value="1">初级技师</option>
-												<option value="2">中级技师</option>
-												<option value="3">高级技师</option>
-										</select> 
-										<select id="technicianId" style="width: 150px; height: 30px; padding-left: 30px; font-size: 0.85em">
-										</select>
-								</div>
-								<div class="clearfix"></div>
-						</div>
-				</div>
-				<div class="form-group">
-						<div class="row">
-								<div class="col-md-4"></div>
-								<div class="col-md-4">
-										<label>服务项目：</label><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"
-												name="chkItem" id="spa" value="1">SPA&nbsp;&nbsp; <input type="checkbox" name="chkItem" id="mass"
-												value="2">按摩&nbsp;&nbsp; <input type="checkbox" name="chkItem" id="cup" value="3">拔罐
-								</div>
-								<div class="clearfix"></div>
-						</div>
-				</div>
-				<div class="form-group">
-						<div class="row">
-								<div class="col-md-4"></div>
-								<div class="col-md-4">
-										<label>客户手机号码：</label> <input type="text" class="form-control1" id="mobile" value=""
-												onblur="javascript:mobiles(this)">
-								</div>
-								<div class="clearfix"></div>
-						</div>
-				</div>
-				<div class="form-group">
-						<div class="row">
-								<div class="col-md-4"></div>
-								<div class="col-md-4">
-										<label>客户姓名：</label> <input type="text" class="form-control1" id="userName" value="">
-								</div>
-								<div class="clearfix"></div>
-						</div>
-				</div>
-				<div class="form-group">
-						<div class="row">
-								<div class="col-md-7"></div>
-								<a class="btn btn-primary" href="<%=basePath%>homebase" >返回</a>
-								<a class="btn btn-primary" href="javascript:save();">提交订单</a>
-								<div class="clearfix"></div>
-						</div>
-				</div>
+		<input id="homeId" value="${param.id}" hidden="">
+         <div class="panel-body1">
+         <div class="row">
+         <div class="navbar-right">
+         <div class="col_md_2">
+              <a class="btn btn-primary" href="<%=basePath%>homebase" style="margin-left: 70px">返回</a>
+          </div>
+          <div>
+          </div>
+         </div>
+         <div class="bs-example4" data-example-id="contextual-table">
+   <table class="table">
+     <thead>
+        <tr>
+          <th>预约人姓名</th>
+          <th>预约人手机号</th>
+          <th>预约开始时间</th>
+          <th>预约结束时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="orderTable">
+      </tbody>
+    </table>
+    </div>
+    </div>
+       </div>
+   </div>
+		</div>
 		</div>
 		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 		$(function (){
-			showTechnician();
+			getOrderList();
 		})
-		function showTechnician(){
-			var grade = $("#grade").val();
-			$("#technicianId option").remove();
-		//加载房间
+		function getOrderList(){
+			var homeId = $("#homeId").val();
 			$.ajax({
 		    type: "get",
-		    url: "<%=basePath%>technician/getTechnician?grade="+grade+"",
+		    url: "<%=basePath%>order/getOrderListByHomeId?roomId="+homeId+"",
 					data : {},
 					dataType : "json",
 					async:false,
 					success : function(data) {
-						console.log(data);
-						if(data.length==0){
-							$("#technicianId").append("<option value='0'>无技师可选择</option>");
-						}else{
-						for (var i = 0; i < data.length; i++) {
-							$("#technicianId").append("<option value='"+data[i].id+"'>" + data[i].name + "</option>");
-						}
-						}
-					}
-				})
-		}
-		
-		function save(){
-			var isSpa =0;
-			var isMass = 0;
-			var isCup = 0;
-			$('input:checkbox[name=chkItem]').each(function() {
-				if($(this).context.checked){
-					if($(this).val()==1){
-						isSpa = 1;
-					}else if($(this).val()==2){
-						isMass =1;
-					}else if($(this).val()==3){
-						isCup =1;
-					}
-				}
-			});
-				var datas = {
-            "technicianId" : $("#technicianId").val(),
-            "roomId" : $("#homeNum").val(),
-            "isSpa" : isSpa,
-            "isMass" : isMass,
-            "isCup" : isCup,
-             "mobile":$("#mobile").val()
-        }
-    $.ajax({
-    type: "post",
-    url: "<%=basePath%>order/submitOrderByManager",
-    contentType : "application/json;charset=utf-8",
-    data : JSON.stringify(datas),
-        dataType : "json",
-        async : false,
-        success : function(data) {
-            if(data){
-                alert("开单成功");
-                window.location.href="<%=basePath%>homebase";
-            }
-        }
-    });
-		}
-		
-		function mobiles(val){
-    	var mobile = val.value;
-    	if(mobile!=null && mobile !=''){
-    	$.ajax({
-            type: "get",
-            url: "<%=basePath%>getUserByMobile",
-						data : {
-							"mobile" : mobile
-						},
-						dataType : "json",
-						success : function(data) {
-							if (data != null) {
-								$("#userName").val(data.name);
-								if (data.name != '') {
-									$("#userName").attr("disabled", "disabled");
-								} else {
-									$("#userName").removeAttr("disabled");
-								}
-							} else {
-								$("#userName").val("");
+						$("#orderTable tr").remove();
+						if(data.length>0){
+							var tr = "";
+							for (var i = 0; i < data.length; i++) {
+								tr += "<tr>";
+								tr += "<td>" + data[i].name + "</td>";
+								tr += "<td>" + data[i].mobile + "</td>";
+								tr += "<td>" + initTableTime(data[i].startTime) + "</td>";
+								tr += "<td>" + initTableTime(data[i].endTime) + "</td>";
+								tr += "<td><a class='remove btn btn-primary input-xs' href=javascript:cancel("+ data[i].id+","+data[i].appointmentId+")>取消</a>&nbsp&nbsp"
+										+"<a class='remove btn btn-primary input-xs' href=${pageContext.request.contextPath}/views/home/reservation-order.jsp?id=" + data[i].id + "&homeId="+homeId+">详情</a></td>";
+								tr += "</tr>";
 							}
+							$("#orderTable").append(tr);
 						}
-					});
-				}
-			}
+					}
+			})
+		}
+		function cancel(orderId,appointmentId){
+			$.ajax({
+		    type: "get",
+		    url: "<%=basePath%>order/cancelOrder?orderId="+orderId+"&appointmentId="+appointmentId+"",
+					data : {},
+					dataType : "json",
+					async:false,
+					success : function(data) {
+						if(data){
+							getOrderList();
+						}
+					}
+			})
+			
+		}
+		initTableTime = function(longTime) {
+	    if (longTime === null || arguments.length === 0) {
+		return ""
+	    }
+	    if (typeof longTime !== "number") {
+		var longTime = parseInt(longTime.trim())
+	    }
+	    var _time = new Date(longTime)
+	    var year = _time.getFullYear().toString()
+	    var month = (_time.getMonth() + 1).toString().length === 1 ? "0" + (_time.getMonth() + 1) : (_time.getMonth() + 1)
+		    .toString()
+	    var day = _time.getDate().toString().length === 1 ? "0" + _time.getDate() : _time.getDate().toString()
+	    var hour = _time.getHours().toString().length === 1 ? "0" + _time.getHours() : _time.getHours().toString()
+	    var minute = _time.getMinutes().toString().length === 1 ? "0" + _time.getMinutes() : _time.getMinutes().toString()
+	    var second = _time.getSeconds().toString().length === 1 ? "0" + _time.getSeconds() : _time.getSeconds().toString()
+	    var list = []
+	    list.splice(0, 0, year, '-', month, '-', day, ' ', hour, ':', minute, ':', second)
+
+	    return list.join('')
+	}
 		</script>
 </body>
 </html>

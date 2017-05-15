@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.club.dao.OrderDao;
 import com.club.dao.TechnicianDao;
+import com.club.model.Appointment;
 import com.club.model.Order;
 import com.club.model.TechnicianDetailRes;
 import com.club.model.TechnicianPerform;
@@ -60,6 +61,14 @@ public class TechnicianController {
 		return technicianList;
 	}
 	
+	@RequestMapping("/getTechnician")
+	@ResponseBody
+	public List<TechnicianDetailRes> getTechnician(@RequestParam(required = false) Integer grade) {
+		List<TechnicianDetailRes> technicianList = new ArrayList<>();
+		technicianList = technicianDao.getTechnician(grade);
+		return technicianList;
+	}
+	
 	@RequestMapping("/all_performance")
 	public ModelAndView performanceModelAndView() {
 		List<TechnicianPerform> performs = orderDao.getAllPerform();
@@ -75,6 +84,16 @@ public class TechnicianController {
 		mv.addObject("incomes", incomes);
 		mv.setViewName("manager/income-expense");
 		return mv;
+	}
+	
+	@RequestMapping("/getTechnicianHasAppointment")
+	@ResponseBody
+	public List<Appointment> getTechnicianHasAppointment(@RequestParam Integer technicianId,@RequestParam Integer roomId) {
+		if(technicianId==0 && roomId == 0){
+			return new ArrayList<>();
+		}
+		List<Appointment> appointmentList = technicianDao.getTechnicianHasAppointment(technicianId,roomId);
+		return appointmentList;
 	}
 	
 }

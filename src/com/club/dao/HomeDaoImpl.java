@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.club.mapper.HomeMapper;
+import com.club.model.Appointment;
 import com.club.model.Home;
 @Component
 public class HomeDaoImpl implements HomeDao{
@@ -97,6 +98,33 @@ public class HomeDaoImpl implements HomeDao{
 	@Override
 	public boolean updateHome(Home home) {
 		int result = homeMapper.updateByHomeId(home);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean insertAppointment(Appointment appointment) {
+		int result = homeMapper.insertAppointment(appointment);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateAppointment(Appointment appointment) {
+		int result = homeMapper.updateAppointment(appointment);
+		if(result>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateAppointmentByOrderId(int orderId) {
+		int result = homeMapper.updateAppointmentByOrderId(orderId);
 		if(result>0){
 			return true;
 		}

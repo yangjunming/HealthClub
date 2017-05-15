@@ -2,6 +2,7 @@ package com.club.dao;
 
 import java.util.List;
 
+import com.club.model.Appointment;
 import com.club.model.Home;
 
 public interface HomeDao {
@@ -29,5 +30,11 @@ public interface HomeDao {
 	public boolean updateHomeToEnd(Home home);
 
 	public boolean updateHome(Home home);
+
+	public boolean insertAppointment(Appointment appointment);
+
+	public boolean updateAppointment(Appointment appointment);
+
+	public boolean updateAppointmentByOrderId(int id);
 	
 }

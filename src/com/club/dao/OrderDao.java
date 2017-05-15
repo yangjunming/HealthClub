@@ -19,7 +19,7 @@ public interface OrderDao {
 	
 	public List<TechnicianPerform> getPerformByTechnician(int technicianId);
 
-	public boolean submitOrder(Order order);
+	public int submitOrder(Order order);
 
 	public OrderRes getOrderByHomeId(Integer roomId);
 
@@ -32,6 +32,10 @@ public interface OrderDao {
 	public List<AchievementOfMonth> getAchievementOfMonth();
 
 	public List<ExpenditureDetails> getExpenditureDetails();
+
+	public List<OrderRes> getOrderListByHomeId(Integer roomId);
+
+	public OrderRes getOrderByOrderId(Integer orederId);
 
 
 	

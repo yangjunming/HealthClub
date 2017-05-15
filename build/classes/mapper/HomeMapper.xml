@@ -5,20 +5,23 @@
 		<update id="updateByHomeId" parameterType="com.club.model.Home">
 				UPDATE t_home
 				<trim prefix="set" suffixOverrides=",">
-						<if test="startTime !=null and startTime !='' ">start_time=#{startTime},</if>
+						<if test="startTime !=null ">start_time=#{startTime},</if>
 						<if test="isEnd !=0 ">is_end=#{isEnd},</if>
 						<if test="isReservation !=0 ">is_reservation=#{isReservation},</if>
 						<if test="resTime !=null and resTime !='' ">res_time=#{resTime},</if>
 						<if test="userId !=0 ">user_id=#{userId},</if>
 						<if test="hasUser !=0 ">has_user=#{hasUser},</if>
+						<if test="charge !=null and charge !='' ">charge=#{charge},</if>
 						<if test="technicianId !=0 ">technician_id=#{technicianId},</if>
 						<if test="homeNum !=0 ">home_num=#{homeNum},</if>
 						<if test="size !=0 ">size=#{size},</if>
+						<if test="orderId !=0 ">order_id=#{orderId},</if>
 				</trim>
 				WHERE id=#{id}
 		</update>
 		<select id="gethomeList" resultType="com.club.model.Home">
 				SELECT id,start_time as startTime,
+				order_id as orderId,
 				is_end as isEnd,
 				is_reservation as
 				isReservation,
@@ -27,7 +30,8 @@
 				has_user as hasUser,
 				technician_id as technicianId,
 				home_num as
-				homeNum
+				homeNum,
+				size
 				FROM t_home
 		</select>
 		<select id="getHomeById" resultType="com.club.model.Home">
@@ -39,6 +43,8 @@
 				user_id as userId,
 				has_user as hasUser,
 				technician_id as technicianId,
+				size,
+				charge,
 				home_num as
 				homeNum
 				FROM t_home WHERE id=#{homeId}
@@ -79,4 +85,82 @@
 				homeNum
 				FROM t_home WHERE user_id=#{userId}
 		</select>
+		<select id="getHomeBySize" resultType="com.club.model.Home">
+				SELECT id,start_time as startTime,
+				is_end as isEnd,
+				is_reservation as
+				isReservation,
+				res_time as resTime,
+				user_id as userId,
+				has_user as hasUser,
+				technician_id as technicianId,
+				home_num as
+				homeNum
+				FROM t_home WHERE size=#{homeSize}
+		</select>
+		<update id="updateHomeByOrder" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set
+				technician_id=#{technicianId},is_reservation=#{isReservation},user_id=0,has_user=0
+				WHERE id=#{id}
+		</update>
+		<update id="updateHomeToStart" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set
+				is_reservation=#{isReservation},has_user=#{hasUser},order_id=#{orderId}
+				WHERE id=#{id}
+		</update>
+		<update id="updateHomeToEnd" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set
+				is_end=#{isEnd},has_user=#{hasUser},technician_id=#{technicianId},user_id=#{userId},order_id=0
+				WHERE id=#{id}
+		</update>
+		<insert id="insertAppointment" parameterType="com.club.model.Appointment">
+				insert into t_appointment
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+						<if test="roomId !=0 ">
+								room_id,
+						</if>
+						<if test="technicianId !=0 ">
+								technician_id,
+						</if>
+						<if test="startTime !=null ">
+								start_time,
+						</if>
+						<if test="endTime !=null ">
+								end_time,
+						</if>
+						<if test="orderId !=0 ">
+								order_id,
+						</if>
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+						<if test="roomId !=0 ">
+								#{roomId},
+						</if>
+						<if test="technicianId !=0 ">
+								#{technicianId},
+						</if>
+						<if test="startTime !=null ">
+								#{startTime},
+						</if>
+						<if test="endTime !=null ">
+								#{endTime},
+						</if>
+						<if test="orderId !=0 ">
+								#{orderId},
+						</if>
+				</trim>
+		</insert>
+		<update id="updateAppointment" parameterType="com.club.model.Appointment">
+				UPDATE t_appointment
+				set status = 2
+				WHERE id=#{id}
+		</update>
+		<update id="updateAppointmentByOrderId" >
+		UPDATE t_appointment
+		set status = 2
+		WHERE order_id=#{orderId}
+		</update>
 </mapper>
