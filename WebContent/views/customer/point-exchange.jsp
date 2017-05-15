@@ -75,6 +75,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li style="border-right:3px solid #fff;">
                             <a href="<%=basePath%>memberCard/getMemCardPoint?id=${User.id}"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>积分兑换&nbsp;&gt;&gt;</strong></a>
                         </li>
+                        <li>
+                            <a href="<%=basePath%>/views/customer/reservation-order-list.jsp"><i class="fa fa-indent nav_icon"></i>我的订单</a>
+                        </li>
                     </ul>
                 </div>
             </div>

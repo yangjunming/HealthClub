@@ -37,6 +37,8 @@ public interface OrderDao {
 
 	public OrderRes getOrderByOrderId(Integer orederId);
 
+	public List<OrderRes> getOrderListByUserId(Integer userId);
+
 
 	
 	

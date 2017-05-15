@@ -91,6 +91,11 @@ public class OrderImpl implements OrderDao{
 	public OrderRes getOrderByOrderId(Integer orederId) {
 		return orderMapper.getOrderByOrderId(orederId);
 	}
+
+	@Override
+	public List<OrderRes> getOrderListByUserId(Integer userId) {
+		return orderMapper.getOrderListByUserId(userId);
+	}
 	
 
 }

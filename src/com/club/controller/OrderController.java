@@ -295,5 +295,22 @@ public class OrderController {
 		return false;
 
 	}
+	
+	/**
+	 * 根据用户id获取订单列表
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/getOrderListByUserId")
+	@ResponseBody
+	public List<OrderRes> getOrderListByUserId(@RequestParam(required = false) Integer userId) {
+		List<OrderRes> order = new ArrayList<>();
+		if (null == userId || userId == 0) {
+			return order;
+		}
+		order = orderDao.getOrderListByUserId(userId);
+		return order;
+	}
 
 }

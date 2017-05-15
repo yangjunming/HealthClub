@@ -126,8 +126,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<option value="2">中级技师</option>
 												<option value="3">高级技师</option>
 										</select> 
-										<select id="technicianId" style="width: 150px; height: 30px; padding-left: 30px; font-size: 0.85em">
+										<select id="technicianId" style="width: 150px; height: 30px; padding-left: 30px; font-size: 0.85em" onchange="jaavascript:technicianTime();">
 										</select>
+								</div>
+								<div class="clearfix"></div>
+						</div>
+				</div>
+				<div class="form-group" id="technicianTables">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>技师被预定时间段：</label>
+										<table class="table">
+												<thead>
+														<tr>
+																<th>开始时间</th>
+																<th>结束时间</th>
+														</tr>
+												</thead>
+												<tbody id="technicianTable">
+												</tbody>
+										</table>
+								</div>
+								<div class="clearfix"></div>
+						</div>
+				</div>
+				<div class="form-group">
+						<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+										<label>预计结束时间：</label> <input type="text" class="form-control1" id="endTime" value="">
 								</div>
 								<div class="clearfix"></div>
 						</div>
@@ -172,6 +200,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 		</div>
 		<script src="<%=basePath%>resources/js/bootstrap.min.js"></script>
+		<script src="<%=basePath%>resources/js/moment.js"></script>
+		<script src="<%=basePath%>resources/js/bootstrap-datetimepicker.js"></script>	
 		<script type="text/javascript">
 		$(function (){
 			showTechnician();
@@ -197,6 +227,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}
 					}
 				})
+				technicianTime();
 		}
 		
 		function save(){
@@ -263,6 +294,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					});
 				}
 			}
+		
+		function technicianTime(){
+			var technicianId = $("#technicianId").val();
+			//加载技师被预约时间
+			$.ajax({
+		    type: "get",
+		    url: "<%=basePath%>technician/getTechnicianHasAppointment?technicianId="+technicianId+"&roomId="+0+"",
+					data : {},
+					dataType : "json",
+					async:false,
+					success : function(data) {
+						if(data.length>0){
+							$("#technicianTables").show();
+							$("#technicianTable tr").remove();
+							var tr = "";
+							for (var i = 0; i < data.length; i++) {
+								tr += "<tr>";
+								tr += "<td>" + data[i].startTime+ "</td>";
+								tr += "<td>" + data[i].endTime + "</td>";
+								tr += "</tr>";
+							}
+							$("#technicianTable").append(tr);
+						}else{
+							$("#technicianTables").hide();
+						}
+					}
+				})
+		}
+		$(document).ready(function() {
+			// date time picker
+			if ($("#startTime").length > 0) {
+				$("#startTime").datetimepicker({
+					locale : "zh-cn",
+					format : "YYYY-MM-DD HH:mm:ss",
+					dayViewHeaderFormat : "YYYY年 MMMM"
+				});
+			}
+			if ($("#endTime").length > 0) {
+				$("#endTime").datetimepicker({
+					locale : "zh-cn",
+					format : "YYYY-MM-DD HH:mm:ss",
+					dayViewHeaderFormat : "YYYY年 MMMM"
+				});
+			}
+		})
 		</script>
 </body>
 </html>

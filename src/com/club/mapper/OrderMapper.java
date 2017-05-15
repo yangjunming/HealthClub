@@ -38,4 +38,6 @@ public interface OrderMapper {
 
 	public OrderRes getOrderByOrderId(@Param("orderId")Integer orderId);
 
+	public List<OrderRes> getOrderListByUserId(@Param("userId")Integer userId);
+
 }

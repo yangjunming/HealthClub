@@ -61,7 +61,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li>
                                             <a href="<%=basePath%>views/index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
                                             </li>
-												<li style="border-right:3px solid #fff;"><a href="<%=basePath%>/views/customer/tourist-index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>预约</strong></a></li>
+												<li style="border-right:3px solid #fff;"><a href="<%=basePath%>/views/customer/tourist-index.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i><strong>预约&nbsp;&gt;&gt;</strong></a></li>
+										 <li>
+                            <a href="<%=basePath%>/views/customer/tourist-order-list.jsp"><i class="fa fa-indent nav_icon"></i>我的订单</a>
+                        </li>
 										</ul>
 								</div>
 						</div>

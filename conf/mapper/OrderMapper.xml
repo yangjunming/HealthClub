@@ -410,4 +410,22 @@
 				WHERE
 				t_order.id=#{orderId}
 		</select>
+		<select id="getOrderListByUserId" resultType="com.club.model.OrderRes">
+				SELECT
+				t_order.id,
+				t_order.room_id AS roomId,
+                technicianuser.name as technicianName,
+				t_appointment.id AS appointmentId,
+                t_order.order_status as orderStatus
+				FROM
+				t_order
+				LEFT JOIN `user` AS reuser ON
+				reuser.id = t_order.user_id
+				LEFT JOIN t_appointment ON t_appointment.order_id = t_order.id
+                left join technician on technician.id = t_order.technician_id
+                left join `user` as technicianuser on technicianuser.id = technician.user_id
+				WHERE
+				t_order.user_id = #{userId}
+				order by t_order.id desc
+		</select>
 </mapper>
