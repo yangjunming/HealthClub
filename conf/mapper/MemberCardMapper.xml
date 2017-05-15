@@ -28,6 +28,9 @@
 				<if test="grade !=0 ">
 						grade,
 				</if>
+				<if test="userId !=0 ">
+						user_id,
+				</if>
 				<if test="cardNum !=null and cardNum !='' ">
 						card_num,
 				</if>
@@ -44,6 +47,9 @@
 				values(
 				<if test="grade !=0 ">
 						#{grade},
+				</if>
+				<if test="userId !=0 ">
+						#{userId},
 				</if>
 				<if test="cardNum !=null and cardNum !='' ">
 						#{cardNum},

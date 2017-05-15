@@ -14,6 +14,8 @@ public interface TechnicianMapper {
 
 	public List<TechnicianDetailRes> getTechnicianByGrade(@Param("grade")Integer grade);
 
+    public int insert(Technician technician);
+
 	public List<Appointment> getTechnicianHasAppointment(@Param("technicianId")Integer technicianId,@Param("roomId")Integer roomId);
 
 	public List<TechnicianDetailRes> getTechnician(@Param("grade")Integer grade);

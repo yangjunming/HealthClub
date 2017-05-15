@@ -94,22 +94,14 @@ public class MemberCardController {
 	 * @return
 	 */
 	@RequestMapping(value="/addMemberCard")
-	public ModelAndView addMemberCard(@RequestParam Integer grade,
-			@RequestParam String cardNum,
-			@RequestParam BigDecimal price,
-			@RequestParam BigDecimal point,@RequestParam BigDecimal discount,@RequestParam String name,@RequestParam String mobile){
-		MemberCard memberCard = new MemberCard();
-		memberCard.setGrade(grade);
-		memberCard.setCardNum(cardNum);
-		memberCard.setPrice(price);
-		memberCard.setPoint(point);
-		memberCard.setDiscount(discount);
-		User user = userDao.getUserByMobile(mobile);
+	@ResponseBody
+	public boolean addMemberCard(@RequestBody MemberCard memberCard){
+		User user = userDao.getUserByMobile(memberCard.getMobile());
 		User user1= new User();
 		Integer userId = 0;
 		if(user==null){
-			user1.setMobile(mobile);
-			user1.setName(name);
+			user1.setMobile(memberCard.getMobile());
+			user1.setName(memberCard.getName());
 			user1.setPassword("123456");
 			user1.setType(4);
 			userId = userDao.insert(user1);
@@ -128,13 +120,7 @@ public class MemberCardController {
 			memberCard.setUserId(userId);
 			result = memberCardDao.addMemberCard(memberCard);
 		}
-		ModelAndView mv = new ModelAndView();
-		if(result){
-			ModelAndView mv1 = getList(null,null);
-			return mv1;
-		}
-		mv.setViewName("manager/memberCard");
-		return mv;
+		return result;
 	}
 	
 	/**
