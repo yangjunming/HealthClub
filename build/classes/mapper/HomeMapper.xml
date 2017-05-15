@@ -5,12 +5,13 @@
 		<update id="updateByHomeId" parameterType="com.club.model.Home">
 				UPDATE t_home
 				<trim prefix="set" suffixOverrides=",">
-						<if test="startTime !=null and startTime !='' ">start_time=#{startTime},</if>
+						<if test="startTime !=null ">start_time=#{startTime},</if>
 						<if test="isEnd !=0 ">is_end=#{isEnd},</if>
 						<if test="isReservation !=0 ">is_reservation=#{isReservation},</if>
 						<if test="resTime !=null and resTime !='' ">res_time=#{resTime},</if>
 						<if test="userId !=0 ">user_id=#{userId},</if>
 						<if test="hasUser !=0 ">has_user=#{hasUser},</if>
+						<if test="charge !=null and charge !='' ">charge=#{charge},</if>
 						<if test="technicianId !=0 ">technician_id=#{technicianId},</if>
 						<if test="homeNum !=0 ">home_num=#{homeNum},</if>
 						<if test="size !=0 ">size=#{size},</if>
@@ -27,7 +28,8 @@
 				has_user as hasUser,
 				technician_id as technicianId,
 				home_num as
-				homeNum
+				homeNum,
+				size
 				FROM t_home
 		</select>
 		<select id="getHomeById" resultType="com.club.model.Home">
@@ -39,6 +41,8 @@
 				user_id as userId,
 				has_user as hasUser,
 				technician_id as technicianId,
+				size,
+				charge,
 				home_num as
 				homeNum
 				FROM t_home WHERE id=#{homeId}
@@ -79,4 +83,34 @@
 				homeNum
 				FROM t_home WHERE user_id=#{userId}
 		</select>
+		<select id="getHomeBySize" resultType="com.club.model.Home">
+				SELECT id,start_time as startTime,
+				is_end as isEnd,
+				is_reservation as
+				isReservation,
+				res_time as resTime,
+				user_id as userId,
+				has_user as hasUser,
+				technician_id as technicianId,
+				home_num as
+				homeNum
+				FROM t_home WHERE size=#{homeSize}
+				and is_reservation = '0'
+				AND has_user = 0
+		</select>
+		<update id="updateHomeByOrder" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set technician_id=#{technicianId},is_reservation=#{isReservation},user_id=0,has_user=0
+				WHERE id=#{id}
+		</update>
+		<update id="updateHomeToStart" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set is_reservation=#{isReservation},has_user=#{hasUser}
+				WHERE id=#{id}
+		</update>
+		<update id="updateHomeToEnd" parameterType="com.club.model.Home">
+				UPDATE t_home
+				set is_end=#{isEnd},has_user=#{hasUser},technician_id=#{technicianId},user_id=#{userId}
+				WHERE id=#{id}
+		</update>
 </mapper>
